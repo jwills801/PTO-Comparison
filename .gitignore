@@ -1,0 +1,10 @@
+*.png
+*.pdf
+*.zip
+OSWEC_matlabWorkspace.mat
+Jackson_check_four.mat
+4Rail_results_ONE.mat
+irreg_frq_sweep.mat
+irreg_frq_sweep_fmin.mat
+reg_frq_sweep.mat
+reg_frq_sweep_fmin.mat

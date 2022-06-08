@@ -1,0 +1,25 @@
+
+WEC-Sim Input From Standard wecSimInputFile.m Of Case Directory... 
+WEC-Sim: An open-source code for simulating wave energy converters
+Version: 4.4
+
+Initializing the Simulation Class...
+	Case Dir: /home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2 
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('simulationClass/checkinputs', '/home/jackson/Documents/LiResearch/WEC_SIM/source/objects/simulationClass.m', 179)" style="font-weight:bold">simulationClass/checkinputs</a> (<a href="matlab: opentoline('/home/jackson/Documents/LiResearch/WEC_SIM/source/objects/simulationClass.m',179,0)">line 179</a>)
+The simMechanics file, /home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/OSWEC.slx, does not exist in the case directory
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('initializeWecSim', '/home/jackson/Documents/LiResearch/WEC_SIM/source/functions/initializeWecSim.m', 101)" style="font-weight:bold">initializeWecSim</a> (<a href="matlab: opentoline('/home/jackson/Documents/LiResearch/WEC_SIM/source/functions/initializeWecSim.m',101,0)">line 101</a>)
+simu.checkinputs;
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('run', '/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/matlab/lang/run.m', 91)" style="font-weight:bold">run</a> (<a href="matlab: opentoline('/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/matlab/lang/run.m',91,0)">line 91</a>)
+evalin('caller', strcat(script, ';'));
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('wecSim', '/home/jackson/Documents/LiResearch/WEC_SIM/source/wecSim.m', 45)" style="font-weight:bold">wecSim</a> (<a href="matlab: opentoline('/home/jackson/Documents/LiResearch/WEC_SIM/source/wecSim.m',45,0)">line 45</a>)
+run('initializeWecSim');
+} 
+wecSim
+WEC-Sim: An open-source code for simulating wave energy converters
+Version: 4.4
+
+Initializing the Simulation Class...
+	Case Dir: /home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/EHA_codesign/OSWEC 

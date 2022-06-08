@@ -1,0 +1,1 @@
+The PTO paper for the full journal paper used the code in NEWresults_2. Inside of that folder are all the codes that I used. The latest versions in these files are the ones I used. All .mat files were generated using code from this folder except for inputs to wecSim and the 107cc pump map. 

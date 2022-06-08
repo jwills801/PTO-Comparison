@@ -1,0 +1,73 @@
+
+WEC-Sim Input From Standard wecSimInputFile.m Of Case Directory... 
+WEC-Sim: An open-source code for simulating wave energy converters
+Version: 4.4
+
+Initializing the Simulation Class...
+	Case Dir: /home/jackson/Documents/LiResearch/Projects/PTO_comparison/investigatePIcontroller/PI_frequencySweep/OSWEC 
+Elapsed time is 1.416304 seconds.
+
+WEC-Sim Pre-processing ...   
+Elapsed time is 0.109360 seconds.
+
+WEC-Sim Simulation Settings:
+	Start Time                     (sec) = 0
+	End Time                       (sec) = 2000
+	Time Step Size                 (sec) = 0.01
+	Ramp Function Time             (sec) = 50
+	 Number of Time Steps     = 200000 
+
+Wave Environment: 
+	Wave Type                            = Regular Waves (Constant Hydrodynamic Coefficients)
+	Wave Height, H (m)                   = 2.5
+	Wave Period, T (sec)                 = 8
+
+List of Body: Number of Bodies = 2 
+
+	***** Body Number 1, Name: flap *****
+	Body CG                          (m) = [0,0,-3.9]
+	Body Mass                       (kg) = 127000 
+	Body Diagonal MOI              (kgm2)= [1.85E+06,1.85E+06,1.85E+06]
+
+	***** Body Number 2, Name: base *****
+	Body CG                          (m) = [0,0,-10.9]
+	Body Mass                       (kg) = 999 
+	Body Diagonal MOI              (kgm2)= [999,999,999]
+
+List of PTO(s): Number of PTOs = 1 
+
+	***** PTO Name: PTO1 *****
+	PTO Stiffness           (N/m;Nm/rad) = 3.3451E+07
+	PTO Damping           (Ns/m;Nsm/rad) = 1.8335E+07
+
+List of Constraint(s): Number of Constraints = 1 
+
+	***** Constraint Name: Constraint1 *****
+
+
+Simulating the WEC device defined in the SimMechanics model /home/jackson/Documents/LiResearch/Projects/PTO_comparison/investigatePIcontroller/PI_frequencySweep/OSWEC/OSWEC.slx...   
+Elapsed time is 0.234510 seconds.
+### Generating code for Physical Networks associated with solver block 'OSWEC/Global Reference Frame/Solver Configuration' ... 
+done.
+### Building the rapid accelerator target for model: OSWEC
+### Successfully built the rapid accelerator target for model: OSWEC
+
+Build Summary
+
+Top model rapid accelerator targets built:
+
+Model  Action                       Rebuild Reason                                    
+======================================================================================
+OSWEC  Code generated and compiled  Code generation information file does not exist.  
+
+1 of 1 models built (0 models already up to date)
+Build duration: 0h 0m 20.51s
+Elapsed time is 30.844917 seconds.
+
+Post-processing and saving...   
+
+CWR =
+
+    1.3462
+
+Elapsed time is 1.059938 seconds.

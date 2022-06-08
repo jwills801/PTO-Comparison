@@ -1,0 +1,1207 @@
+
+WEC-Sim Input From Standard wecSimInputFile.m Of Case Directory... 
+WEC-Sim: An open-source code for simulating wave energy converters
+Version: 4.4
+
+Initializing the Simulation Class...
+	Case Dir: /home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP 
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('simulationClass/checkinputs', '/home/jackson/Documents/LiResearch/WEC_SIM/source/objects/simulationClass.m', 179)" style="font-weight:bold">simulationClass/checkinputs</a> (<a href="matlab: opentoline('/home/jackson/Documents/LiResearch/WEC_SIM/source/objects/simulationClass.m',179,0)">line 179</a>)
+The simMechanics file, /home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/OSWEC.slx, does not exist in the case
+directory
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('initializeWecSim', '/home/jackson/Documents/LiResearch/WEC_SIM/source/functions/initializeWecSim.m', 101)" style="font-weight:bold">initializeWecSim</a> (<a href="matlab: opentoline('/home/jackson/Documents/LiResearch/WEC_SIM/source/functions/initializeWecSim.m',101,0)">line 101</a>)
+simu.checkinputs;
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('run', '/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/matlab/lang/run.m', 91)" style="font-weight:bold">run</a> (<a href="matlab: opentoline('/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/matlab/lang/run.m',91,0)">line 91</a>)
+evalin('caller', strcat(script, ';'));
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('wecSim', '/home/jackson/Documents/LiResearch/WEC_SIM/source/wecSim.m', 45)" style="font-weight:bold">wecSim</a> (<a href="matlab: opentoline('/home/jackson/Documents/LiResearch/WEC_SIM/source/wecSim.m',45,0)">line 45</a>)
+run('initializeWecSim');
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('WEC_DP_v7', '/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m', 48)" style="font-weight:bold">WEC_DP_v7</a> (<a href="matlab: opentoline('/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m',48,0)">line 48</a>)
+wecSim
+} 
+opentoline('/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m',48,0)
+load('../PI_irregular.mat')
+WEC_DP_v7
+
+all_options =
+
+  1×1 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {'C00M'}
+
+
+Spectrum =
+
+    'irregular'
+
+
+CWR =
+
+    0.8737
+
+WEC_DP_v7
+
+all_options =
+
+  1×1 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {'C00M'}
+
+
+Spectrum =
+
+    'irregular'
+
+
+CWR =
+
+    0.8737
+
+Elapsed time is 1.830218 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   0
+
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('WEC_DP_v7>fun', '/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m', 409)" style="font-weight:bold">WEC_DP_v7>fun</a> (<a href="matlab: opentoline('/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m',409,0)">line 409</a>)
+
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('WEC_DP_v7>@(lam)-fun(lam,params)', '/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m', 235)" style="font-weight:bold">WEC_DP_v7>@(lam)-fun(lam,params)</a> (<a href="matlab: opentoline('/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m',235,0)">line 235</a>)
+    [lam,cost,exitflag] = fminsearch(@(lam) -fun(lam,params) , lam0,options); % The negative sign is there because we want to maximize over lambda
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('fminsearch', '/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/matlab/optimfun/fminsearch.m', 381)" style="font-weight:bold">fminsearch</a> (<a href="matlab: opentoline('/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/matlab/optimfun/fminsearch.m',381,0)">line 381</a>)
+                    x(:) = v(:,j); fv(:,j) = funfcn(x,varargin{:});
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('WEC_DP_v7', '/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m', 235)" style="font-weight:bold">WEC_DP_v7</a> (<a href="matlab: opentoline('/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m',235,0)">line 235</a>)
+    [lam,cost,exitflag] = fminsearch(@(lam) -fun(lam,params) , lam0,options); % The negative sign is there because we want to maximize over lambda
+} 
+WEC_DP_v7
+
+all_options =
+
+  1×1 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {'C00M'}
+
+
+Spectrum =
+
+    'regular'
+
+
+CWR =
+
+    0.7763
+
+Elapsed time is 1.301861 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+Convergence =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+lam =
+
+   -0.0372   -0.1154
+
+
+Eff_conv =
+
+    0.3941
+
+Elapsed time is 7.199166 seconds.
+
+ans =
+
+   1.0e+07 *
+
+   -8.7241   -8.7241
+
+waves.Pw
+
+ans =
+
+   9.5977e+04
+
+simu.rho*simu.g*(waves.A).^(2)/4*sqrt(simu.g./waves.k.*tanh(waves.k.*waves.waterDepth))*(1+2*waves.k.*waves.waterDepth./sinh(2*waves.k.*waves.waterDepth))
+
+ans =
+
+   5.5795e+04
+
+simu.rho*simu.g*(waves.A).^(2)/4*sqrt(simu.g./waves.k.*tanh(waves.k.*waves.waterDepth))*(1+2*waves.k.*waves.waterDepth./sinh(waves.k.*waves.waterDepth))
+
+ans =
+
+   9.5977e+04
+
+Energy_first_chunk = -sum(F1(1:find(t==t_start)).*V1(1:find(t==t_start)))*dt;
+Total_energy_in = -sum(F1.*V1)*dt;
+ave_power_out = (Total_energy_in-Energy_first_chunk)/(t(end)-t_start); % Ave power for last 100 s
+J = simu.rho*simu.g*(waves.A).^(2)/4*sqrt(simu.g./waves.k.*tanh(waves.k.*waves.waterDepth))*(1+2*waves.k.*waves.waterDepth./sinh(2*waves.k.*waves.waterDepth));
+CW = ave_power_out/J;
+CWR = CW/B
+
+CWR =
+
+   1.3354e-04
+
+J
+
+J =
+
+   5.5795e+04
+
+WEC_DP_v7
+
+all_options =
+
+  1×1 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {'C00M'}
+
+
+Spectrum =
+
+    'regular'
+
+
+CWR =
+
+    1.3354
+
+Elapsed time is 1.241279 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+Convergence =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+lam =
+
+   -0.0372   -0.1154
+
+
+Eff_conv =
+
+    0.3941
+
+Elapsed time is 6.941330 seconds.
+
+ans =
+
+   1.0e+07 *
+
+   -8.7241   -8.7241
+
+sum(HECM_PowLoss(d_ind))*(t(2)-t(1))
+
+ans =
+
+   4.2166e+07
+
+sum(ActualMPLoss)
+
+ans =
+
+   1.8715e+07
+
+IncludeSwitchingLosses*sum(d_Switchingloss)
+
+ans =
+
+   7.3248e+07
+
+NegWork
+
+NegWork =
+
+  -3.0919e+08
+
+PosWork
+
+PosWork =
+
+   8.7819e+07
+
+Total_input_Energy
+
+Total_input_Energy =
+
+  -8.7241e+07
+
+Net_work_in
+
+Net_work_in =
+
+   2.2137e+08
+
+NegWork + PosWork
+
+ans =
+
+  -2.2137e+08
+
+sum(d_Switchingloss)
+
+ans =
+
+   7.3248e+07
+
+d_battery_work(end)
+
+ans =
+
+  -2.0344e+07
+
+TotalMPWork
+
+TotalMPWork =
+
+  -1.4014e+08
+
+Total_input_Energy
+
+Total_input_Energy =
+
+  -8.7241e+07
+
+Net_work_in
+
+Net_work_in =
+
+   2.2137e+08
+
+Efficiency
+
+Efficiency =
+
+    0.3941
+
+Net_work_in
+
+Net_work_in =
+
+   2.2137e+08
+
+Total_energy_in
+
+Total_energy_in =
+
+   2.2137e+08
+
+WEC_DP_v7
+
+all_options =
+
+  1×1 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {'C00M'}
+
+
+Spectrum =
+
+    'regular'
+
+
+CWR =
+
+    1.3354
+
+
+Total_energy_in =
+
+   2.2137e+08
+
+Elapsed time is 1.224330 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+Convergence =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+lam =
+
+   -0.0371   -0.1123
+
+
+Eff_conv =
+
+    0.3961
+
+Elapsed time is 6.521706 seconds.
+
+ans =
+
+   1.0e+07 *
+
+   -8.7691   -8.7691
+
+WEC_DP_v7
+
+all_options =
+
+  1×1 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {'C00M'}
+
+
+Spectrum =
+
+    'regular'
+
+
+CWR =
+
+    1.3354
+
+
+Total_energy_in =
+
+   2.2137e+08
+
+Elapsed time is 1.158977 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+Convergence =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+lam =
+
+   1.0e+03 *
+
+    4.2072    0.4015
+
+
+Eff_conv =
+
+  -3.3239e+03
+
+Elapsed time is 10.204838 seconds.
+
+ans =
+
+   1.0e+11 *
+
+    7.3581    7.3581
+
+WEC_DP_v7
+
+all_options =
+
+  1×1 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {'C00M'}
+
+
+Spectrum =
+
+    'regular'
+
+
+CWR =
+
+    1.3354
+
+
+Total_energy_in =
+
+   2.2137e+08
+
+Elapsed time is 1.164685 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+Convergence =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+lam =
+
+   -0.0597   -0.1158
+
+
+Eff_conv =
+
+    0.3986
+
+Elapsed time is 6.814313 seconds.
+
+ans =
+
+   1.0e+07 *
+
+   -8.8230   -8.8230
+
+TotalMPWork
+
+TotalMPWork =
+
+  -1.3874e+08
+
+d_battery_work(end)
+
+ans =
+
+  -2.1549e+07
+
+sum(d_Switchingloss)
+
+ans =
+
+   7.2063e+07
+
+TotalMPWork + d_battery_work(end)
+
+ans =
+
+  -1.6029e+08
+
+ans/-Net_work_in
+
+ans =
+
+    0.7241
+
+PR
+
+PR =
+
+   1.0e+07 *
+
+         0    0.5833    2.3333    3.5000
+
+PR(end)/2e6
+
+ans =
+
+   17.5000
+
+(PR(end)-2e6)/PR(end)
+
+ans =
+
+    0.9429
+
+WEC_DP_v7
+
+all_options =
+
+  1×1 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {'C00M'}
+
+
+Spectrum =
+
+    'regular'
+
+
+CWR =
+
+    1.3354
+
+
+Total_energy_in =
+
+   2.2137e+08
+
+Elapsed time is 1.134579 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+Convergence =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+lam =
+
+   -0.0644   -0.1161
+
+
+Eff_conv =
+
+    0.6801
+
+Elapsed time is 6.392692 seconds.
+
+ans =
+
+   1.0e+08 *
+
+   -1.5054   -1.5054
+
+WEC_DP_v7
+
+all_options =
+
+  1×1 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {'C00M'}
+
+
+Spectrum =
+
+    'regular'
+
+
+CWR =
+
+    1.3354
+
+
+Total_energy_in =
+
+   2.2137e+08
+
+Elapsed time is 1.162790 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+Convergence =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+lam =
+
+   -0.0613   -0.1154
+
+
+Eff_conv =
+
+    0.5530
+
+Elapsed time is 7.016756 seconds.
+
+ans =
+
+   1.0e+08 *
+
+   -1.2241   -1.2241
+
+WEC_DP_v7
+
+all_options =
+
+  1×1 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {'C00M'}
+
+
+Spectrum =
+
+    'regular'
+
+
+CWR =
+
+    1.3354
+
+
+Total_energy_in =
+
+   2.2137e+08
+
+Elapsed time is 1.163541 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+Convergence =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+lam =
+
+   -0.0625   -0.1156
+
+
+Eff_conv =
+
+    0.6322
+
+Elapsed time is 7.389905 seconds.
+
+ans =
+
+   1.0e+08 *
+
+   -1.3995   -1.3995
+
+.1*PR(end)
+
+ans =
+
+     3500000
+
+.05*PR(end)
+
+ans =
+
+     1750000
+
+ans*1e-5
+
+ans =
+
+   17.5000
+
+1.75e6
+
+ans =
+
+     1750000
+
+1.75e6/2
+
+ans =
+
+      875000
+
+WEC_DP_v7
+
+all_options =
+
+  1×1 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {'C00M'}
+
+
+Spectrum =
+
+    'regular'
+
+
+CWR =
+
+    1.3354
+
+
+Total_energy_in =
+
+   2.2137e+08
+
+Elapsed time is 1.162603 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+Convergence =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+lam =
+
+   -0.0035   -0.1078
+
+
+Eff_conv =
+
+    0.6568
+
+Elapsed time is 7.065275 seconds.
+
+ans =
+
+   1.0e+08 *
+
+   -1.4540   -1.4540
+
+WEC_DP_v7
+
+all_options =
+
+  1×1 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {'C00M'}
+
+
+Spectrum =
+
+    'regular'
+
+
+CWR =
+
+    1.3354
+
+
+Total_energy_in =
+
+   2.2137e+08
+
+Elapsed time is 1.164128 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+Convergence =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+lam =
+
+   -0.0633   -0.1159
+
+
+Eff_conv =
+
+    0.7037
+
+Elapsed time is 7.292292 seconds.
+
+ans =
+
+   1.0e+08 *
+
+   -1.5579   -1.5579
+
+WEC_DP_v7
+
+all_options =
+
+  1×1 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {'C00M'}
+
+
+Spectrum =
+
+    'regular'
+
+
+CWR =
+
+    1.3354
+
+
+Total_energy_in =
+
+   2.2137e+08
+
+Elapsed time is 1.161854 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+Convergence =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+lam =
+
+   -0.0625   -0.1156
+
+
+Eff_conv =
+
+    0.6322
+
+Elapsed time is 7.706945 seconds.
+
+ans =
+
+   1.0e+08 *
+
+   -1.3995   -1.3995
+
+WEC_DP_v7
+
+all_options =
+
+  1×1 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {'C00M'}
+
+
+Spectrum =
+
+    'regular'
+
+
+CWR =
+
+    1.3354
+
+
+Total_energy_in =
+
+   2.2137e+08
+
+Elapsed time is 1.148694 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+Convergence =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+lam =
+
+   -0.0633   -0.1159
+
+
+Eff_conv =
+
+    0.7037
+
+Elapsed time is 7.405218 seconds.
+
+ans =
+
+   1.0e+08 *
+
+   -1.5579   -1.5579
+
+WEC_DP_v7
+
+all_options =
+
+  1×1 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {'C00M'}
+
+
+Spectrum =
+
+    'regular'
+
+
+CWR =
+
+    1.3354
+
+
+Total_energy_in =
+
+   2.2137e+08
+
+Elapsed time is 1.130860 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+Convergence =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+lam =
+
+   -0.0625   -0.1156
+
+
+Eff_conv =
+
+    0.6322
+
+Elapsed time is 7.422829 seconds.
+
+ans =
+
+   1.0e+08 *
+
+   -1.3995   -1.3995
+
+WEC_DP_v7
+
+all_options =
+
+  1×1 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {'C00M'}
+
+
+Spectrum =
+
+    'regular'
+
+
+CWR =
+
+    1.3354
+
+
+Total_energy_in =
+
+   2.2137e+08
+
+Elapsed time is 1.236711 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+Convergence =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+lam =
+
+   -0.0371   -0.1451
+
+
+Eff_conv =
+
+    0.6318
+
+Elapsed time is 6.775674 seconds.
+
+ans =
+
+   1.0e+08 *
+
+   -1.3987   -1.3987
+
+HECM_size1 = max(abs(V1))*ARod1/MaxSpeed*2*pi
+
+HECM_size1 =
+
+    0.0048
+
+D
+
+D =
+
+   1.0700e-04
+
+HECM_scale1 = HECM_size1/D
+
+HECM_scale1 =
+
+   44.3975
+
+max(w1rad_Mapping(:))/2
+
+ans =
+
+  523.5988
+
+MaxSpeed*3/5
+
+ans =
+
+  188.4956
+
+MaxSpeed = max(w1rad_Mapping(:))/2; % 5000 RPM
+        MaxSpeed = MaxSpeed*3/5
+
+MaxSpeed =
+
+  314.1593
+
+labels
+
+labels = 
+
+  1×2 <a href="matlab:helpPopup categorical" style="font-weight:bold">categorical</a> array
+
+     HECM Energy      Main Pump Energy 
+
+X_
+
+X_ = 
+
+  1×2 <a href="matlab:helpPopup categorical" style="font-weight:bold">categorical</a> array
+
+     HECM Energy      Main Pump Energy 
+
+X_ = categorical({'HECM Energy','Main Pump Energy'});
+Y_ = [-d_battery_work(end), -TotalMPWork];
+bar(X_,Y_)
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('bar', '/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/matlab/specgraph/bar.m', 213)" style="font-weight:bold">bar</a> (<a href="matlab: opentoline('/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/matlab/specgraph/bar.m',213,0)">line 213</a>)
+Data inputs must match the axis configuration. A numeric axis must have numeric data inputs or data inputs which can be converted to double.
+} 
+X_ = categorical({'HECM Energy','Main Pump Energy'});
+Y_ = [-d_battery_work(end), -TotalMPWork];
+bar(X_,Y_)
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('bar', '/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/matlab/specgraph/bar.m', 213)" style="font-weight:bold">bar</a> (<a href="matlab: opentoline('/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/matlab/specgraph/bar.m',213,0)">line 213</a>)
+Data inputs must match the axis configuration. A numeric axis must have numeric data inputs or data inputs which can be converted to double.
+} 
+WEC_DP_v7
+
+all_options =
+
+  1×1 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {'C00M'}
+
+
+Spectrum =
+
+    'regular'
+
+
+CWR =
+
+    1.3354
+
+Elapsed time is 1.220733 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+Convergence =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+lam =
+
+   -0.0371   -0.1451
+
+
+Eff_conv =
+
+    0.6318
+
+Elapsed time is 6.840339 seconds.
+
+ans =
+
+   1.0e+08 *
+
+   -1.3987   -1.3987
+
+close all
+close all
+kp
+{Unrecognized function or variable 'kp'.
+} 
+Kp
+{Unrecognized function or variable 'Kp'.
+} 
+clear
+load('../PI_regular.mat')
+pto.k
+
+ans =
+
+    38278000
+
+pto.c
+
+ans =
+
+    20188000
+
+main_v1

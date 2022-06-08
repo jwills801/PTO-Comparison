@@ -1,0 +1,2622 @@
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('simulationClass/checkinputs', '/home/jackson/Documents/LiResearch/WEC_SIM/source/objects/simulationClass.m', 179)" style="font-weight:bold">simulationClass/checkinputs</a> (<a href="matlab: opentoline('/home/jackson/Documents/LiResearch/WEC_SIM/source/objects/simulationClass.m',179,0)">line 179</a>)
+The simMechanics file,
+/home/jackson/Documents/LiResearch/Projects/PTO_comparison/investigatePIcontroller/Find_optimal_PI_gains/Find_optimal_PI_gains/OSWEC.slx, does
+not exist in the case directory
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('initializeWecSim', '/home/jackson/Documents/LiResearch/WEC_SIM/source/functions/initializeWecSim.m', 101)" style="font-weight:bold">initializeWecSim</a> (<a href="matlab: opentoline('/home/jackson/Documents/LiResearch/WEC_SIM/source/functions/initializeWecSim.m',101,0)">line 101</a>)
+simu.checkinputs;
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('run', '/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/matlab/lang/run.m', 91)" style="font-weight:bold">run</a> (<a href="matlab: opentoline('/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/matlab/lang/run.m',91,0)">line 91</a>)
+evalin('caller', strcat(script, ';'));
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('wecSim', '/home/jackson/Documents/LiResearch/WEC_SIM/source/wecSim.m', 45)" style="font-weight:bold">wecSim</a> (<a href="matlab: opentoline('/home/jackson/Documents/LiResearch/WEC_SIM/source/wecSim.m',45,0)">line 45</a>)
+run('initializeWecSim');
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('main_v1>fun', '/home/jackson/Documents/LiResearch/Projects/PTO_comparison/investigatePIcontroller/Find_optimal_PI_gains/Find_optimal_PI_gains/main_v1.m', 21)" style="font-weight:bold">main_v1>fun</a> (<a href="matlab: opentoline('/home/jackson/Documents/LiResearch/Projects/PTO_comparison/investigatePIcontroller/Find_optimal_PI_gains/Find_optimal_PI_gains/main_v1.m',21,0)">line 21</a>)
+[~]=evalc('wecSim');
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('fminsearch', '/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/matlab/optimfun/fminsearch.m', 201)" style="font-weight:bold">fminsearch</a> (<a href="matlab: opentoline('/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/matlab/optimfun/fminsearch.m',201,0)">line 201</a>)
+fv(:,1) = funfcn(x,varargin{:});
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('main_v1', '/home/jackson/Documents/LiResearch/Projects/PTO_comparison/investigatePIcontroller/Find_optimal_PI_gains/Find_optimal_PI_gains/main_v1.m', 9)" style="font-weight:bold">main_v1</a> (<a href="matlab: opentoline('/home/jackson/Documents/LiResearch/Projects/PTO_comparison/investigatePIcontroller/Find_optimal_PI_gains/Find_optimal_PI_gains/main_v1.m',9,0)">line 9</a>)
+[x,fval] = fminsearch(@fun,x0,options)
+} 
+WEC_DP_v7
+
+all_options =
+
+  1×1 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {'C00M'}
+
+
+Spectrum =
+
+    'regular'
+
+
+CWR =
+
+    1.3354
+
+Elapsed time is 1.220003 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+Convergence =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+lam =
+
+   -0.0371   -0.1451
+
+
+Eff_conv =
+
+    0.6318
+
+Elapsed time is 7.162299 seconds.
+
+ans =
+
+   1.0e+08 *
+
+   -1.3987   -1.3987
+
+MPstart = 50; %Seconds
+WorkOut = d_battery_work + [zeros(1,find(t==MPstart)),t(2)*cumsum(TotalMPWork/(t(end)-MPstart)*ones(1,length(t)-find(t==MPstart)))] + d_Switchingloss';
+figure, plot(t,-t(2)*cumsum(F1.*V1)/1e6,t,-WorkOut/1e6), xlabel('Time (s)'), ylabel('Work (MJ)'),legend('Mechanical Energy In','Electrical Energy Out')
+
+
+
+TotalMPWork/(t(end)-MPstart)
+
+ans =
+
+  -9.4081e+05
+
+106e-6*2000/60
+
+ans =
+
+    0.0035
+
+ans*150
+
+ans =
+
+    0.5300
+
+4.56/ans
+
+ans =
+
+    8.6038
+
+ans*107
+
+ans =
+
+  920.6038
+
+1.1*-.37
+
+ans =
+
+   -0.4070
+
+ans/-.1
+
+ans =
+
+    4.0700
+
+WEC_DP_v7
+{Error: <a href="matlab: opentoline('/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m',346,11)">File: WEC_DP_v7.m Line: 346 Column: 11</a>
+Invalid expression. Check for missing or extra characters.
+} 
+opentoline('/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m',346,11)
+WEC_DP_v7
+{Unrecognized function or variable 'k'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('WEC_DP_v7', '/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m', 12)" style="font-weight:bold">WEC_DP_v7</a> (<a href="matlab: opentoline('/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m',12,0)">line 12</a>)
+            k=k+1;
+} 
+opentoline('/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m',12,0)
+WEC_DP_v7
+
+Spectrum =
+
+    'irregular'
+
+
+CWR =
+
+    0.8737
+
+Elapsed time is 1.203109 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   0
+
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: -Inf 
+
+
+Convergence =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   0
+
+
+lam =
+
+     []
+
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: -Inf 
+
+
+Convergence =
+
+  1×2 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0
+
+
+lam =
+
+     []
+
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('WEC_DP_v7>fun', '/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m', 424)" style="font-weight:bold">WEC_DP_v7>fun</a> (<a href="matlab: opentoline('/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m',424,0)">line 424</a>)
+
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('WEC_DP_v7>@(lam)-fun(lam,params)', '/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m', 241)" style="font-weight:bold">WEC_DP_v7>@(lam)-fun(lam,params)</a> (<a href="matlab: opentoline('/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m',241,0)">line 241</a>)
+    [lam,cost,exitflag] = fminsearch(@(lam) -fun(lam,params) , lam0,options); % The negative sign is there because we want to maximize over lambda
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('fminsearch', '/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/matlab/optimfun/fminsearch.m', 366)" style="font-weight:bold">fminsearch</a> (<a href="matlab: opentoline('/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/matlab/optimfun/fminsearch.m',366,0)">line 366</a>)
+                x(:) = xcc; fxcc = funfcn(x,varargin{:});
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('WEC_DP_v7', '/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m', 241)" style="font-weight:bold">WEC_DP_v7</a> (<a href="matlab: opentoline('/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m',241,0)">line 241</a>)
+    [lam,cost,exitflag] = fminsearch(@(lam) -fun(lam,params) , lam0,options); % The negative sign is there because we want to maximize over lambda
+} 
+WEC_DP_v7
+
+Spectrum =
+
+    'irregular'
+
+
+CWR =
+
+    0.8737
+
+Elapsed time is 1.169077 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: -192913495.701601 
+
+
+Convergence =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   0
+
+
+lam =
+
+     []
+
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: 402605226.289953 
+
+
+Convergence =
+
+  1×2 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0
+
+
+lam =
+
+     []
+
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('WEC_DP_v7>fun', '/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m', 424)" style="font-weight:bold">WEC_DP_v7>fun</a> (<a href="matlab: opentoline('/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m',424,0)">line 424</a>)
+
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('WEC_DP_v7>@(lam)-fun(lam,params)', '/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m', 241)" style="font-weight:bold">WEC_DP_v7>@(lam)-fun(lam,params)</a> (<a href="matlab: opentoline('/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m',241,0)">line 241</a>)
+    [lam,cost,exitflag] = fminsearch(@(lam) -fun(lam,params) , lam0,options); % The negative sign is there because we want to maximize over lambda
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('fminsearch', '/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/matlab/optimfun/fminsearch.m', 366)" style="font-weight:bold">fminsearch</a> (<a href="matlab: opentoline('/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/matlab/optimfun/fminsearch.m',366,0)">line 366</a>)
+                x(:) = xcc; fxcc = funfcn(x,varargin{:});
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('WEC_DP_v7', '/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m', 241)" style="font-weight:bold">WEC_DP_v7</a> (<a href="matlab: opentoline('/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m',241,0)">line 241</a>)
+    [lam,cost,exitflag] = fminsearch(@(lam) -fun(lam,params) , lam0,options); % The negative sign is there because we want to maximize over lambda
+} 
+figure, plot(t,HECM_PowLoss)
+R_M_loss
+
+R_M_loss =
+
+    0.1994
+    0.1158
+    0.1177
+
+R_P_loss
+
+R_P_loss =
+
+    0.2025
+    0.1231
+    0.1291
+
+figure, plot(battery_power)
+figure, plot(t,battery_power)
+max(min(HECM_PowLoss + battery_power),[],'includenan') 
+
+ans =
+
+   7.7692e+03
+
+feasibility = isfinite(  max(min(HECM_PowLoss + battery_power),[],'includenan') )
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+WEC_DP_v7
+
+Spectrum =
+
+    'irregular'
+
+
+CWR =
+
+    0.8737
+
+Elapsed time is 1.167773 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   0
+
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: -Inf 
+
+
+Convergence =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   0
+
+
+lam =
+
+     []
+
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: -Inf 
+
+
+Convergence =
+
+  1×2 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0
+
+
+lam =
+
+     []
+
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: -Inf 
+
+
+Convergence =
+
+  1×3 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   0
+
+
+lam =
+
+    0.1000
+
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: -Inf 
+
+
+Convergence =
+
+  1×4 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   0   0
+
+
+lam =
+
+     []
+
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: -Inf 
+
+
+Convergence =
+
+  1×5 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   0   0   0
+
+
+lam =
+
+     []
+
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: -Inf 
+
+
+Convergence =
+
+  1×6 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   0   0   0   0
+
+
+lam =
+
+    0.1000
+
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('WEC_DP_v7>fun', '/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m', 428)" style="font-weight:bold">WEC_DP_v7>fun</a> (<a href="matlab: opentoline('/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m',428,0)">line 428</a>)
+
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('WEC_DP_v7>@(lam)-fun(lam,params)', '/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m', 241)" style="font-weight:bold">WEC_DP_v7>@(lam)-fun(lam,params)</a> (<a href="matlab: opentoline('/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m',241,0)">line 241</a>)
+    [lam,cost,exitflag] = fminsearch(@(lam) -fun(lam,params) , lam0,options); % The negative sign is there because we want to maximize over lambda
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('fminsearch', '/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/matlab/optimfun/fminsearch.m', 381)" style="font-weight:bold">fminsearch</a> (<a href="matlab: opentoline('/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/matlab/optimfun/fminsearch.m',381,0)">line 381</a>)
+                    x(:) = v(:,j); fv(:,j) = funfcn(x,varargin{:});
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('WEC_DP_v7', '/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m', 241)" style="font-weight:bold">WEC_DP_v7</a> (<a href="matlab: opentoline('/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m',241,0)">line 241</a>)
+    [lam,cost,exitflag] = fminsearch(@(lam) -fun(lam,params) , lam0,options); % The negative sign is there because we want to maximize over lambda
+} 
+feasibility = isfinite(  max(min(HECM_PowLoss + battery_power),[],'includenan') )
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   0
+
+WEC_DP_v7
+
+Spectrum =
+
+    'irregular'
+
+
+CWR =
+
+    0.8737
+
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('normAm', '/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/matlab/matfun/private/normAm.m', 16)" style="font-weight:bold">normAm</a> (<a href="matlab: opentoline('/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/matlab/matfun/private/normAm.m',16,0)">line 16</a>)
+
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('expm>ell', '/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/matlab/matfun/expm.m', 210)" style="font-weight:bold">expm>ell</a> (<a href="matlab: opentoline('/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/matlab/matfun/expm.m',210,0)">line 210</a>)
+alpha = normAm(scaledT,2*m_val+1)/norm(T,1);
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('expm>expm_params', '/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/matlab/matfun/expm.m', 243)" style="font-weight:bold">expm>expm_params</a> (<a href="matlab: opentoline('/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/matlab/matfun/expm.m',243,0)">line 243</a>)
+if (eta1 <= theta(1) && ell(T, coeff(1), 3) == 0)
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('expm', '/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/matlab/matfun/expm.m', 73)" style="font-weight:bold">expm</a> (<a href="matlab: opentoline('/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/matlab/matfun/expm.m',73,0)">line 73</a>)
+[s, m, Tpowers] = expm_params(T);
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('utScaledExpm', '/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/shared/controllib/engine/numerics/utScaledExpm.m', 7)" style="font-weight:bold">utScaledExpm</a> (<a href="matlab: opentoline('/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/shared/controllib/engine/numerics/utScaledExpm.m',7,0)">line 7</a>)
+m = lrscale(expm(a),s,1./s);
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('ltipack.ssdata/utDiscretizeZOH', '/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/shared/controllib/engine/+ltipack/@ssdata/utDiscretizeZOH.m', 172)" style="font-weight:bold">ltipack.ssdata/utDiscretizeZOH</a> (<a href="matlab: opentoline('/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/shared/controllib/engine/+ltipack/@ssdata/utDiscretizeZOH.m',172,0)">line 172</a>)
+      s = utScaledExpm([[a b]*Ts; zeros(nu,nx+nu)]);
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('ltipack.ssdata/trespSetUp', '/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/shared/controllib/engine/+ltipack/@ssdata/trespSetUp.m', 92)" style="font-weight:bold">ltipack.ssdata/trespSetUp</a> (<a href="matlab: opentoline('/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/shared/controllib/engine/+ltipack/@ssdata/trespSetUp.m',92,0)">line 92</a>)
+            [D,XMap] = utDiscretizeZOH(D,dt,XMap);
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('ltipack.tfdata/trespSetUp', '/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/shared/controllib/engine/+ltipack/@tfdata/trespSetUp.m', 10)" style="font-weight:bold">ltipack.tfdata/trespSetUp</a> (<a href="matlab: opentoline('/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/shared/controllib/engine/+ltipack/@tfdata/trespSetUp.m',10,0)">line 10</a>)
+      trespSetUp(LocalConvert2SS(D),RespType,dt,tf,[],SimInfo);
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('ltipack.ltidata/timeresp', '/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/shared/controllib/engine/+ltipack/@ltidata/timeresp.m', 59)" style="font-weight:bold">ltipack.ltidata/timeresp</a> (<a href="matlab: opentoline('/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/shared/controllib/engine/+ltipack/@ltidata/timeresp.m',59,0)">line 59</a>)
+[Dsim,dt,tf,SimInfo] = trespSetUp(D,RespType,dt,tf,[],SimInfo);
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('ltipack.SystemArray/timeresp_', '/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/shared/controllib/engine/+ltipack/@SystemArray/SystemArray.m', 274)" style="font-weight:bold">ltipack.SystemArray/timeresp_</a> (<a href="matlab: opentoline('/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/shared/controllib/engine/+ltipack/@SystemArray/SystemArray.m',274,0)">line 274</a>)
+         [varargout{1:nargout}] = timeresp(sys.Data_,varargin{:});
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('DynamicSystem/step', '/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/shared/controllib/engine/@DynamicSystem/step.m', 79)" style="font-weight:bold">DynamicSystem/step</a> (<a href="matlab: opentoline('/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/shared/controllib/engine/@DynamicSystem/step.m',79,0)">line 79</a>)
+         [y,t,focus] = timeresp_(sys,'step',tspec,[],DataOptions);
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('GetSwitchingLossMatrix_v3', '/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/GetSwitchingLossMatrix_v3.m', 33)" style="font-weight:bold">GetSwitchingLossMatrix_v3</a> (<a href="matlab: opentoline('/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/GetSwitchingLossMatrix_v3.m',33,0)">line 33</a>)
+                    xon = step(gs,tspan);
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('WEC_DP_v7', '/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m', 201)" style="font-weight:bold">WEC_DP_v7</a> (<a href="matlab: opentoline('/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m',201,0)">line 201</a>)
+GetSwitchingLossMatrix_v3; % for 3 rails 5 delayvals, and dt = 1e-5, it takes .5 hour
+} 
+WEC_DP_v7
+
+Spectrum =
+
+    'irregular'
+
+
+CWR =
+
+    0.8737
+
+Elapsed time is 1.183110 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   0
+
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: -Inf 
+
+
+Convergence =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   0
+
+
+lam =
+
+     []
+
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: -Inf 
+
+
+Convergence =
+
+  1×2 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0
+
+
+lam =
+
+     []
+
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('WEC_DP_v7>fun', '/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m', 428)" style="font-weight:bold">WEC_DP_v7>fun</a> (<a href="matlab: opentoline('/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m',428,0)">line 428</a>)
+
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('WEC_DP_v7>@(lam)-fun(lam,params)', '/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m', 241)" style="font-weight:bold">WEC_DP_v7>@(lam)-fun(lam,params)</a> (<a href="matlab: opentoline('/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m',241,0)">line 241</a>)
+    [lam,cost,exitflag] = fminsearch(@(lam) -fun(lam,params) , lam0,options); % The negative sign is there because we want to maximize over lambda
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('fminsearch', '/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/matlab/optimfun/fminsearch.m', 381)" style="font-weight:bold">fminsearch</a> (<a href="matlab: opentoline('/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/matlab/optimfun/fminsearch.m',381,0)">line 381</a>)
+                    x(:) = v(:,j); fv(:,j) = funfcn(x,varargin{:});
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('WEC_DP_v7', '/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m', 241)" style="font-weight:bold">WEC_DP_v7</a> (<a href="matlab: opentoline('/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m',241,0)">line 241</a>)
+    [lam,cost,exitflag] = fminsearch(@(lam) -fun(lam,params) , lam0,options); % The negative sign is there because we want to maximize over lambda
+} 
+WEC_DP_v7
+
+Spectrum =
+
+    'irregular'
+
+
+CWR =
+
+    0.8737
+
+Elapsed time is 1.154343 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+WEC_DP_v7
+
+Spectrum =
+
+    'irregular'
+
+
+CWR =
+
+    0.8737
+
+Elapsed time is 1.178396 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+WEC_DP_v7
+
+Spectrum =
+
+    'irregular'
+
+
+CWR =
+
+    0.8737
+
+Elapsed time is 1.148487 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+WEC_DP_v7
+
+Spectrum =
+
+    'irregular'
+
+
+CWR =
+
+    0.8737
+
+Elapsed time is 1.165736 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   0
+
+WEC_DP_v7
+
+Spectrum =
+
+    'irregular'
+
+
+CWR =
+
+    0.8737
+
+Elapsed time is 1.150020 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+WEC_DP_v7
+
+Spectrum =
+
+    'irregular'
+
+
+CWR =
+
+    0.8737
+
+Elapsed time is 1.150506 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: -204923185.347458 
+
+
+Convergence =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   0
+
+
+lam =
+
+     []
+
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: 144874927.201297 
+
+
+Convergence =
+
+  1×2 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0
+
+
+lam =
+
+     []
+
+
+Convergence =
+
+  1×3 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1
+
+
+lam =
+
+   -0.1290
+
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: 12448310.078044 
+
+
+Convergence =
+
+  1×4 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0
+
+
+lam =
+
+     []
+
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: -1631397.354128 
+
+
+Convergence =
+
+  1×5 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0
+
+
+lam =
+
+     []
+
+
+Convergence =
+
+  1×6 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1
+
+
+lam =
+
+    0.0439
+
+
+Convergence =
+
+  1×7 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1
+
+
+lam =
+
+   -0.1260
+
+
+Convergence =
+
+  1×8 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1
+
+
+lam =
+
+    0.1111
+
+ 
+Exiting: Maximum number of iterations has been exceeded
+         - increase MaxIter option.
+         Current function value: -93057278370990458740664299193707666671567139504128.000000 
+
+
+Convergence =
+
+  1×9 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1   0
+
+
+lam =
+
+   1.0e+41 *
+
+   -4.3227   -4.1278
+
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: -168505227.104565 
+
+
+Convergence =
+
+  1×10 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1   0   0
+
+
+lam =
+
+     []
+
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: 117403936.779244 
+
+
+Convergence =
+
+  1×11 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1   0   0   0
+
+
+lam =
+
+     []
+
+
+Convergence =
+
+  1×12 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1   0   0   0   1
+
+
+lam =
+
+   -0.1617
+
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: 257260.960230 
+
+
+Convergence =
+
+  1×13 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1   0   0   0   1   0
+
+
+lam =
+
+     []
+
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: -65737780.733016 
+
+
+Convergence =
+
+  1×14 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1   0   0   0   1   0   0
+
+
+lam =
+
+     []
+
+
+Convergence =
+
+  1×15 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1   0   0   0   1   0   0   1
+
+
+lam =
+
+    0.0813
+
+
+Convergence =
+
+  1×16 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1   0   0   0   1   0   0   1   1
+
+
+lam =
+
+   -0.1517
+
+
+Convergence =
+
+  1×17 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1   0   0   0   1   0   0   1   1   1
+
+
+lam =
+
+    0.1229
+
+ 
+Exiting: Maximum number of iterations has been exceeded
+         - increase MaxIter option.
+         Current function value: -235244638651713097657127759908598347590525066936320.000000 
+
+
+Convergence =
+
+  1×18 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1   0   0   0   1   0   0   1   1   1   0
+
+
+lam =
+
+   1.0e+42 *
+
+   -1.1325   -1.0241
+
+
+Convergence =
+
+  1×19 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1   0   0   0   1   0   0   1   1   1   0   1
+
+
+lam =
+
+   -0.1064
+
+
+Convergence =
+
+  1×20 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1   0   0   0   1   0   0   1   1   1   0   1   1
+
+
+lam =
+
+    0.1126
+
+
+Convergence =
+
+  1×21 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1   0   0   0   1   0   0   1   1   1   0   1   1   1
+
+
+lam =
+
+   -0.1080   -0.1269
+
+
+Convergence =
+
+  1×22 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1   0   0   0   1   0   0   1   1   1   0   1   1   1   1
+
+
+lam =
+
+    0.0456
+
+
+Convergence =
+
+  1×23 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1   0   0   0   1   0   0   1   1   1   0   1   1   1   1   1
+
+
+lam =
+
+    0.1607
+
+
+Convergence =
+
+  1×24 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1   0   0   0   1   0   0   1   1   1   0   1   1   1   1   1   1
+
+
+lam =
+
+    0.0551    0.0829
+
+
+Convergence =
+
+  1×25 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1   0   0   0   1   0   0   1   1   1   0   1   1   1   1   1   1   1
+
+
+lam =
+
+   -0.1135   -0.1245
+
+
+Convergence =
+
+  1×26 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1   0   0   0   1   0   0   1   1   1   0   1   1   1   1   1   1   1   1
+
+
+lam =
+
+    0.1478    0.1332
+
+ 
+Exiting: Maximum number of iterations has been exceeded
+         - increase MaxIter option.
+         Current function value: -664431939568656363587551832647216922624.000000 
+
+
+Convergence =
+
+  1×27 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1   0   0   0   1   0   0   1   1   1   0   1   1   1   1   1   1   1   1   0
+
+
+lam =
+
+   1.0e+30 *
+
+    1.2018   -5.2933   -4.4635
+
+
+Eff_conv =
+
+  Columns 1 through 14
+
+         0         0    0.5781         0         0    0.4727    0.5662    0.4164         0         0         0    0.5811         0         0
+
+  Columns 15 through 27
+
+    0.5465    0.5727    0.5277         0    0.6752    0.2542    0.6742    0.4527    0.4875    0.6080    0.6679    0.5745         0
+
+Elapsed time is 77.303811 seconds.
+
+ans =
+
+   1.0e+07 *
+
+   -3.3233   -3.3233
+
+Efficiency(case_no)
+
+ans =
+
+    0.5050
+
+Efficiency
+
+Efficiency =
+
+  Columns 1 through 14
+
+    0.5648    0.2004    0.5781    0.3586    0.4143    0.4727    0.5662    0.4164    0.5537    0.5791    0.2039    0.5811    0.3934    0.5279
+
+  Columns 15 through 27
+
+    0.5465    0.5727    0.5277    0.5514    0.6752    0.2542    0.6742    0.4527    0.4875    0.6080    0.6679    0.5745    0.5050
+
+[a,b]= max(Efficiency)
+
+a =
+
+    0.6752
+
+
+b =
+
+    19
+
+all_options(b)
+
+ans =
+
+  1×1 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {'C0MM'}
+
+WEC_DP_v7
+
+all_options =
+
+  1×1 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {'C0MM'}
+
+
+Spectrum =
+
+    'irregular'
+
+
+CWR =
+
+    0.8737
+
+Elapsed time is 1.133763 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+Convergence =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+lam =
+
+   -0.1064
+
+
+Eff_conv =
+
+    0.6752
+
+Elapsed time is 3.160113 seconds.
+
+ans =
+
+   1.0e+07 *
+
+   -4.4431   -4.4431
+
+WEC_DP_v7
+
+Spectrum =
+
+    'regular'
+
+
+all_options =
+
+  1×1 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {'C00M'}
+
+
+CWR =
+
+    1.3354
+
+Elapsed time is 1.116682 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+Convergence =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+lam =
+
+   -0.0760   -0.1358
+
+
+Eff_conv =
+
+    0.6348
+
+Elapsed time is 6.398866 seconds.
+
+ans =
+
+   1.0e+08 *
+
+   -1.4054   -1.4054
+
+pto.c
+
+ans =
+
+    20188000
+
+pto.k
+
+ans =
+
+    38278000
+
+pto.k/1e7
+
+ans =
+
+    3.8278
+
+pto.c/1e7
+
+ans =
+
+    2.0188
+
+WEC_DP_v7
+
+Spectrum =
+
+    'regular'
+
+
+all_options =
+
+  1×1 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {'C00M'}
+
+
+CWR =
+
+    1.3354
+
+Elapsed time is 1.113759 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+Convergence =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+lam =
+
+   -0.0760   -0.1358
+
+
+Eff_conv =
+
+    0.6348
+
+Elapsed time is 6.523755 seconds.
+
+ans =
+
+   1.0e+08 *
+
+   -1.4054   -1.4054
+
+WEC_DP_v7
+
+Spectrum =
+
+    'regular'
+
+
+all_options =
+
+  1×1 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {'C00M'}
+
+
+CWR =
+
+    1.3354
+
+Elapsed time is 1.128407 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+Convergence =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+lam =
+
+   -0.0760   -0.1358
+
+
+Eff_conv =
+
+    0.6348
+
+Elapsed time is 6.423710 seconds.
+
+ans =
+
+   1.0e+08 *
+
+   -1.4054   -1.4054
+
+WorkOut(end)
+
+ans =
+
+  -1.6086e+08
+
+Total_input_Energy
+
+Total_input_Energy =
+
+  -1.4054e+08
+
+WorkOut = d_battery_work + [zeros(1,find(t==MPstart)),t(2)*cumsum(TotalMPWork/(t(end)-MPstart)*ones(1,length(t)-find(t==MPstart)))] + cumsum(d_Switchingloss');
+figure, plot(t,-t(2)*cumsum(F1.*V1)/1e6,t,-WorkOut/1e6), xlabel('Time (s)'), ylabel('Work (MJ)'),legend('Mechanical Energy In','Electrical Energy Out')
+WorkIn = t(2)*cumsum(F1.*V1);
+figure, plot(t,-WorkIn,t,-WorkOut) 
+clearvars -except WorkIn t WorkOut
+WEC_DP_v7
+
+Spectrum =
+
+    'regular'
+
+
+all_options =
+
+  1×1 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {'C00M'}
+
+
+CWR =
+
+    1.3354
+
+Elapsed time is 1.182047 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+Convergence =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+lam =
+
+   -0.0760   -0.1358
+
+
+Eff_conv =
+
+    0.6348
+
+Elapsed time is 6.605652 seconds.
+
+ans =
+
+   1.0e+08 *
+
+   -1.4054   -1.4054
+
+PR
+
+PR =
+
+   1.0e+07 *
+
+         0    0.5833    2.3333    3.5000
+
+figure, plot(t,HECM_T1(d_ind)), ylabel('Torque (Nm)'), xlabel('Time (s)'), title('HECM Torque'), grid on, xlim([100 150]), xlabel('Time (s)')
+figure, plot(t,V1)
+figure, subplot(112), plot(t,F1)
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('subplot', '/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/matlab/graph2d/subplot.m', 183)" style="font-weight:bold">subplot</a> (<a href="matlab: opentoline('/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/matlab/graph2d/subplot.m',183,0)">line 183</a>)
+Index exceeds number of subplots.
+} 
+figure, subplot(122), plot(t,F1)
+        subplot(212), plot(t,V1)
+figure, subplot(112), plot(t,F1)
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('subplot', '/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/matlab/graph2d/subplot.m', 183)" style="font-weight:bold">subplot</a> (<a href="matlab: opentoline('/usr/local/MATLAB/R2021b/MATLAB/R2021b/toolbox/matlab/graph2d/subplot.m',183,0)">line 183</a>)
+Index exceeds number of subplots.
+} 
+figure, subplot(121), plot(t,F1)
+        subplot(221), plot(t,V1)
+help subplot
+ <strong>subplot</strong> Create axes in tiled positions.
+    H = <strong>subplot</strong>(m,n,p), or <strong>subplot</strong>(mnp), breaks the Figure window
+    into an m-by-n matrix of small axes, selects the p-th axes for
+    the current plot, and returns the axes handle.  The axes are
+    counted along the top row of the Figure window, then the second
+    row, etc.  For example,
+ 
+        <strong>subplot</strong>(2,1,1), PLOT(income)
+        <strong>subplot</strong>(2,1,2), PLOT(outgo)
+ 
+    plots income on the top half of the window and outgo on the
+    bottom half. If the CurrentAxes is nested in a uipanel the
+    panel is used as the parent for the subplot instead of the
+    current figure.
+ 
+    <strong>subplot</strong>(m,n,p), if the axes already exists, makes it current.
+    <strong>subplot</strong>(m,n,p,'replace'), if the axes already exists, deletes it and
+    creates a new axes.
+    <strong>subplot</strong>(m,n,p,'align') places the axes so that the plot boxes
+    are aligned, but does not prevent the labels and ticks from
+    overlapping.
+    <strong>subplot</strong>(m,n,P), where P is a vector, specifies an axes position
+    that covers all the subplot positions listed in P.
+    <strong>subplot</strong>(H), where H is an axes handle, is another way of making
+    an axes current for subsequent plotting commands.
+ 
+    <strong>subplot</strong>('position',[left bottom width height]) creates an
+    axes at the specified position in normalized coordinates (in
+    in the range from 0.0 to 1.0).
+ 
+    <strong>subplot</strong>(..., PROP1, VALUE1, PROP2, VALUE2, ...) sets the
+    specified property-value pairs on the subplot axes. To add the
+    subplot to a specific figure pass the figure handle as the
+    value for the 'Parent' property.
+ 
+    If a <strong>subplot</strong> specification causes a new axes to overlap an
+    existing axes, the existing axes is deleted - unless the position
+    of the new and existing axes are identical.  For example,
+    the statement <strong>subplot</strong>(1,2,1) deletes all existing axes overlapping
+    the left side of the Figure window and creates a new axes on that
+    side - unless there is an axes there with a position that exactly
+    matches the position of the new axes (and 'replace' was not specified),
+    in which case all other overlapping axes will be deleted and the
+    matching axes will become the current axes.
+ 
+    <strong>subplot</strong>(111) is an exception to the rules above, and is not
+    identical in behavior to <strong>subplot</strong>(1,1,1).  For reasons of backwards
+    compatibility, it is a special case of subplot which does not
+    immediately create an axes, but instead sets up the figure so that
+    the next graphics command executes CLF RESET in the figure
+    (deleting all children of the figure), and creates a new axes in
+    the default position.  This syntax does not return a handle, so it
+    is an error to specify a return argument.  The delayed CLF RESET
+    is accomplished by setting the figure's NextPlot to 'replace'.
+ 
+    Be aware when creating subplots from scripts that the Position
+    property of subplots is not finalized until either a drawnow
+    command is issued, or MATLAB returns to await a user command.
+    That is, the value obtained for subplot i by the command
+    h(i).Position will not be correct until the script
+    refreshes the plot or exits.
+ 
+    See also  <a href="matlab:help gca -displayBanner">gca</a>, <a href="matlab:help gcf -displayBanner">gcf</a>, <a href="matlab:help axes -displayBanner">axes</a>, <a href="matlab:help figure -displayBanner">figure</a>, <a href="matlab:help uipanel -displayBanner">uipanel</a>
+
+    <a href="matlab:doc subplot">Documentation for subplot</a>
+
+figure, subplot(121), plot(t,F1)
+        subplot(122), plot(t,V1)
+figure, subplot(211), plot(t,F1)
+        subplot(212), plot(t,V1)
+figure, subplot(211), plot(t,F1/1e6), ylabel('Force (MN)')
+        subplot(212), plot(t,V1), ylabel('Angular Velocity (rad/s)'), xlabel('Time (s)')
+HECM_size1
+
+HECM_size1 =
+
+    0.0048
+
+HECM_size1*1e6
+
+ans =
+
+   4.7505e+03
+
+HECM_scale1 = 45;
+HECM_scale1*D
+
+ans =
+
+    0.0048
+
+ans*1e6
+
+ans =
+
+        4815
+
+figure, plot(t,-t(2)*(F1.*V1)/1e6)
+figure, plot(t,-t(2)*(F1.*V1)/1e3)
+close all
+TotalMPWork/(t(end)-MPstart)/1e3
+
+ans =
+
+ -846.8835
+
+figure, plot(t,d_battery_power)
+max((d_battery_power+d_Switchingloss'/t(2)))
+
+ans =
+
+   1.5657e+06
+
+ans*1e6
+
+ans =
+
+   1.5657e+12
+
+ans*1e-6
+
+ans =
+
+   1.5657e+06
+
+ans*1e-6
+
+ans =
+
+    1.5657
+
+TotalMPWork/(t(end)-MPstart)
+
+ans =
+
+  -8.4688e+05
+
+max((d_battery_power+d_Switchingloss'/t(2)))*1e-3
+
+ans =
+
+   1.5657e+03
+
+1566
+
+ans =
+
+        1566
+
+figure, subplot(211), plot(t,F1/1e6), ylabel('Force (MN)')
+        subplot(212), plot(t,V1), ylabel('Velocity (m/s)'), xlabel('Time (s)')
+WEC_DP_v7
+
+Spectrum =
+
+    'irregular'
+
+
+all_options =
+
+  1×1 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {'C0MM'}
+
+
+CWR =
+
+    0.8737
+
+Elapsed time is 1.201970 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+Convergence =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+lam =
+
+   -0.1055
+
+
+Eff_conv =
+
+    0.6731
+
+Elapsed time is 3.156240 seconds.
+
+ans =
+
+   1.0e+07 *
+
+   -4.4291   -4.4291
+
+
+%% Size the HECM
+switch PM
+    case '107cc'
+        D = Disp*2*pi; %displacement [m^3/rev]
+        MaxSpeed = max(w1rad_Mapping(:))/2; % 5000 RPM
+        MaxSpeed = MaxSpeed*3/5; % 3000 RPM
+    case 'Minal'
+        D = 1.3681e-5; % m^3/rev
+        MaxSpeed = max(w_x(:)); % rad/s
+    otherwise 
+        disp('Please definie HECM P/M map to use')
+        pause;
+end
+HECM_size1 = max(abs(V1))*ARod1/MaxSpeed*2*pi;
+HECM_scale1 = HECM_size1/D
+
+HECM_scale1 =
+
+   45.6486
+
+TotalMPWork/(t(end)-MPstart)
+
+ans =
+
+  -2.0116e+05
+
+TotalMPWork/(t(end)-MPstart)/1e3
+
+ans =
+
+ -201.1619
+
+max((d_battery_power+d_Switchingloss'/t(2))/1e3)
+
+ans =
+
+   1.3531e+03
+
+WEC_DP_v7
+
+Spectrum =
+
+    'irregular'
+
+
+all_options =
+
+  1×1 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {'C0MM'}
+
+
+CWR =
+
+    0.8737
+
+Elapsed time is 1.194937 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   0
+
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: -Inf 
+
+
+Convergence =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   0
+
+
+lam =
+
+    0.1000
+
+
+Eff_conv =
+
+     0
+
+Elapsed time is 6.470830 seconds.
+
+ans =
+
+   1.0e+07 *
+
+       Inf   -4.1953
+
+WEC_DP_v7
+
+Spectrum =
+
+    'irregular'
+
+
+all_options =
+
+  1×1 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {'C0MM'}
+
+{Unrecognized function or variable 'F1'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('WEC_DP_v7', '/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m', 52)" style="font-weight:bold">WEC_DP_v7</a> (<a href="matlab: opentoline('/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m',52,0)">line 52</a>)
+        Pmax = max( [abs(max(F1)/ACap1), abs(min(F1)/ARod1) ]); % most poative force rail = Pmax*ACap;  Most negative force rail = -Pmax*Arod
+} 
+WEC_DP_v7
+{Unable to resolve the name myoutput.signals.values.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('WEC_DP_v7', '/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m', 38)" style="font-weight:bold">WEC_DP_v7</a> (<a href="matlab: opentoline('/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m',38,0)">line 38</a>)
+V1 = myoutput.signals.values(:,11);
+} 
+WEC_DP_v7
+
+Spectrum =
+
+    'irregular'
+
+
+all_options =
+
+  1×1 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {'C0MM'}
+
+
+CWR =
+
+    0.8737
+
+Elapsed time is 1.128927 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   0
+
+WEC_DP_v7
+
+Spectrum =
+
+    'irregular'
+
+
+all_options =
+
+  1×1 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {'C0MM'}
+
+
+CWR =
+
+    0.8737
+
+Elapsed time is 1.205989 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+WEC_DP_v7
+
+Spectrum =
+
+    'irregular'
+
+
+all_options =
+
+  1×1 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {'C0MM'}
+
+
+CWR =
+
+    0.8737
+
+Elapsed time is 1.133343 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+Convergence =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+lam =
+
+   -0.1341
+
+
+Eff_conv =
+
+    0.6800
+
+Elapsed time is 3.458715 seconds.
+
+ans =
+
+   1.0e+07 *
+
+   -4.4743   -4.4743
+
+WEC_DP_v7
+
+Spectrum =
+
+    'irregular'
+
+
+CWR =
+
+    0.8737
+
+Elapsed time is 1.124347 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: -194316456.283363 
+
+
+Convergence =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   0
+
+
+lam =
+
+     []
+
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: 186765848.017016 
+
+
+Convergence =
+
+  1×2 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0
+
+
+lam =
+
+     []
+
+
+Convergence =
+
+  1×3 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1
+
+
+lam =
+
+   -0.1266
+
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: 104780955.461440 
+
+
+Convergence =
+
+  1×4 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0
+
+
+lam =
+
+     []
+
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: 23446357.100107 
+
+
+Convergence =
+
+  1×5 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0
+
+
+lam =
+
+     []
+
+
+Convergence =
+
+  1×6 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1
+
+
+lam =
+
+    0.0668
+
+
+Convergence =
+
+  1×7 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1
+
+
+lam =
+
+   -0.1307
+
+
+Convergence =
+
+  1×8 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1
+
+
+lam =
+
+    0.0920
+
+ 
+Exiting: Maximum number of iterations has been exceeded
+         - increase MaxIter option.
+         Current function value: -76381462340491009715001819557737344967942036520960.000000 
+
+
+Convergence =
+
+  1×9 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1   0
+
+
+lam =
+
+   1.0e+41 *
+
+   -8.3115   -8.2600
+
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: -152767746.966790 
+
+
+Convergence =
+
+  1×10 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1   0   0
+
+
+lam =
+
+     []
+
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: 177125614.592580 
+
+
+Convergence =
+
+  1×11 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1   0   0   0
+
+
+lam =
+
+     []
+
+
+Convergence =
+
+  1×12 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1   0   0   0   1
+
+
+lam =
+
+   -0.1483
+
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: 59353260.381637 
+
+
+Convergence =
+
+  1×13 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1   0   0   0   1   0
+
+
+lam =
+
+     []
+
+ 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: -59042201.820912 
+
+
+Convergence =
+
+  1×14 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1   0   0   0   1   0   0
+
+
+lam =
+
+     []
+
+
+Convergence =
+
+  1×15 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1   0   0   0   1   0   0   1
+
+
+lam =
+
+    0.0849
+
+
+Convergence =
+
+  1×16 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1   0   0   0   1   0   0   1   1
+
+
+lam =
+
+   -0.1142
+
+
+Convergence =
+
+  1×17 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1   0   0   0   1   0   0   1   1   1
+
+
+lam =
+
+    0.1226
+
+ 
+Exiting: Maximum number of iterations has been exceeded
+         - increase MaxIter option.
+         Current function value: -34030790122342465618160494913952202511987362496512.000000 
+
+
+Convergence =
+
+  1×18 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1   0   0   0   1   0   0   1   1   1   0
+
+
+lam =
+
+   1.0e+41 *
+
+   -3.8869   -3.6170
+
+
+Convergence =
+
+  1×19 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1   0   0   0   1   0   0   1   1   1   0   1
+
+
+lam =
+
+   -0.1341
+
+
+Convergence =
+
+  1×20 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1   0   0   0   1   0   0   1   1   1   0   1   1
+
+
+lam =
+
+   -0.0185
+
+
+Convergence =
+
+  1×21 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1   0   0   0   1   0   0   1   1   1   0   1   1   1
+
+
+lam =
+
+   -0.1334   -0.1156
+
+
+Convergence =
+
+  1×22 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1   0   0   0   1   0   0   1   1   1   0   1   1   1   1
+
+
+lam =
+
+    0.1689
+
+
+Convergence =
+
+  1×23 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1   0   0   0   1   0   0   1   1   1   0   1   1   1   1   1
+
+
+lam =
+
+    0.1646
+
+
+Convergence =
+
+  1×24 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1   0   0   0   1   0   0   1   1   1   0   1   1   1   1   1   1
+
+
+lam =
+
+    0.1594    0.0882
+
+
+Convergence =
+
+  1×25 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1   0   0   0   1   0   0   1   1   1   0   1   1   1   1   1   1   1
+
+
+lam =
+
+   -0.1301   -0.1228
+
+
+Convergence =
+
+  1×26 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1   0   0   0   1   0   0   1   1   1   0   1   1   1   1   1   1   1   1
+
+
+lam =
+
+    0.1559    0.1276
+
+ 
+Exiting: Maximum number of iterations has been exceeded
+         - increase MaxIter option.
+         Current function value: -2450818544004484294593474856564555776.000000 
+
+
+Convergence =
+
+  1×27 <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a> array
+
+   0   0   1   0   0   1   1   1   0   0   0   1   0   0   1   1   1   0   1   1   1   1   1   1   1   1   0
+
+
+lam =
+
+   1.0e+28 *
+
+   -0.8965   -3.8484   -2.9530
+
+
+Eff_conv =
+
+  Columns 1 through 14
+
+         0         0    0.5533         0         0    0.4054    0.5563    0.3732         0         0         0    0.5862         0         0
+
+  Columns 15 through 27
+
+    0.5475    0.5848    0.5295         0    0.6800    0.1785    0.6838    0.3282    0.5383    0.5791    0.6827    0.5798         0
+
+Elapsed time is 78.868506 seconds.
+
+ans =
+
+   1.0e+07 *
+
+   -3.8994   -3.8994
+
+[a,b]= max(Efficiency)
+
+a =
+
+    0.6838
+
+
+b =
+
+    21
+
+all_options(b)
+
+ans =
+
+  1×1 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {'C0M0'}
+
+WEC_DP_v7
+
+Spectrum =
+
+    'irregular'
+
+
+all_options =
+
+  1×1 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {'C0M0'}
+
+
+CWR =
+
+    0.8737
+
+Elapsed time is 1.177403 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+Convergence =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+lam =
+
+   -0.1334   -0.1156
+
+
+Eff_conv =
+
+    0.6838
+
+Elapsed time is 6.691782 seconds.
+
+ans =
+
+   1.0e+07 *
+
+   -4.4993   -4.4993
+
+PR
+
+PR =
+
+           0     5000000    20000000    30000000
+
+WorkIn = t(2)*cumsum(F1.*V1);
+clearvars -except WorkIn t WorkOut
+Unrecognized function or variable 'PosWork'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('WEC_DP_v7', '/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m', 330)" style="font-weight:bold">WEC_DP_v7</a> (<a href="matlab: opentoline('/home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/HHEA_DP/WEC_DP_v7.m',330,0)">line 330</a>)
+pie22=[PosWork, sum(ActualMPLoss), sum(HECM_PowLoss(d_ind))*(t(2)-t(1)), IncludeSwitchingLosses*sum(d_Switchingloss)];
+
+WEC_DP_v7
+
+Spectrum =
+
+    'irregular'
+
+
+all_options =
+
+  1×1 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {'C0M0'}
+
+
+CWR =
+
+    0.8737
+
+Elapsed time is 1.222570 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+Convergence =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+lam =
+
+   -0.1334   -0.1156
+
+
+Eff_conv =
+
+    0.6838
+
+Elapsed time is 6.834002 seconds.
+
+ans =
+
+   1.0e+07 *
+
+   -4.4993   -4.4993
+
+1.27/150
+
+ans =
+
+    0.0085
+
+1.27/150*60/2000
+
+ans =
+
+   2.5400e-04
+
+1.27/150*60/2000*1e6
+
+ans =
+
+   254
+
+pto.c
+
+ans =
+
+    20188000
+
+pto.k
+
+ans =
+
+    38278000
+
+CWR
+
+CWR =
+
+    0.8737
+
+WEC_DP_v7
+
+Spectrum =
+
+    'irregular'
+
+
+all_options =
+
+  1×1 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {'C0M0'}
+
+
+CWR =
+
+    0.8737
+
+
+HECM_size1 =
+
+    0.0049
+
+Elapsed time is 1.202591 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+Convergence =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+lam =
+
+   -0.1334   -0.1156
+
+
+Eff_conv =
+
+    0.6838
+
+Elapsed time is 6.727835 seconds.
+
+ans =
+
+   1.0e+07 *
+
+   -4.4993   -4.4993
+
+WEC_DP_v7
+
+Spectrum =
+
+    'irregular'
+
+
+all_options =
+
+  1×1 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {'C0M0'}
+
+
+CWR =
+
+    0.8737
+
+
+HECM_size1 =
+
+    0.0049
+
+
+HECM_scale1 =
+
+   45.6486
+
+Elapsed time is 1.150341 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+Convergence =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+lam =
+
+   -0.1334   -0.1156
+
+
+Eff_conv =
+
+    0.6838
+
+Elapsed time is 6.783702 seconds.
+
+ans =
+
+   1.0e+07 *
+
+   -4.4993   -4.4993
+
+WEC_DP_v7
+
+Spectrum =
+
+    'regular'
+
+
+all_options =
+
+  1×1 <a href="matlab:helpPopup cell" style="font-weight:bold">cell</a> array
+
+    {'C00M'}
+
+
+CWR =
+
+    1.3354
+
+
+HECM_size1 =
+
+    0.0048
+
+
+HECM_scale1 =
+
+   44.3975
+
+Elapsed time is 1.165553 seconds.
+
+feasibility =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+Convergence =
+
+  <a href="matlab:helpPopup logical" style="font-weight:bold">logical</a>
+
+   1
+
+
+lam =
+
+   -0.0824   -0.1181
+
+
+Eff_conv =
+
+    0.6373
+
+Elapsed time is 6.737447 seconds.
+
+ans =
+
+   1.0e+08 *
+
+   -1.4108   -1.4108
+
