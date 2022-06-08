@@ -4,7 +4,8 @@
 
 %% Simulation Data
 simu = simulationClass();              
-simu.simMechanicsFile = 'OSWEC_Hydraulic_PTO.slx'; % Specify Simulink Model File with PTO-Sim
+%simu.simMechanicsFile = 'OSWEC_Hydraulic_PTO.slx'; % Specify Simulink Model File with PTO-Sim
+simu.simMechanicsFile = 'OSWEC_Constant_DeltaP.slx'; % Specify Simulink Model File
 simu.mode = 'normal';                   % Specify Simulation Mode ('normal','accelerator','rapid-accelerator')
 %simu.mode = 'rapid-accelerator';                   % Specify Simulation Mode ('normal','accelerator','rapid-accelerator')
 simu.explorer = 'off';                   % Turn SimMechanics Explorer (on/off)

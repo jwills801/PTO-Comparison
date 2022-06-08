@@ -5,10 +5,10 @@ Version: 4.4
 
 Initializing the Simulation Class...
 	Case Dir: /home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/CheckValveCode/OSWEC_Hydraulic_PTO 
-Elapsed time is 1.909637 seconds.
+Elapsed time is 0.686696 seconds.
 
 WEC-Sim Pre-processing ...   
-Elapsed time is 0.111602 seconds.
+Elapsed time is 0.137639 seconds.
 
 WEC-Sim Simulation Settings:
 	Start Time                     (sec) = 0
@@ -45,5 +45,9 @@ List of Constraint(s): Number of Constraints = 1
 	***** Constraint Name: Constraint1 *****
 
 
-Simulating the WEC device defined in the SimMechanics model /home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/CheckValveCode/OSWEC_Hydraulic_PTO/OSWEC_Hydraulic_PTO.slx...   
-Elapsed time is 0.415829 seconds.
+Simulating the WEC device defined in the SimMechanics model /home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/CheckValveCode/OSWEC_Hydraulic_PTO/OSWEC_Constant_DeltaP.slx...   
+Elapsed time is 0.222374 seconds.
+Elapsed time is 7.088129 seconds.
+
+Post-processing and saving...   
+Elapsed time is 0.046480 seconds.

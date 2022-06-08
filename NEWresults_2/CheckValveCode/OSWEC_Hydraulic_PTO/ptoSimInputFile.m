@@ -25,8 +25,8 @@ ptosim.pistonNCF.botA = 0.2382;    % Bottom piston area [m^2]
 % ptosim.accumulator(2).VIeq = ptosim.accumulator(2).VImax;
 % ptosim.accumulator(2).pIeq = ptosim.accumulator(2).pIprecharge/(1-ptosim.accumulator(2).VIeq/ptosim.accumulator(2).VI0)^(1.4);
 
-ptosim.accumulator(2).VI0 = X(1)/2; % Initial volume [m^3] - assuming that the initial volume is half full of fluid
-ptosim.accumulator(2).pIprecharge = X(3) *2^1.2; % Initial pressure [Pa] - assuming that the initial volume is half full of fluid
+%ptosim.accumulator(2).VI0 = X(1)/2; % Initial volume [m^3] - assuming that the initial volume is half full of fluid
+%ptosim.accumulator(2).pIprecharge = X(3) *2^1.2; % Initial pressure [Pa] - assuming that the initial volume is half full of fluid
 ptosim.accumulator(2).del_p_r = NaN;                                         
 ptosim.accumulator(2).pIrated = NaN;
 ptosim.accumulator(2).pIeq = NaN;
@@ -48,8 +48,8 @@ ptosim.accumulator(2).VImin = NaN;
 % ptosim.accumulator(1).VImax = ptosim.accumulator(1).VI0*(1-(ptosim.accumulator(1).pIprecharge/ptosim.accumulator(1).pIupper_limit)^(1/1.4));
 % ptosim.accumulator(1).VImin = ptosim.accumulator(1).VI0*(1-(ptosim.accumulator(1).pIprecharge/ptosim.accumulator(1).pIlower_limit)^(1/1.4));
 
-ptosim.accumulator(1).VI0 = X(2)/2; % Initial volume [m^3] - assuming that the initial volume is half full of fluid
-ptosim.accumulator(1).pIprecharge = X(4) *2^1.2; % Initial pressure [Pa] - assuming that the initial volume is half full of fluid
+%ptosim.accumulator(1).VI0 = X(2)/2; % Initial volume [m^3] - assuming that the initial volume is half full of fluid
+%ptosim.accumulator(1).pIprecharge = X(4) *2^1.2; % Initial pressure [Pa] - assuming that the initial volume is half full of fluid
 ptosim.accumulator(1).del_p_r = NaN;                                         
 ptosim.accumulator(1).pIrated = NaN;
 ptosim.accumulator(1).pIeq = NaN;
@@ -77,7 +77,7 @@ w = 3000*2*pi/60; % Angular Velocity [rad/s]
 % else
 %     d_scale = 1200/107; % regular waves
 % end
-d_scale = X(5)/107; % how much bigger is this motor from the 107cc motor that the map was made for
+%d_scale = X(5)/107; % how much bigger is this motor from the 107cc motor that the map was made for
 
 
 %% Rotary to Linear Adjustable Rod
