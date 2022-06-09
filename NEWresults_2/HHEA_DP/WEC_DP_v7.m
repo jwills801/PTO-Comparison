@@ -20,12 +20,11 @@ for k1=1:3
 end
 
 
-%Spectrum = 'regular';
-Spectrum = 'irregular';
+Spectrum = 'regular';
+%Spectrum = 'irregular';
 
 IncludeSwitchingLosses = 1; % 1 for yes, include switching losses, 0 for no, dont inlcude
-Sampled = 0; % 1 for sampled, 0 for summed
-analyzeOG = 1; % 1 for analysis using original data, 0 for analysis using sampled/summed data
+
 
 %PM = 'Minal';
 PM = '107cc';
@@ -41,14 +40,14 @@ switch Spectrum
         t_step = dt;
         ACap1 = .2382;
         ARod1 = ACap1;
-        J = simu.rho*simu.g*(waves.A).^(2)/4*sqrt(simu.g./waves.k.*tanh(waves.k.*waves.waterDepth))*(1+2*waves.k.*waves.waterDepth./sinh(2*waves.k.*waves.waterDepth));
-        all_options = {'C00M'} % best case for regular
+
+        %all_options = {'C0MM'} % maybe best case for regular
+        all_options = {'C00M'} % best case for regular - but might have a pumping rails
         ScaleMaxT1 = 2.5;
         Pmax = max( [abs(max(F1)/ACap1), abs(min(F1)/ARod1) ]); % most poative force rail = Pmax*ACap;  Most negative force rail = -Pmax*Arod
         Pmax = 35e6; % MPa
     case 'irregular'
         load('../PI_irregular.mat')
-        %% Load in Drive Cycle
         V1 = myoutput.signals.values(:,11);
         F1 = myoutput.signals.values(:,17);
         t = myoutput.time;
@@ -56,8 +55,8 @@ switch Spectrum
         t_step = dt;
         ACap1 = .2382;
         ARod1 = ACap1;
-        J = waves.Pw;
-        all_options = {'C0PM'} % best case for irregular 
+        
+        %all_options = {'C0PM'} % best case for irregular 
         ScaleMaxT1 = 2;
         Pmax = max( [abs(max(F1)/ACap1), abs(min(F1)/ARod1) ]); % most poative force rail = Pmax*ACap;  Most negative force rail = -Pmax*Arod
         Pmax = 35e6; % MPa
@@ -72,7 +71,7 @@ t_start = 50;
 Energy_first_chunk = -sum(F1(1:find(t==t_start)).*V1(1:find(t==t_start)))*dt;
 Total_energy_in = -sum(F1.*V1)*dt;
 ave_power_out = (Total_energy_in-Energy_first_chunk)/(t(end)-t_start); % Ave power for last 100 s
-CW = ave_power_out/J;
+CW = ave_power_out/waves.Pw;
 CWR = CW/B
 
 
@@ -167,7 +166,7 @@ HECM_PowLoss = HECM_PowLoss_Hydr + HECM_PowLoss_Elec;
 % Torque constraint
 Frange1 = (ones(length(PR),1)*PR*ACap1-PR'*ones(1,length(PR))*ARod1);
 
-MaxT1_Act=max(diff(sort(Frange1(:))))/ARod1/2*HECM_scale1*D*ScaleMaxT1/2/pi;
+MaxT1_Act = max(diff(sort(Frange1(:))))/ARod1/2*HECM_scale1*D*ScaleMaxT1/2/pi;
 
 HECM_PowLoss(abs(HECM_T1) > MaxT1_Act) = NaN; %inf
 
@@ -339,12 +338,12 @@ for i = 1:length(PR)
     eval(['plot(t,cumsum(QR{',num2str(i),'}(d_ind))*(t(2)-t(1)))'])
     eval(['D_MP = D_MP + sum(QR{',num2str(i),'}(d_ind))*(t(2)-t(1)) * PR(',num2str(i),')/PR(2) ']);
 end, hold off, legend, grid on, ylabel('Cumulative Flow(m^3)'), xlabel('Time (s)')
-D_MP = D_MP/150/2000*60*1e6 %cc
+D_MP = D_MP/150/2000*60*1e6 %cc Main pump size
 
-% Main pump size
+%% Generator sizes
+HECM_gen = max(abs(d_battery_power))
 
 
-pie11 = [-NegWork,Total_input_Energy];
 
 % Force rail section
 figure, plot(t,F1), hold on, plot(t([1,end]),repmat(PRA1*ACap1-PRB1*ARod1,1,2)),scatter(t,PRA1([starting_ind Decision_vector])*ACap1-PRB1([starting_ind Decision_vector])*ARod1,'x'), hold off, ylabel('Force (N)'),xlim([100 200]), xlabel('Time (s)')

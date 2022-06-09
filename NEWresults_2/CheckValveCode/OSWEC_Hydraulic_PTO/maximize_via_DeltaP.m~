@@ -9,29 +9,43 @@
 % just provides some constant delta P, as dictated by this code
 
 % For regular Waves, most energy is aborbed using deltaP of 8.4e6 Pa.
-% Energy absorbed: 98 MJ
+% Mechanical Energy absorbed: 98 MJ
+% GenSize: 862 kW
+% Motor Size: 1166 cc
+% CWR_in: .7081
+% CWR_out: .6054
 
-deltaP_vals = linspace(0,2e8,500); % Pa
+% For Irregular Waves, most energy is aborbed using deltaP of  Pa.
+% Mechanical Energy absorbed:  MJ
+% GenSize:  kW
+% Motor Size:  ccand
+% CWR_in: 
+% CWR_out: 
+
+deltaP_vals = linspace(0,2e7,100); % Pa
 Work_mech = NaN(size(deltaP_vals)); % initilize vector
 
+tic
 for ind = 1:length(deltaP_vals)
     deltaP = deltaP_vals(ind);
-    wecSim
+    evalc('wecSim');
     controller = struct();
     controller.velocity = controller1_out.signals.values(:,2); % + into actuator - piston velocity
     controller.force = controller1_out.signals.values(:,3); % + into actuator - piston force
     inst_power_mech = -controller.velocity.*controller.force;
     Work_mech(ind) = sum(inst_power_mech)*simu.time(2);
+    
+    disp([num2str(ind) ' of ' num2str(length(deltaP_vals)) ' simulations complete'])
 end
+toc
 
 [Best_Energy_Capture, ind]= max(Work_mech);
 Best_DeltaP = deltaP_vals(ind);
 figure, plot(deltaP_vals,Work_mech/1e3), xlabel('Delta P (Pa)'), ylabel('Mechanical Work In (kJ)')
 
 %% Run wecsim again with optimal deltaP in order to get the whole picture
-Best_DeltaP = 8.4e6;
 deltaP = Best_DeltaP;
-wecSim
+evalc('wecSim');
 controller = struct();
 controller.time = simu.time;
 controller.position = controller1_out.signals.values(:,1); % + towards actuator - piston position
@@ -84,19 +98,19 @@ xlabel('Time (s)');
 ylabel('Power (kW)');
 
 %% Find size of Hydraulic pump motor
-MotorSize = d_scale*107 %cc
-genSize = max(abs(inst_power_out))/1e3 % kW
-Efficiency = sum(inst_power_out)/sum(inst_power)
+genSize = max(abs(inst_power_elec))/1e3 % kW
 
 B = 18; % m (This is the width of the oswec)
 t_start = 50;
-dt= output.ptosim.time(2);
-t= output.ptosim.time;
-Energy_in_first_chunk = -sum(inst_power(1:find(t==t_start)))*dt;
-Energy_out_first_chunk = -sum(inst_power_out(1:find(t==t_start)))*dt;
-Total_energy_in = sum(inst_power)*dt;
-Total_energy_out = sum(inst_power_out)*dt;
+t= controller.time;
+dt = t(2);
+Energy_in_first_chunk = -sum(inst_power_mech(1:find(t==t_start)))*dt;
+Energy_out_first_chunk = -sum(inst_power_elec(1:find(t==t_start)))*dt;
+Total_energy_in = sum(inst_power_mech)*dt;
+Total_energy_out = sum(inst_power_elec)*dt;
 ave_power_in = (Total_energy_in - Energy_in_first_chunk)/150;
 ave_power_out = (Total_energy_out - Energy_out_first_chunk)/150;
 CWR_in = ave_power_in/waves.Pw/B
 CWR_out = ave_power_out/waves.Pw/B
+
+%% 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

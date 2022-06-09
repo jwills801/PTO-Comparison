@@ -15,17 +15,17 @@
 % CWR_in: .7081
 % CWR_out: .6054
 
-% For Irregular Waves, most energy is aborbed using deltaP of  Pa.
-% Mechanical Energy absorbed:  MJ
-% GenSize:  kW
-% Motor Size:  ccand
-% CWR_in: 
-% CWR_out: 
+% For Irregular Waves, most energy is aborbed using deltaP of 8.1e6 Pa.
+% Mechanical Energy absorbed: 44.4 MJ
+% GenSize: 1318.4 kW
+% Motor Size: 549.5136 cc
+% CWR_in: 0.8838
+% CWR_out: 0.7557
 
 deltaP_vals = linspace(0,2e7,100); % Pa
 Work_mech = NaN(size(deltaP_vals)); % initilize vector
 
-tic
+outer_toc = tic;
 for ind = 1:length(deltaP_vals)
     deltaP = deltaP_vals(ind);
     evalc('wecSim');
@@ -37,11 +37,12 @@ for ind = 1:length(deltaP_vals)
     
     disp([num2str(ind) ' of ' num2str(length(deltaP_vals)) ' simulations complete'])
 end
-toc
+toc(outer_toc)
 
 [Best_Energy_Capture, ind]= max(Work_mech);
 Best_DeltaP = deltaP_vals(ind);
-figure, plot(deltaP_vals,Work_mech/1e3), xlabel('Delta P (Pa)'), ylabel('Mechanical Work In (kJ)')
+close all
+figure, plot(deltaP_vals,Work_mech/1e6), xlabel('Delta P (Pa)'), ylabel('Mechanical Work In (MJ)')
 
 %% Run wecsim again with optimal deltaP in order to get the whole picture
 deltaP = Best_DeltaP;
@@ -96,6 +97,7 @@ plot(controller.time,inst_power_mech/1000,controller.time,inst_power_elec/1000)
 legend('Power in','Power out')
 xlabel('Time (s)');
 ylabel('Power (kW)');
+xlim([100 125])
 
 %% Find size of Hydraulic pump motor
 genSize = max(abs(inst_power_elec))/1e3 % kW
@@ -112,3 +114,5 @@ ave_power_in = (Total_energy_in - Energy_in_first_chunk)/150;
 ave_power_out = (Total_energy_out - Energy_out_first_chunk)/150;
 CWR_in = ave_power_in/waves.Pw/B
 CWR_out = ave_power_out/waves.Pw/B
+
+%% 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
