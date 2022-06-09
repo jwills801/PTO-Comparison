@@ -10,7 +10,6 @@
 % The motor always spins at 3000 RPM. The electric efficiency is always 90%
 % but the hydraulic efficiency varies with a pump map from pmouvahead.
 
-% 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
 
 nvars = 5; options = optimoptions('ga','PlotFcn', @gaplotbestf);
 lb = [0;0;0;0;0]; % Lower bound on each design parameter
