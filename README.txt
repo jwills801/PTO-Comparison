@@ -10,8 +10,7 @@ All of these are tested using a flap type wec. Regular and irrgular waves are te
 
 The PTO paper for the full journal paper used the code in NEWresults_2. Inside of that folder are all the codes that I used. The latest versions in these files are the ones I used. All .mat files were generated using code from this folder except for inputs to wecSim and the 107cc pump map.
 
-The other files have older versions of the three PTO simulations. All necessary code to generate the results from the paper should be found in the folder NEWresults_2.
-
+The other files have older versions of the three PTO simulations. All necessary code to generate the results from the paper should be found in the folder NEWresults_2. The drive cycle for the HHEA is generated using the wecsim files in the EHA folder
 
 #####
 .gitignore info:

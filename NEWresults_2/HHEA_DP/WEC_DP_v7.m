@@ -4,6 +4,7 @@ clear, close all
 
 %PR_spread = [0 .5 1];
 PR_spread = [0 1/6 2/3 1];
+PR_spread = [0 1/3 5/6 1];
 choices=['M','P','0']; % motoring, pumping, or nothing
 k = 0;
 for k1=1:3
@@ -43,7 +44,8 @@ switch Spectrum
 
         %all_options = {'C0MM'} % maybe best case for regular
         all_options = {'C00M'} % best case for regular - but might have a pumping rails
-        ScaleMaxT1 = 2.5;
+        ScaleMaxT1 = 2.25;
+        ScaleMaxPow = 2.05;
         Pmax = max( [abs(max(F1)/ACap1), abs(min(F1)/ARod1) ]); % most poative force rail = Pmax*ACap;  Most negative force rail = -Pmax*Arod
         Pmax = 35e6; % MPa
     case 'irregular'
@@ -156,7 +158,7 @@ end
 
 
 HECM_PowLoss_Hydr = abs(HECM_T1.*HECM_w1-HECM_DeltaP1.*HECM_Q1);
-HECM_PowLoss_Hydr((PRA1*ACap1 - F1')/ARod1 < -1e5) = inf; % Cavitation limit - rod side
+HECM_PowLoss_Hydr((PRA1*ACap1 - F1')/ARod1 < -1e5) = inf; % Cavitation limit - rod side cylinder pressure - cannot buck below cav limit
 %HECM_PowLoss_Hydr((PRB1) <= 0 | (PRB2 <= 0)) = inf; % Cavitation limit -
 %cap side - CAN THE PRESSURE ON THE CAP SIDE EVER BE ZERO?                
 HECM_PowLoss_Hydr((PRA1*ACap1 - F1')/ARod1 > PR(end)) = inf; % Cannot boost above max pressure
@@ -167,8 +169,10 @@ HECM_PowLoss = HECM_PowLoss_Hydr + HECM_PowLoss_Elec;
 Frange1 = (ones(length(PR),1)*PR*ACap1-PR'*ones(1,length(PR))*ARod1);
 
 MaxT1_Act = max(diff(sort(Frange1(:))))/ARod1/2*HECM_scale1*D*ScaleMaxT1/2/pi;
+MaxPow_Act = ScaleMaxPow*max(diff(sort(Frange1(:))))/ARod1/2*HECM_scale1*D/2/pi * MaxSpeed;
 
-HECM_PowLoss(abs(HECM_T1) > MaxT1_Act) = NaN; %inf
+%HECM_PowLoss(abs(HECM_T1) > MaxT1_Act) = NaN; %inf
+HECM_PowLoss(abs(battery_power) > MaxPow_Act) = NaN;
 
 figure, plot(t,F1), hold on, plot(t([1,end]),repmat(PRA1*ACap1-PRB1*ARod1,1,2)), hold off, ylabel('Force (N)'), xlabel('Time (s)'), xlim([100 150])
 
@@ -341,7 +345,8 @@ end, hold off, legend, grid on, ylabel('Cumulative Flow(m^3)'), xlabel('Time (s)
 D_MP = D_MP/150/2000*60*1e6 %cc Main pump size
 
 %% Generator sizes
-HECM_gen = max(abs(d_battery_power))
+HECM_gen = max(abs(d_battery_power))/1e3 % kW
+MP_gen = abs(TotalMPWork)/t(end)/1e3 % kW
 
 
 
@@ -365,7 +370,7 @@ WorkOut = d_battery_work + [zeros(1,find(t==MPstart)),t(2)*cumsum(TotalMPWork/(t
 figure, plot(t,-t(2)*cumsum(F1.*V1)/1e6,t,-WorkOut/1e6), xlabel('Time (s)'), ylabel('Work (MJ)'),legend('Mechanical Energy In','Electrical Energy Out')
 
 %% Power 
-figure, plot(t,-(F1.*V1)/1e3,t,[zeros(1,find(t==MPstart)),-TotalMPWork/(t(end)-MPstart)*ones(1,length(t)-find(t==MPstart))]/1e3,t,(d_battery_power+d_Switchingloss'/t(2))/1e3), legend('Power In','Main Pump Power Out','HECM Power Out')
+figure, plot(t,-(F1.*V1)/1e3,t,[zeros(1,find(t==MPstart)),-TotalMPWork/(t(end)-MPstart)*ones(1,length(t)-find(t==MPstart))]/1e3,'--k',t,(d_battery_power+d_Switchingloss'/t(2))/1e3,'--r'), legend('Power In','Main Pump Power Out','HECM Power Out')
 xlim([100 125]), ylabel('Power (kW)'), xlabel('Time (s)')
 %% Energy Distribution
 figure
@@ -382,7 +387,7 @@ ylim([0 -1.1*TotalMPWork/1e6])
 %% Loss Distribution
 figure
 Totallosses = sum(HECM_PowLoss(d_ind))*(t(2)-t(1)) +sum(ActualMPLoss) + IncludeSwitchingLosses*sum(d_Switchingloss); %Joules
-labels = categorical({'HECM Losses','Main Pump Losses','Switching Losses'});
+labels = categorical({'HECM Losses','Main Pump Losses','Throttling Losses'});
 b = bar(labels,[sum(HECM_PowLoss(d_ind))*(t(2)-t(1))/1e6, sum(ActualMPLoss)/1e6, sum(d_Switchingloss)/1e6]);
 ylabel('Energy (MJ)')
 xtips1 = b(1).XEndPoints;

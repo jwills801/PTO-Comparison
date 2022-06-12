@@ -9,3 +9,4 @@ irreg_frq_sweep_fmin.mat
 reg_frq_sweep.mat
 reg_frq_sweep_fmin.mat
 *.m~
+**/output
