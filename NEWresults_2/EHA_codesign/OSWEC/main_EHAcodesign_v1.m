@@ -15,17 +15,19 @@ TimeElapsed = toc(tStart)
 
 %%
 N = 25;
-k_vals = linspace(5e6,5e7,N);
+k_vals = linspace(5e6,10e7,N);
 
 KP = NaN(N,N); KI = KP; J = KP;
+outertime = tic;
 for i = 1:N
-    (i-1)*100/N
     for j = 1:N
         KP(i,j) = k_vals(i);
         KI(i,j) = k_vals(j);
         J(i,j) = fun([k_vals(i) ; k_vals(j)]);
+        disp([num2str((i-1)*N+j) ' of ' num2str(N*N) ' simulations complete'])
     end
 end
+toc(outertime)
 figure, contour(KP,KI,J), xlabel('K_p'), ylabel('K_i')
 
 %%
@@ -39,6 +41,6 @@ ki = x(2);
 %A = x(3);
 [~]=evalc('wecSim');
 EHA_losses;
-%J = Work_Out;
-J = Work_in;
+J = Work_Out;
+%J = Work_in;
 end

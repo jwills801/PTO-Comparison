@@ -10,20 +10,20 @@
 
 % For regular Waves, most energy is aborbed using deltaP of 8.4e6 Pa.
 % Mechanical Energy absorbed: 98 MJ
-% GenSize: 862 kW
-% Motor Size: 1166 cc
+% GenSize: 509 kW
+% Motor Size: 1554 cc
 % CWR_in: .7081
-% CWR_out: .6054
+% CWR_out: .5070
 
 % For Irregular Waves, most energy is aborbed using deltaP of 8.1e6 Pa.
 % Mechanical Energy absorbed: 44.4 MJ
-% GenSize: 1318.4 kW
-% Motor Size: 549.5136 cc
-% CWR_in: 0.8838
-% CWR_out: 0.7557
+% GenSize: 231 kW
+% Motor Size: 731 cc
+% CWR_in: 0.8843
+% CWR_out: 0.5485
 
 deltaP_vals = linspace(0,2e7,100); % Pa
-deltaP_vals = 8.4e6; % Pa
+deltaP_vals = 8.1e6; % Pa
 Work_mech = NaN(size(deltaP_vals)); % initilize vector
 
 outer_toc = tic;
@@ -65,7 +65,7 @@ w = 3000*2*pi/60; % Angular Velocity of e generator [rad/s]
 D = Ave_Flow/w*2*pi*1e6;  % Size of motor (cc)
 disp(['Pump size is ', num2str(D,4),' cc'])
 
-Constant_eff = .95*.9; % From Pmouvahead
+Constant_eff = .78; % From Pmouvahead at 35 MPa and 3000 RMP and full displacement
 
 %% Plots
 %Plot waves

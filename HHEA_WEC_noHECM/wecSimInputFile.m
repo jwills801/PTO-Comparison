@@ -7,7 +7,7 @@ simu.startTime = 0;                     % Simulation Start Time [s]
 simu.rampTime = 50;                     % Wave Ramp Time [s]
 simu.endTime=200;                       % Simulation End Time [s]        
 simu.solver = 'ode4';                   % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
-simu.dt = 0.001;                          % Simulation Time-Step [s]
+simu.dt = 0.05;                          % Simulation Time-Step [s]
 simu.CITime = 30;                       % Specify CI Time [s]
 
 %% Wave Information
@@ -77,10 +77,18 @@ pto(1).loc = [0 0 -8.9];                        % PTO Location [m]
 pto(1).c = 1.9e07;                             % PTO Damping Coeff [Nsm/rad]
 pto(1).k = 3.3e7;                                   % PTO Stiffness Coeff [Nm/rad]
 
+% grid seach - work in irregular waves
+%pto(1).c = 3.1e07;                             % PTO Damping Coeff [Nsm/rad]
+%pto(1).k = 3.1e7;                                   % PTO Stiffness Coeff [Nm/rad]
+
 
 % grid seach - EHA work out
 %pto(1).c = 3.1e07;                             % PTO Damping Coeff [Nsm/rad]
 %pto(1).k = 2.9e7;                                   % PTO Stiffness Coeff [Nm/rad]
+
+% grid seach - EHA work out - irregular waves
+%pto(1).c = 4.1e07;                             % PTO Damping Coeff [Nsm/rad]
+%pto(1).k = 2.1e7;                                   % PTO Stiffness Coeff [Nm/rad]
 
 
 %Perry's - from maximum power of linear system

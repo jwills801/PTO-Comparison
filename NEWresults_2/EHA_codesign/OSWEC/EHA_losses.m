@@ -111,9 +111,9 @@ for i = 1:n
    
 end
 
-e = P_out_sum/P_in_sum
-EHA_Generator = max(abs(P_out))/1e3 % kW
-EHA_Pump_size = D*Scale
+e = P_out_sum/P_in_sum;
+EHA_Generator = max(abs(P_out))/1e3; % kW
+EHA_Pump_size = D*Scale;
 
 Work_in = sum(P_in)*dt;
 Work_Out = sum(P_out)*dt;
@@ -124,13 +124,13 @@ Energy_first_chunk = -sum(P_in(1:find(t==t_start)))*dt;
 Total_energy_in = -sum(P_in)*dt;
 ave_power_in = (Total_energy_in-Energy_first_chunk)/(t(end)-t_start); % Ave power for last 100 s
 CW = ave_power_in/waves.Pw;
-CWR_in = CW/B
+CWR_in = CW/B;
 
 Energy_first_chunk = -sum(P_out(1:find(t==t_start)))*dt;
 Total_energy_out = -sum(P_out)*dt;
 ave_power_out = (Total_energy_out-Energy_first_chunk)/(t(end)-t_start); % Ave power for last 100 s
 CW = ave_power_out/waves.Pw;
-CWR_out = CW/B
+CWR_out = CW/B;
 return
 %%
 figure

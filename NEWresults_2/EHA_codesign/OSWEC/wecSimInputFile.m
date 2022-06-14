@@ -73,14 +73,22 @@ pto(1).loc = [0 0 -8.9];                        % PTO Location [m]
 pto(1).c = kp;                                   % PTO Damping Coeff [Nsm/rad]
 pto(1).k = ki;                                   % PTO Stiffness Coeff [Nm/rad]
 
-% grid seach - work in
+% grid seach - work in - regular waves
 %pto(1).c = 1.9e07;                             % PTO Damping Coeff [Nsm/rad]
 %pto(1).k = 3.3e7;                                   % PTO Stiffness Coeff [Nm/rad]
+
+% grid seach - work in irregular waves
+%pto(1).c = 3.1e07;                             % PTO Damping Coeff [Nsm/rad]
+%pto(1).k = 3.1e7;                                   % PTO Stiffness Coeff [Nm/rad]
 
 
 % grid seach - EHA work out
 %pto(1).c = 3.1e07;                             % PTO Damping Coeff [Nsm/rad]
 %pto(1).k = 2.9e7;                                   % PTO Stiffness Coeff [Nm/rad]
+
+% grid seach - EHA work out - irregular waves
+%pto(1).c = 4.1e07;                             % PTO Damping Coeff [Nsm/rad]
+%pto(1).k = 2.1e7;                                   % PTO Stiffness Coeff [Nm/rad]
 
 
 %Perry's - from maximum power of linear system

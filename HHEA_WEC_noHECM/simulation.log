@@ -5,18 +5,18 @@ Version: 4.4
 
 Initializing the Simulation Class...
 	Case Dir: /home/jackson/Documents/LiResearch/Projects/PTO_comparison/HHEA_WEC_noHECM 
-Elapsed time is 0.563674 seconds.
+Elapsed time is 1.202063 seconds.
 
 WEC-Sim Pre-processing ...   
-Elapsed time is 2.936854 seconds.
+Elapsed time is 0.615862 seconds.
 
 WEC-Sim Simulation Settings:
 	Start Time                     (sec) = 0
 	End Time                       (sec) = 200
-	Time Step Size                 (sec) = 0.001
+	Time Step Size                 (sec) = 0.05
 	Ramp Function Time             (sec) = 50
 	Convolution Integral Interval  (sec) = 30
-	 Number of Time Steps     = 200000 
+	 Number of Time Steps     = 4000 
 
 Wave Environment: 
 	Wave Type                            = Irregular Waves (Predefined Random Phase)
@@ -48,8 +48,8 @@ List of Constraint(s): Number of Constraints = 1
 
 
 Simulating the WEC device defined in the SimMechanics model /home/jackson/Documents/LiResearch/Projects/PTO_comparison/HHEA_WEC_noHECM/OSWEC.slx...   
-Elapsed time is 0.208144 seconds.
-Elapsed time is 1172.422825 seconds.
+Elapsed time is 0.213769 seconds.
+Elapsed time is 12.581007 seconds.
 
 Post-processing and saving...   
-Elapsed time is 0.586550 seconds.
+Elapsed time is 0.253284 seconds.
