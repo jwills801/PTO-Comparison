@@ -23,6 +23,7 @@
 % CWR_out: 0.7557
 
 deltaP_vals = linspace(0,2e7,100); % Pa
+deltaP_vals = 8.4e6; % Pa
 Work_mech = NaN(size(deltaP_vals)); % initilize vector
 
 outer_toc = tic;
@@ -56,12 +57,15 @@ controller.flow = abs(controller1_out.signals.values(:,4)); % flow into high Pre
 controller.applied_torque = controller1_out.signals.values(:,5); % + towards actuator - torque on the WEC
 controller.actual_angvel = controller1_out.signals.values(:,6); % + towards actuator - angular velocity of WEC
 
+T = controller.time(end);
+T = T - simu.rampTime; % How much time does the main pump have to pump?
 Net_Flow = sum(controller.flow)*controller.time(2); % integrate flow to get volume (m^3)
-Ave_Flow = Net_Flow/controller.time(end); % Motor can remove net flow (m^3/s)
+Ave_Flow = Net_Flow/T; % Motor can remove net flow (m^3/s)
 w = 3000*2*pi/60; % Angular Velocity of e generator [rad/s]
-D = Ave_Flow/w*2*pi*1e6  % Size of motor (cc)
+D = Ave_Flow/w*2*pi*1e6;  % Size of motor (cc)
+disp(['Pump size is ', num2str(D,4),' cc'])
 
-Constant_eff = .855; % After hydrualic motor (95% max eff) and e-motor (90% eff)
+Constant_eff = .95*.9; % From Pmouvahead
 
 %% Plots
 %Plot waves
@@ -82,10 +86,11 @@ ylabel('Velocity (m/s)')
 xlabel('Time (s)')
 grid on
 
+dt = controller.time(2);
 inst_power_mech = -controller.velocity.*controller.force;
-Work_mech = cumsum(inst_power_mech)*controller.time(2);
-inst_power_elec = Constant_eff*inst_power_mech;
-Work_elec = Constant_eff*Work_mech;
+Work_mech = cumsum(inst_power_mech)*dt;
+inst_power_elec = [zeros(simu.rampTime/dt+1,1);ones(T/dt,1)]*Constant_eff*Ave_Flow * deltaP; %eta * flow * pressure
+Work_elec = cumsum(inst_power_elec)*dt;
 figure
 plot(controller.time,Work_mech/1e6,controller.time,Work_elec/1e6)
 xlabel('Time (s)');
@@ -114,5 +119,3 @@ ave_power_in = (Total_energy_in - Energy_in_first_chunk)/150;
 ave_power_out = (Total_energy_out - Energy_out_first_chunk)/150;
 CWR_in = ave_power_in/waves.Pw/B
 CWR_out = ave_power_out/waves.Pw/B
-
-%% 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

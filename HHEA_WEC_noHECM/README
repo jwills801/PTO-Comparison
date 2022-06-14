@@ -1,0 +1,5 @@
+This folder uses the HHEA for wave energym but we've gotten rid of the whole HECM.
+Here, the PTO force is made by using the PI control as before, but rounding the force to the nearest force rail
+
+The energy absorbed with this rounding is very nearly the same as without rounding, and there are no HECM losses, which were the largest source of loss.
+However, there is no longer any freedom in the pressure rail selection. We must deal with whatever flow is taken or removed from the accumulator.

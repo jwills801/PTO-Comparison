@@ -21,7 +21,7 @@ end
 
 
 Spectrum = 'regular';
-% Spectrum = 'irregular';
+%Spectrum = 'irregular';
 
 IncludeSwitchingLosses = 1; % 1 for yes, include switching losses, 0 for no, dont inlcude
 
@@ -33,38 +33,25 @@ PM = '107cc';
 switch Spectrum
     case 'regular'
         load('PI_regular_discretized.mat')
-        V1 = squeeze(myoutput.signals.values(11,:,:));
-        F1 = squeeze(myoutput.signals.values(17,:,:));
-        t = myoutput.time;
-        dt = mean(diff(t));
-        t_step = dt;
-        ACap1 = .2382;
-        ARod1 = ACap1;
-
-        %all_options = {'C00M'} % maybe best case for regular discrete
-        all_options = all_options(21); % maybe best case for regular discrete
-        ScaleMaxT1 = 2.25;
-        ScaleMaxPow = .05;
-        Pmax = max( [abs(max(F1)/ACap1), abs(min(F1)/ARod1) ]); % most poative force rail = Pmax*ACap;  Most negative force rail = -Pmax*Arod
-        Pmax = 35e6; % MPa
     case 'irregular'
-        load('../PI_irregular.mat')
-        V1 = myoutput.signals.values(:,11);
-        F1 = myoutput.signals.values(:,17);
-        t = myoutput.time;
-        dt = mean(diff(t));
-        t_step = dt;
-        ACap1 = .2382;
-        ARod1 = ACap1;
-        
-        %all_options = {'C0PM'} % best case for irregular 
-        ScaleMaxT1 = 2;
-        Pmax = max( [abs(max(F1)/ACap1), abs(min(F1)/ARod1) ]); % most poative force rail = Pmax*ACap;  Most negative force rail = -Pmax*Arod
-        Pmax = 35e6; % MPa
+        load('PI_irregular_discretized.mat')
     otherwise
         disp('Please provide a vaid spectrum type (irregular or regular)')
         pause()
 end
+V1 = squeeze(myoutput.signals.values(11,:,:));
+F1 = squeeze(myoutput.signals.values(17,:,:));
+t = myoutput.time;
+dt = mean(diff(t));
+t_step = dt;
+ACap1 = .2382;
+ARod1 = ACap1;
+
+%all_options = {'C00M'} % maybe best case for regular discrete
+all_options = all_options(21); % maybe best case for regular discrete
+ScaleMaxT1 = 2.25;
+ScaleMaxPow = .05;
+Pmax = 35e6; % MPa
 
 % Find Capture Wdith Ratio
 B = 18; % m (This is the width of the oswec)
@@ -91,93 +78,69 @@ MP_wmap = w1rad_Mapping;
 PR = Pmax*PR_spread; 
 
 [PRCap1, PRRod1] = ndgrid(PR,PR);
-PRA1 = PRCap1(:); PRB1 = PRRod1(:); % A is cap, 1 is lift
-
-%% Size the HECM
-switch PM
-    case '107cc'
-        D = Disp*2*pi; %displacement [m^3/rev]
-        MaxSpeed = max(w1rad_Mapping(:))/2; % 5000 RPM
-        MaxSpeed = MaxSpeed*3/5; % 3000 RPM
-    case 'Minal'
-        D = 1.3681e-5; % m^3/rev
-        MaxSpeed = max(w_x(:)); % rad/s
-    otherwise 
-        disp('Please definie HECM P/M map to use')
-        pause;
-end
-HECM_size1 = max(abs(V1))*ARod1/MaxSpeed*2*pi;
-HECM_scale1 = HECM_size1/D
-
-switch Spectrum
-    case 'regular'
-        HECM_scale1 = 47;
-        HECM_size1 = HECM_scale1*D;
-    case 'irregular'
-        HECM_scale1 = 55;
-        HECM_size1 = HECM_scale1*D;
-    otherwise
-        disp('Please provide a vaid spectrum type (irregular or regular)')
-        pause()
-end
-%% Make Matrices
-
-% HECM losses
-HECM_DeltaP1 = (PRA1*ACap1 - F1')/ARod1 - PRB1; 
-
-HECM_Q1 = repmat(-V1'*ARod1,length(PR)^2,1); 
-
-switch PM
-    case '107cc'
-        HECM_w1 = interp2(P_Map,HECM_scale1*Q_Map,W_Map,HECM_DeltaP1,HECM_Q1);
-
-        HECM_T1 = HECM_scale1*interp2(P1_Mapping,w1rad_Mapping,T1_Act_Mapping,HECM_DeltaP1,HECM_w1); 
-        
-        ElectricEff = 0.9;
-        
-        battery_power = (HECM_T1.*HECM_w1>0).*(HECM_T1.*HECM_w1)/ElectricEff+(HECM_T1.*HECM_w1<0).*(HECM_T1.*HECM_w1)*ElectricEff;
-
-        HECM_PowLoss_Elec = (HECM_T1.*HECM_w1>0).*abs(HECM_T1.*HECM_w1*(1/ElectricEff-1))...
-                     +(HECM_T1.*HECM_w1<0).*abs(HECM_T1.*HECM_w1*(1-ElectricEff));
-    case 'Minal'
-        HECM_w1 = interp2(HECM_scale1*Q_x,P_y,w_from_Q_P,HECM_Q1,HECM_DeltaP1);
-
-        HECM_T1 = HECM_scale1*interp2(w_x,P_y,T_map,HECM_w1,HECM_DeltaP1);
-        
-        HECM_PowLoss_Elec = interp2(w_x,P_y,T_electic_lossmap,HECM_w1,HECM_DeltaP1);          
-        
-        battery_power = HECM_T1.*HECM_w1 + HECM_PowLoss_Elec;
-
-    otherwise 
-        disp('Please definie HECM P/M map to use')
-        pause;
-end
-
-
-HECM_PowLoss_Hydr = abs(HECM_T1.*HECM_w1-HECM_DeltaP1.*HECM_Q1);
-HECM_PowLoss_Hydr((PRA1*ACap1 - F1')/ARod1 < -1e5) = inf; % Cavitation limit - rod side cylinder pressure - cannot buck below cav limit
-%HECM_PowLoss_Hydr((PRB1) <= 0 | (PRB2 <= 0)) = inf; % Cavitation limit -
-%cap side - CAN THE PRESSURE ON THE CAP SIDE EVER BE ZERO?                
-HECM_PowLoss_Hydr((PRA1*ACap1 - F1')/ARod1 > 1.001*PR(end)) = inf; % Cannot boost above max pressure
-
-HECM_PowLoss = HECM_PowLoss_Hydr + HECM_PowLoss_Elec;
-
-% Torque constraint
-Frange1 = (ones(length(PR),1)*PR*ACap1-PR'*ones(1,length(PR))*ARod1);
-
-MaxT1_Act = max(diff(sort(Frange1(:))))/ARod1/2*HECM_scale1*D*ScaleMaxT1/2/pi;
-MaxPow_Act = ScaleMaxPow*max(diff(sort(Frange1(:))))/ARod1/2*HECM_scale1*D/2/pi * MaxSpeed;
-
-%HECM_PowLoss(abs(HECM_T1) > MaxT1_Act) = NaN; %inf
-%HECM_PowLoss(abs(battery_power) > MaxPow_Act) = NaN;
-
-%% Incentivise selction of discrete forces
-HECM_PowLoss = NaN*HECM_PowLoss;
-HECM_PowLoss(abs(HECM_DeltaP1) <= 1e-5) = 0; % HECM losses are zero when delta P is zero - only if HECM is completely gotten rid of
-
-
+PRA1 = PRCap1(:); PRB1 = PRRod1(:); % A is cap
 
 figure, plot(t,F1), hold on, plot(t([1,end]),repmat(PRA1*ACap1-PRB1*ARod1,1,2)), hold off, ylabel('Force (N)'), xlabel('Time (s)'), xlim([100 150])
+
+%% Get net flow through each rail
+f_discr = PRA1*ACap1-PRB1*ARod1; % Force rail options
+
+Q = zeros(length(PR),length(t)); % Initialize flow matrix
+for i = 1:length(t)
+    [~,ind] = min( abs( f_discr - F1(i) ) ) ; % Find which force rail is being using
+    cap_rail = find(PR == PRA1(ind)) ; % Cap side rail
+    rod_rail = find(PR == PRB1(ind)) ; % Rod side rail
+    
+    Q(cap_rail,i) = V1(i)*ACap1 ;
+    Q(rod_rail,i) = -V1(i)*ARod1 ; % velocity of piston is positive in extension AND this flow is flow leaving the accumulator
+end
+
+vol_over_time = cumsum(Q')*dt; % m^3
+figure, plot(t,vol_over_time/1e3), xlabel('Time (s)'), ylabel('Cumulative Volume (L)'), legend('Tank','Low Pressure Rail','Middle Pressure Rail','High Pressure Rail','Location','Northwest')
+
+vol = vol_over_time(end,2:end)'
+
+%% Main pump losses
+if vol(1)>0 && vol(2)<0 && vol(3) < 0 % This code only works for a specific case of main pump flows
+    % Let the flow from the second rail 
+    wMP = 3000*2*pi/60; % Angular Velocity [rad/s]
+    
+    % Find fractional displacements
+    % subscripts chi_ij denote that flow is taken from rail i and delivered to rail j
+    chi_MT = 1; % Full displacement at lowest pressure difference
+    chi_HT = PR(3)/PR(4);
+    chi_HL = PR(3)/(PR(4)-PR(2));
+
+    % find required displacement of pump - from time and flow requirements
+    T = 150 ; % How long is the main pump running?
+    D = ( vol(1)/chi_HL + ( -vol(3) - vol(1)  )/chi_HT - vol(2)/chi_MT) / wMP / T ; % m^3/rad
+    disp(['Pump size is ', num2str(D*2*pi*1e6,4),' cc'])
+
+    % Find power
+    [chi_MT*D*wMP*PR(3) chi_HT*D*wMP*PR(4) chi_HL*D*wMP*(PR(4)-PR(2))] / 1e3
+    disp(['Generator size is ', num2str(chi_HT*D*wMP*PR(4)/1e3,4),' kW'])
+
+    % check results
+    %check time
+    t_HL = vol(1)/chi_HL/D/wMP
+    t_HT = (-vol(3)-vol(1)) /chi_HT/D/wMP
+    t_MT = -vol(2)/chi_MT/D/wMP
+    [ t_HL+t_HT+t_MT T]
+
+    %check flow contraint
+    [chi_HL*D*wMP*t_HL vol(1)]
+    [chi_MT*D*wMP*t_MT -vol(2)]
+    [chi_HT*D*wMP*t_HT+chi_HL*D*wMP*t_HL -vol(3)]
+
+
+    % how efficient is the pump at each operating condition?
+    Calc_Eff
+else
+    disp('The code here is invalid')
+end
+
+return
+%%
 
 % Main Pump Losses
 wMP = 3000*2*pi/60; % Angular Velocity [rad/s]
@@ -190,6 +153,7 @@ MP_MotorEff = T_PR(length(PR):end)*wMP./(-PR(2:end)'.*Q_PR(length(PR):end));
 R_P_loss = (1./MP_PumpEff-1);  % loss per power
 R_M_loss = (1-MP_MotorEff);
 
+HECM_Q1 = repmat(-V1'*ARod1,length(PR)^2,1); 
 for k=1:length(PR)
     QR{k} = zeros(length(PRA1),length(t));
     ind = find(PRA1==PR(k)); QR{k}(ind,:) = QR{k}(ind,:)+ACap1*ones(length(ind),1)*V1';
@@ -222,111 +186,35 @@ GetSwitchingLossMatrix_v3; % for 3 rails 5 delayvals, and dt = 1e-5, it takes .5
 else
     Eloss_SwitchingValve = zeros(length(PR)^4,length(PR)^4,length(t));
 end
-                        
+
 toc
-    
-% Check fesibility
-feasibility = isfinite(  max(min(HECM_PowLoss + battery_power),[],'includenan') )
 
-%% LOOP OVER OPTIONS
-for case_no = 1:length(all_options)
-    options = all_options{case_no};
-    
-    %% Make Cost String
-    Jstr = ' HECM_PowLoss';
-    lamk = 0;
-    lam0 = [];
-    for k=2:length(PR)
-        switch options(k)
-            case '0'
-                lamk=lamk+1;
-                Jstr=[Jstr,' + lam(',num2str(lamk),')*QR{',num2str(k),'}*PR(',num2str(k),')'];  % That is the flow constraint
-                lam0 = [lam0 .1];
-            case 'M'
-                Jstr = [Jstr,'- QR{',num2str(k),'}*PR(',num2str(k),')*R_M_loss(',num2str(k-1),')'];
-            case 'P'
-                Jstr = [Jstr,'+ QR{',num2str(k),'}*PR(',num2str(k),')*R_P_loss(',num2str(k-1),')'];
-        end
-    end
-    eval(['f = @(lam) ',Jstr,';'])
-    
 
-    %% Dynamic Programming
-    % parameters to pass into fmin search function
-    params = struct(); params.t = t; params.PRA1 = PRA1; params.f = f; params.Eloss_SwitchingValve = Eloss_SwitchingValve; params.IncludeSwitchingLosses= IncludeSwitchingLosses;
-    options = optimset('MaxIter',200);
-    
-    
-    [lam,cost,exitflag] = fminsearch(@(lam) -fun(lam,params) , lam0,options); % The negative sign is there because we want to maximize over lambda
-    Convergence(case_no) = (exitflag ==1)
-    lam
-    
 
-    %% Evaluate with the lambda value that we just found, this is just to get
-    % the decision matrix back out
-    CostMatrix = f(lam);
-    J = NaN(length(PRA1),length(t));
-    J(:,length(t)) = zeros(size(PRA1));
-    if IncludeSwitchingLosses ==0
-        for t_ind = (length(t)-1):-1:1
-            for i = 1:length(PRA1)
-                [J(i,t_ind), DecisionMatrix(i,t_ind)] = min( CostMatrix(:,t_ind+1) + J(:,t_ind+1));
-            end
-        end
-    elseif IncludeSwitchingLosses == 1
-        for t_ind = (length(t)-1):-1:1
-            for i = 1:length(PRA1)
-                [J(i,t_ind), DecisionMatrix(i,t_ind)] = min( CostMatrix(:,t_ind+1) + J(:,t_ind+1) + transpose(Eloss_SwitchingValve(i,:,t_ind+1))/(t(2)-t(1)) );
-            end
-        end
-    else
-        disp('Please provide a boolean value for "IncludeSwithingLosses"')
-        pause()
-    end
-    [cost, starting_ind] = min(J(:,1)); % Minimizing over rail force selctions
-    
-    %% Get decisions back out
-    Decision_vector = NaN(1,length(t)-1);
-    Decision_vector(1) = DecisionMatrix(starting_ind,1);
-    for t_ind = 2:length(t)-1
-        Decision_vector(t_ind) = DecisionMatrix(Decision_vector(t_ind-1),t_ind);
-    end
-    
-    d_ind = NaN(1,length(t));
-    d_ind(1) = sub2ind([length(PRA1),length(t)],Decision_vector(1),1);
-    for t_ind = 2:length(t)
-        d_ind(t_ind) = sub2ind([length(PRA1),length(t)],Decision_vector(t_ind-1),t_ind);
-    end
-   
-    %% Analyze results
-    Net_work_in = -sum(F1.*V1)*t(2);
-    tmp=F1.*V1; PosWork=sum(tmp(tmp>0))*(t(2)-t(1));
-    NegWork = sum(tmp(tmp<0))*(t(2)-t(1));
-    
-    
-    d_battery_power = battery_power(d_ind);
-    d_battery_work = cumsum(d_battery_power)*(t(2)-t(1));
-    for kk=1:length(PR)
-        NetRailEnergy(kk)=sum(QR{kk}(d_ind))*PR(kk)*(t(2)-t(1));
-    end
-    ActualMPLoss = NetRailEnergy.*((NetRailEnergy>0).*[0,R_P_loss'] - (NetRailEnergy<0).*[0,R_M_loss']);
-    TotalMPWork = sum(NetRailEnergy+ActualMPLoss);
-    Netbattery = sum(d_battery_power)*(t(2)-t(1));
+%% Analyze results
+Net_work_in = -sum(F1.*V1)*t(2);
+tmp=F1.*V1; PosWork=sum(tmp(tmp>0))*(t(2)-t(1));
+NegWork = sum(tmp(tmp<0))*(t(2)-t(1));
 
-    d_Switchingloss = NaN(size(t)); d_Switchingloss(1) = 0; d_Switchingloss(end) = 0;
-    for t_ind = 2:length(t)-1
-        d_Switchingloss(t_ind) = Eloss_SwitchingValve(Decision_vector(t_ind-1),Decision_vector(t_ind),t_ind+1);
-    end
-    Total_input_Energy = TotalMPWork + d_battery_work(end) + sum(d_Switchingloss);
-    Efficiency(case_no) = -Total_input_Energy/Net_work_in;
-    Actual_cost(case_no) = sum(ActualMPLoss)/t_step + sum(HECM_PowLoss(d_ind)) +sum(d_Switchingloss)/t_step;
-    
-    %figure, plot(t,d_Switchingloss)
-    
 
-end % Case_no for loop for all the options
-Eff_conv = Efficiency.*Convergence
-toc
+d_battery_power = battery_power(d_ind);
+d_battery_work = cumsum(d_battery_power)*(t(2)-t(1));
+for kk=1:length(PR)
+    NetRailEnergy(kk)=sum(QR{kk}(d_ind))*PR(kk)*(t(2)-t(1));
+end
+ActualMPLoss = NetRailEnergy.*((NetRailEnergy>0).*[0,R_P_loss'] - (NetRailEnergy<0).*[0,R_M_loss']);
+TotalMPWork = sum(NetRailEnergy+ActualMPLoss);
+Netbattery = sum(d_battery_power)*(t(2)-t(1));
+
+d_Switchingloss = NaN(size(t)); d_Switchingloss(1) = 0; d_Switchingloss(end) = 0;
+for t_ind = 2:length(t)-1
+    d_Switchingloss(t_ind) = Eloss_SwitchingValve(Decision_vector(t_ind-1),Decision_vector(t_ind),t_ind+1);
+end
+Total_input_Energy = TotalMPWork + d_battery_work(end) + sum(d_Switchingloss);
+Efficiency(case_no) = -Total_input_Energy/Net_work_in;
+Actual_cost(case_no) = sum(ActualMPLoss)/t_step + sum(HECM_PowLoss(d_ind)) +sum(d_Switchingloss)/t_step;
+
+%figure, plot(t,d_Switchingloss)
 
 %% Make plots
 pie22=[PosWork, sum(ActualMPLoss), sum(HECM_PowLoss(d_ind))*(t(2)-t(1)), IncludeSwitchingLosses*sum(d_Switchingloss)];
@@ -378,11 +266,11 @@ xlim([100 125]), ylabel('Power (kW)'), xlabel('Time (s)')
 %% Energy Distribution
 figure
 labels = categorical({'HECM Energy','Main Pump Energy'});
-b = bar(labels,[-d_battery_work(end)/1e6, -TotalMPWork/1e6]);
+vol = bar(labels,[-d_battery_work(end)/1e6, -TotalMPWork/1e6]);
 ylabel('Work (MJ)')
-xtips1 = b(1).XEndPoints;
-ytips1 = b(1).YEndPoints;
-labels1 = string(b(1).YData)+ [' MJ'];
+xtips1 = vol(1).XEndPoints;
+ytips1 = vol(1).YEndPoints;
+labels1 = string(vol(1).YData)+ [' MJ'];
 text(xtips1,ytips1,labels1,'HorizontalAlignment','center',...
     'VerticalAlignment','bottom')
 ylim([0 -1.1*TotalMPWork/1e6])
@@ -391,11 +279,11 @@ ylim([0 -1.1*TotalMPWork/1e6])
 figure
 Totallosses = sum(HECM_PowLoss(d_ind))*(t(2)-t(1)) +sum(ActualMPLoss) + IncludeSwitchingLosses*sum(d_Switchingloss); %Joules
 labels = categorical({'HECM Losses','Main Pump Losses','Throttling Losses'});
-b = bar(labels,[sum(HECM_PowLoss(d_ind))*(t(2)-t(1))/1e6, sum(ActualMPLoss)/1e6, sum(d_Switchingloss)/1e6]);
+vol = bar(labels,[sum(HECM_PowLoss(d_ind))*(t(2)-t(1))/1e6, sum(ActualMPLoss)/1e6, sum(d_Switchingloss)/1e6]);
 ylabel('Energy (MJ)')
-xtips1 = b(1).XEndPoints;
-ytips1 = b(1).YEndPoints;
-labels1 = string(b(1).YData)+ [' MJ'];
+xtips1 = vol(1).XEndPoints;
+ytips1 = vol(1).YEndPoints;
+labels1 = string(vol(1).YData)+ [' MJ'];
 text(xtips1,ytips1,labels1,'HorizontalAlignment','center',...
     'VerticalAlignment','bottom')
 
