@@ -11,3 +11,4 @@ reg_frq_sweep_fmin.mat
 *.m~
 **/output
 *.mat
+*.log

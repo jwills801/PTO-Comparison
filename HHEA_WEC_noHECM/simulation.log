@@ -5,10 +5,10 @@ Version: 4.4
 
 Initializing the Simulation Class...
 	Case Dir: /home/jackson/Documents/LiResearch/Projects/PTO_comparison/HHEA_WEC_noHECM 
-Elapsed time is 1.202063 seconds.
+Elapsed time is 2.730025 seconds.
 
 WEC-Sim Pre-processing ...   
-Elapsed time is 0.615862 seconds.
+Elapsed time is 1.077445 seconds.
 
 WEC-Sim Simulation Settings:
 	Start Time                     (sec) = 0
@@ -48,8 +48,8 @@ List of Constraint(s): Number of Constraints = 1
 
 
 Simulating the WEC device defined in the SimMechanics model /home/jackson/Documents/LiResearch/Projects/PTO_comparison/HHEA_WEC_noHECM/OSWEC.slx...   
-Elapsed time is 0.213769 seconds.
-Elapsed time is 12.581007 seconds.
+Elapsed time is 0.275684 seconds.
+Elapsed time is 22.360772 seconds.
 
 Post-processing and saving...   
-Elapsed time is 0.253284 seconds.
+Elapsed time is 0.514758 seconds.
