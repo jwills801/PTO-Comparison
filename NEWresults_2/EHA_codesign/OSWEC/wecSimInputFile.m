@@ -6,8 +6,8 @@ simu.explorer='off';                     % Turn SimMechanics Explorer (on/off)
 simu.startTime = 0;                     % Simulation Start Time [s]
 simu.rampTime = 50;                     % Wave Ramp Time [s]
 simu.endTime=200;                       % Simulation End Time [s]        
-simu.solver = 'ode4';                   % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
-simu.dt = 0.1;                          % Simulation Time-Step [s]
+simu.solver = 'ode45';                   % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
+simu.dt = 0.01;                          % Simulation Time-Step [s]
 simu.CITime = 30;                       % Specify CI Time [s]
 
 %% Wave Information
@@ -70,16 +70,16 @@ pto(1) = ptoClass('PTO1');                      % Initialize ptoClass for PTO1
 %pto(1).c = ki;                               % PTO Damping Coeff [Nsm/rad]
 pto(1).loc = [0 0 -8.9];                        % PTO Location [m]
 
-pto(1).c = kp;                                   % PTO Damping Coeff [Nsm/rad]
-pto(1).k = ki;                                   % PTO Stiffness Coeff [Nm/rad]
+%pto(1).c = kp;                                   % PTO Damping Coeff [Nsm/rad]
+%pto(1).k = ki;                                   % PTO Stiffness Coeff [Nm/rad]
 
 % grid seach - work in - regular waves
-%pto(1).c = 1.9e07;                             % PTO Damping Coeff [Nsm/rad]
+%pto(1).c = 1.9e07;                            % PTO Damping Coeff [Nsm/rad]
 %pto(1).k = 3.3e7;                                   % PTO Stiffness Coeff [Nm/rad]
 
 % grid seach - work in irregular waves
-%pto(1).c = 3.1e07;                             % PTO Damping Coeff [Nsm/rad]
-%pto(1).k = 3.1e7;                                   % PTO Stiffness Coeff [Nm/rad]
+pto(1).c = 3.1e07;                             % PTO Damping Coeff [Nsm/rad]
+pto(1).k = 3.1e7;                                   % PTO Stiffness Coeff [Nm/rad]
 
 
 % grid seach - EHA work out

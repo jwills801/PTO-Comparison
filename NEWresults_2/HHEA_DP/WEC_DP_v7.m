@@ -171,8 +171,8 @@ Frange1 = (ones(length(PR),1)*PR*ACap1-PR'*ones(1,length(PR))*ARod1);
 MaxT1_Act = max(diff(sort(Frange1(:))))/ARod1/2*HECM_scale1*D*ScaleMaxT1/2/pi;
 MaxPow_Act = ScaleMaxPow*max(diff(sort(Frange1(:))))/ARod1/2*HECM_scale1*D/2/pi * MaxSpeed;
 
-%HECM_PowLoss(abs(HECM_T1) > MaxT1_Act) = NaN; %inf
-HECM_PowLoss(abs(battery_power) > MaxPow_Act) = NaN;
+HECM_PowLoss(abs(HECM_T1) > MaxT1_Act) = NaN; %inf
+%HECM_PowLoss(abs(battery_power) > MaxPow_Act) = NaN;
 
 figure, plot(t,F1), hold on, plot(t([1,end]),repmat(PRA1*ACap1-PRB1*ARod1,1,2)), hold off, ylabel('Force (N)'), xlabel('Time (s)'), xlim([100 150])
 

@@ -47,7 +47,7 @@ Scale = 55; % for irregular wave case, no codesign
 % (fractional displacement/angular velocity/pressure differential)
 
 % Angular Velocity
-Wrpm = 3000; %revolutions per minute
+Wrpm = 2000; %revolutions per minute
 w = Wrpm.*(2*pi/60); % radians per second
 
 %% Find fraction of total displacement
