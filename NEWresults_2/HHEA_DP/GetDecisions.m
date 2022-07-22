@@ -3,39 +3,24 @@
 CostMatrix = f(lam);
 
 % The actual function
-% J = NaN(length(t_c),length(PRA1));
-% J(length(t_c),:) = zeros(size(PRA1));
-% for t_ind = (length(t_c)-1):-1:1
-%     for i = 1:length(PRA1)
-% 
-%         SwitchingLoss = Eloss_A1((PR==PRA1(i)), :, t_ind+1 )*(PRA1==PR)' + Eloss_B1((PR==PRB1(i)), :, t_ind+1 )*(PRB1==PR)';
-% 
-%         [J(t_ind,i),DecisionMatrix(i,t_ind)]  = min( CostMatrix(t_ind+1,:) + J(t_ind+1,:) + SwitchingLoss/t_c(2) );
-%         % SwitchingLoss is divided by the time step because it is an energy, while
-%         % the other terms are power
-%     end
-% end
-% 
-% [cost,starting_ind] = min(J(1,:));
-
 J = NaN(length(t_c),length(PRA1));
 DecisionMatrix = J';
-J(length(t_c),:) = zeros(size(PRA1));
+J(end,:) = zeros(size(PRA1));
 for t_ind = (length(t_c)-1):-1:1
-    maxSwitchingLoss = max(Eloss_A1(:, :, t_ind+1 ),[],'All') + max(Eloss_B1(:, :, t_ind+1 ),[],'All');
-    
+    maxSwitchingLoss = max(Eloss_A1(:, :, t_ind+1 ),[],'All','includenan') + max(Eloss_B1(:, :, t_ind+1 ),[],'All','includenan');
     [min_w_out_switches, min_ind_w_out_switches] = min(CostMatrix(t_ind+1,:) + J(t_ind+1,:));
+    inds_2_check = find(   (CostMatrix(t_ind+1,:) + J(t_ind+1,:))  < (maxSwitchingLoss/t_c(2) + min_w_out_switches ));
+    
+    SwitchingLoss = (PRA1==PR)*Eloss_A1(:, (PRA1(min_ind_w_out_switches)==PR), t_ind+1 ) + (PRB1==PR)*Eloss_B1(:, (PRB1(min_ind_w_out_switches)==PR), t_ind+1 );
 
-    J(t_ind,:) = min_w_out_switches;
+    J(t_ind,:) = min_w_out_switches + SwitchingLoss/t_c(2);
     DecisionMatrix(:,t_ind) = min_ind_w_out_switches;
-    inds_2_check = find(   (CostMatrix(t_ind+1,:) + J(t_ind+1,:))  < maxSwitchingLoss/t_c(2) + min_w_out_switches );
-
     for i = inds_2_check
 
         % Construct Switching loss vector for this specific time index and
         % valve configuration
         % i denotes the previous valve configuration, we are deciding where
-        % to go next by taking the min 
+        % to go next by taking the min
         SwitchingLoss = Eloss_A1((PR==PRA1(i)), :, t_ind+1 )*(PRA1==PR)' + Eloss_B1((PR==PRB1(i)), :, t_ind+1 )*(PRB1==PR)';
 
         [J(t_ind,i),DecisionMatrix(i,t_ind)] = min( CostMatrix(t_ind+1,:) + J(t_ind+1,:) + SwitchingLoss/t_c(2) );

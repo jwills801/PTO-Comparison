@@ -2,7 +2,7 @@ function all_options = gen_options(nrails, choices)
 % Find all options for given number of CPRs 
 % nrails  = number of CPRs. Valid options are [3, 4, 5].
 % Choices = "['0','M','P']" normally but can be reduced to not generate unlikely cases. 
-% Options with no 'P' are eliminated.
+% Options with no 'P' are NOT eliminated - because this is for wave energy
 
 %choices=['0','M','P'];
 
@@ -17,7 +17,7 @@ switch nrails
             else 
                 all_options{k}=['N',choices(k1),choices(k2)];
             end
-            if ~ismember('P',all_options{k}), k=k-1; end % eliminate the choice.
+            %if ~ismember('P',all_options{k}), k=k-1; end % eliminate the choice.
         end
     end
 
@@ -31,7 +31,7 @@ switch nrails
                 else 
                     all_options{k}=['N',choices(k1),choices(k2),choices(k3)];
                 end
-                if ~ismember('P',all_options{k}), k=k-1; end % eliminate the choice.
+                %if ~ismember('P',all_options{k}), k=k-1; end % eliminate the choice.
             end
         end
     end
@@ -46,7 +46,7 @@ switch nrails
                     else 
                         all_options{k}=['N',choices(k1),choices(k2),choices(k3),choices(k4)];
                     end
-                    if ~ismember('P',all_options{k}), k=k-1; end % eliminate the choice.
+                    %if ~ismember('P',all_options{k}), k=k-1; end % eliminate the choice.
                 end
             end
         end

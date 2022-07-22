@@ -2,7 +2,7 @@
 % interpolate to find the energy loss
 tic
 Vol_inHoses = 2e-3; % m^3
-displacement = cumsum(V1)*t(2); displacement = displacement - min(displacement);
+displacement = cumsum(V1(1:spacing:length(t)))*t_c(2); displacement = displacement - min(displacement);
 Vol_A1 = displacement*ACap1 + Vol_inHoses; Vol_B1 = Vol_inHoses;
 
 k_ = max(abs(V1))*ACap1/sqrt(2e6); % Q/sqrt(delP) Q --> max rated Q for the valve
@@ -70,17 +70,17 @@ for i = 1:length(velA_vec)
                 end
                 [Eloss(j,k,i), delaychosen(j,k,i)] = min(Eloss_delay);
             end
-            if t(2) > Tf
-                Eloss(j,k,i) = Eloss(j,k,i)+(abs(velA_vec(i)))^3/k_/k_*(t(2)-Tf);
+            if t_c(2) > Tf
+                Eloss(j,k,i) = Eloss(j,k,i)+(abs(velA_vec(i)))^3/k_/k_*(t_c(2)-Tf);
             end
         end
     end
 end
 
 %% Now map this to the drive cycle
-Eloss_A1 = NaN(length(PR),length(PR),length(t)); Eloss_B1 = NaN(length(PR),length(PR),length(t));
+Eloss_A1 = NaN(length(PR),length(PR),length(t_c)); Eloss_B1 = NaN(length(PR),length(PR),length(t_c));
 [~,vol_ind_B1] = min(abs(vol_vals-Vol_B1));
-for i = 1:length(t)
+for i = 1:length(t_c)
     [~,vol_ind_A1] = min(abs(vol_vals-Vol_A1(i)));
     [~,velA_ind_A1] = min(abs(velA_vals-V1(i)*ACap1));
     Eloss_A1(:,:,i) = Eloss(:,:,sub2ind(size(velA_matrix),velA_ind_A1,vol_ind_A1));
@@ -94,6 +94,7 @@ end
 % delaychosen(:,:,sub2ind(size(velA_matrix),velA_ind_A1,vol_ind_A1)); %
 % Which delay is used may be useful later, but right now it is just tedious
 
+disp(['Making swiching losses took ' num2str(toc) ' seconds'])
 return
 %% Putting them all together into one matrix
 Eloss_SwitchingValve = NaN(length(PRA1),length(PRA1),length(t));
@@ -105,5 +106,3 @@ for i = 1:length(PRA1)
         Eloss_SwitchingValve(i,j,:) = Eloss_A1(ind_A1_old,ind_A1_new,:)  + Eloss_B1(ind_B1_old,ind_B1_new,:);
     end
 end
-
-disp(['Making swiching losses took ' num2str(toc) ' seconds'])
