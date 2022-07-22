@@ -29,7 +29,7 @@ rho = 870;
 %% I am scaling the pump to be X times larger than the 107 cc b/c That will make -1<fracDisp<1
 %Scale = 47;  % Regular wave case, no codesign
 %Scale = 35;  % Regular wave case, yes codesign
-Scale = 55; % for irregular wave case, no codesign
+Scale = 69.7309; % for irregular wave case, no codesign
 %Scale = 45; % for irregular wave case, yes codesign
 %% Manufacturer 107cc/rev
 % Variable Displacement Axial Piston, 107 cc/rev (Pourmovahed et al. 1992b)
@@ -99,10 +99,7 @@ for i = 1:n
         P_out(i) = w*T_Act(i)/.9;
         P_L_elect(i) =  (1/.9-1)*w*T_Act(i); % This loss accounts for energy that needs to come FROM the generator to the system.
     end
-    
-    P_out_sum = P_out_sum + P_out(i);
     P_in(i) = (F(i)*v(i)); 
-    P_in_sum = P_in(i) + P_in_sum;
     
     
     % check if the difference in work in and work out  (i.e. integral of the power between in and out) is the losses in the hydraulic and electrical components.
@@ -111,12 +108,13 @@ for i = 1:n
    
 end
 
-e = P_out_sum/P_in_sum;
-EHA_Generator = max(abs(P_out))/1e3; % kW
+EHA_Generator = max([ max(abs(P_out)) ,  max(abs(T_Act*w))])/1e3; % kW
 EHA_Pump_size = D*Scale;
 
 Work_in = sum(P_in)*dt;
 Work_Out = sum(P_out)*dt;
+e = Work_Out/Work_in;
+
 
 B = 18; % m (This is the width of the oswec)
 t_start = 50;
@@ -131,6 +129,14 @@ Total_energy_out = -sum(P_out)*dt;
 ave_power_out = (Total_energy_out-Energy_first_chunk)/(t(end)-t_start); % Ave power for last 100 s
 CW = ave_power_out/waves.Pw;
 CWR_out = CW/B;
+
+disp(['CWR in: ' num2str(CWR_in)])
+disp(['CWR out: ' num2str(CWR_out)])
+disp(['Efficiency: ' num2str(e)])
+disp(['EHA pump size: ' num2str(round(EHA_Pump_size)) ' cc'])
+disp(['EHA generator size: ' num2str(round(EHA_Generator)) ' kW'])
+
+
 return
 %%
 figure
