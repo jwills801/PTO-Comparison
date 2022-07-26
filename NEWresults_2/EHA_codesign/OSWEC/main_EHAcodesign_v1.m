@@ -3,8 +3,9 @@ kp_0 = 2.9897e7;
 ki_0 = 3.2542e7;
 x0 = [kp_0;ki_0];
 
-tStart = tic;
 return
+tStart = tic;
+
 options = optimset('PlotFcns',@optimplotfval);
 %[x,fval] = fminsearch(@fun,x0,options)
 
@@ -14,7 +15,7 @@ options = optimset('PlotFcns',@optimplotfval);
 TimeElapsed = toc(tStart)  
 
 %%
-N = 25;
+N = 2;
 k_vals = linspace(5e6,10e7,N);
 
 KP = NaN(N,N); KI = KP; J = KP;
@@ -28,7 +29,16 @@ for i = 1:N
     end
 end
 toc(outertime)
-figure, contour(KP,KI,J), xlabel('K_p'), ylabel('K_i')
+figure, contour(KP,KI,J,N), xlabel('K_p'), ylabel('K_i'), xlim([.5e7 5e7]), ylim([.5e7 10e7])
+
+KP_ = KP(:); KI_ = KI(:); J_ = J(:);
+[a,b] = min(J_);
+disp('Best case was:')
+disp(['              ' num2str(-a/1e6) ' MJ'])
+disp(['    with Kp = ' num2str(KP_(b)/1e7) 'e7'])
+disp(['     and Ki = ' num2str(KI_(b)/1e7) 'e7'])
+
+
 
 %%
 kp = 1.9e07;                             % PTO Damping Coeff [Nsm/rad]

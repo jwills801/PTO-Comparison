@@ -3,8 +3,8 @@ clear, close all
 % Rerun wec sim with finer sampling time
 %%
 disp('____________________________________________________________________________')
-cycle='regular';
-%cycle='irregular';
+%cycle='regular';
+cycle='irregular';
 
 eval(['load ../PI_',cycle,'.mat'])
 
@@ -33,8 +33,6 @@ PR = [0, .36, .81, 1]*Pmax;
 Make_losses_DP;
 
 GetSwitchingLossMatrix_v3;
-%Eloss_A1 = 0*Eloss_A1;
-%Eloss_B1 = 0*Eloss_B1;
 
 Sum_to_constrain_switches_v1;
 
@@ -42,7 +40,8 @@ NetWorkout = -sum(F1.*V1)*t(2);
 OutputPowerSum = sum(abs(F1.*V1))*t(2);
 
 all_options = gen_options(length(PR), ['0','M','P']);
-all_options = {'C0M0'}; % Best for regular, many close runners up though
+%all_options = {'C0M0'}; % Best for REGULAR, if POWER is constrained and torque if constraint is relaxed by 1.5
+all_options = {'C0MM'}; % Best for IRREGULAR, if TORQUE contraint is relaxed by 1.1
 
 for case_no = 1:length(all_options) %13 % %[65,5,47,52], %
     option = all_options{case_no}
@@ -92,6 +91,7 @@ for case_no = 1:length(all_options) %13 % %[65,5,47,52], %
     corner = max(abs(w1(d_ind))*max(abs(T1_Act(d_ind))));
     disp('Optimized cost vs Total losses')
     disp([cost*t_c(2),Totallosses]) % if these don't match, it could be that the option was not consistent
+    % cost matches total losses if you account for the lam*NetrailEnergy and the NetRailEnergy*R_P/M_Loss parts when the option is '0'
     disp('Energy input vs energy output and losses')
     disp([TotalMPWork+Netbattery+NegWork+TotalSwitchingLoss,PosWork+MP_total_loss+HECM_total_loss+TotalSwitchingLoss]) % note the switching loss is both an input and a loss
 
@@ -106,42 +106,77 @@ if length(Eff_all) > 1
 else
 %%
 figure;
-subplot(211); plot(t, cumsum(battery)*t(2)); ylabel('J'), c_battery = cumsum(battery)*t(2);
-title(['Battery end state = ',num2str(c_battery(end)),'J'])
+%subplot(211); plot(t, cumsum(battery)*t(2)); ylabel('J'), c_battery = cumsum(battery)*t(2);
+%title(['Battery end state = ',num2str(c_battery(end)),'J'])
 if  length(PR)==5
-    subplot(212); plot(t, cumsum([QR{1}(d_ind)',QR{2}(d_ind)',QR{3}(d_ind)',QR{4}(d_ind)',QR{5}(d_ind)'])*t(2));
+    %subplot(212); 
+    plot(t, cumsum([QR{1}(d_ind)',QR{2}(d_ind)',QR{3}(d_ind)',QR{4}(d_ind)',QR{5}(d_ind)'])*t(2));
     legend('QR{1}','QR{2}','QR{3}','QR{4}','QR{5}');
 elseif length(PR)==4
-    subplot(212); plot(t, cumsum([QR{1}(d_ind)',QR{2}(d_ind)',QR{3}(d_ind)',QR{4}(d_ind)'])*t(2));
-    legend('QR{1}','QR{2}','QR{3}','QR{4}');
+    %subplot(212); 
+    plot(t, cumsum([QR{1}(d_ind)',QR{2}(d_ind)',QR{3}(d_ind)',QR{4}(d_ind)'])*t(2));
+    legend('Tank',[num2str(round(PR(2)/1e6,2)) ' MPa rail'],[num2str(round(PR(3)/1e6,2)) ' MPa rail'],[num2str(round(PR(4)/1e6,2)) ' MPa rail'],'Location','NorthWest');
 elseif length(PR)==3
-    subplot(212); plot(t, cumsum([QR{1}(d_ind)',QR{2}(d_ind)',QR{3}(d_ind)'])*t(2));
+    %subplot(212); 
+    plot(t, cumsum([QR{1}(d_ind)',QR{2}(d_ind)',QR{3}(d_ind)'])*t(2));
     legend('QR{1}','QR{2}','QR{3}');
 end
-ylabel('Cumulative Rail Flow');
-xlabel('Time - s');
+ylabel('Cumulative Flow [m^3]');
+xlabel('Time [s]');
 %end
 %save SC_5rails_results.mat NetRail_all Eff_all PR ScaleMaxT optimal
 %toc
+
+%% Plot drive cycle force and velocity
+figure, yyaxis left, plot(t,F1/1e6), ylabel('Force [MN]'), xlabel('Time [s]'), ylim([-10 10])
+yyaxis right, plot(t,V1), ylabel('Velocity [m/s]'), xlim([100 125])
+
 %% Check force/torque
 %figure, plot(t, -F1, '-', t([1,end]),ones(2,1)*Frange1', '-', t_c, CPR_F1(d_vector_c),'x','linewidth',2); ylabel('Force1 N'); xlabel('Time - s');grid
-figure(111), hold on, plot(t_c, CPR_F1(d_vector_c),'x','linewidth',2), hold off
+figure(111), hold on, plot(t_c, CPR_F1(d_vector_c)/1e6,'x','MarkerSize',12,'linewidth',2), hold off
+xlim([100, 125])
 
 %% Check flow/speed
-figure,plot(t, V1, '-', t, -Q_HECM_1/ARod1,'-.'); ylabel('Speed1 m/s'); xlabel('Time - s');grid
+%figure,plot(t, V1, '-', t, -Q_HECM_1/ARod1,'-.'); ylabel('Speed1 m/s'); xlabel('Time - s');grid
 
 %% plot torque
-figure, plot(t, T1_Act(d_ind), '-'); ylabel('Torque1 Nm'); xlabel('Time - s'); grid, hold on
+figure, plot(t, T1_Act(d_ind), '-'); ylabel('Torque [Nm]'); xlabel('Time  [s]'); grid, hold on
 plot([0 t(end)], [MaxT1_Act MaxT1_Act],'--k'), plot([0 t(end)], [-MaxT1_Act -MaxT1_Act],'--k'), hold off, ylim(1.25*[-MaxT1_Act MaxT1_Act]), xlim([0 t(end)])
+xlim([100 125])
 
 %% Plot Flow
-figure, plot(t, Q_HECM_1, '-'); ylabel('Flow 1 (m^3/s)'); xlabel('Time - s');grid
+%figure, plot(t, Q_HECM_1, '-'); ylabel('Flow 1 (m^3/s)'); xlabel('Time - s');grid
 
 %% Plot Pressure Drop
 %figure(7), plot(t, DeltaP_HECM1(d_ind)/1e6, '-'); ylabel('Delta P 1 (MPa)'); xlabel('Time - s');grid
 
 %% Plot Pressure at Rod Side - outlet of HECM
-figure, plot(t, P1_Cyl(d_ind)/1e6, '-'); ylabel('Rod Pressure 1 (MPa)'); xlabel('Time - s');grid,title('Pressure at Outlet of HECM 1')%, xlim([100 130])
+%figure, plot(t, P1_Cyl(d_ind)/1e6, '-'); ylabel('Rod Pressure 1 (MPa)'); xlabel('Time - s');grid,title('Pressure at Outlet of HECM 1')%, xlim([100 130])
+
+%% Energy Distribution
+figure
+labels = categorical({'HECM Energy','Main Pump Energy'});
+b = bar(labels,[-Netbattery/1e6, -TotalMPWork/1e6-TotalSwitchingLoss/1e6]);
+ylabel('Work (MJ)')
+xtips1 = b(1).XEndPoints;
+ytips1 = b(1).YEndPoints;
+labels1 = string(b(1).YData)+ [' MJ'];
+text(xtips1,ytips1,labels1,'HorizontalAlignment','center',...
+    'VerticalAlignment','bottom')
+ylim([min([0 -Netbattery/1e6]) -1.1*TotalMPWork/1e6])
+
+%% Loss Distribution
+Totallosses = HECM_total_loss+MP_total_loss+TotalSwitchingLoss;
+figure
+labels = categorical({'HECM Losses','Main Pump Losses','Throttling Losses'});
+b = bar(labels,[HECM_total_loss,MP_total_loss, TotalSwitchingLoss]/1e6);
+ylabel('Energy [MJ]')
+xtips1 = b(1).XEndPoints;
+ytips1 = b(1).YEndPoints;
+labels1 = string(round(b(1).YData,1))+ [' MJ'];
+text(xtips1,ytips1,labels1,'HorizontalAlignment','center',...
+    'VerticalAlignment','bottom')
+%ylim([0 50])
 
 %%
 figure, plot(w1(d_ind), DeltaP_HECM1(d_ind),'.');grid; xlabel('Speed [rad/s]'); ylabel('Pressure [Pa]');
@@ -149,20 +184,13 @@ hold on; [c1,h1]=contour(w1rad_Mapping,P1_Mapping,Eff,(-0.1:0.1:1)); clabel(c1,h
 axis(1.05*[min(w1(d_ind)),max(w1(d_ind)),min(DeltaP_HECM1(d_ind)),max(DeltaP_HECM1(d_ind))])
 
 %%
+t_start = 50;
 disp('Losses:'), disp(['   HECM:      ',num2str(HECM_total_loss,3)]), disp(['   Main Pump: ',num2str(MP_total_loss,3)]), disp(['   Switching: ',num2str(TotalSwitchingLoss,3)])
 disp(['Waves: ' cycle])
 
-% Find Capture Wdith Ratio
-B = 18; % m (This is the width of the oswec)
-t_start = 50;
-Energy_first_chunk = sum(F1(1:find(t==t_start)).*V1(1:find(t==t_start)))*t(2);
-Total_energy_in = sum(F1.*V1)*t(2);
-ave_power_out = (Total_energy_in-Energy_first_chunk)/(t(end)-t_start); % Ave power for last 100 s
-CW = ave_power_out/waves.Pw;
-
-disp(['CWR in: ' num2str(CW/B) ])
-
 disp(['HECM hydraulic unit is ' num2str(D_HECM1*1e6),' cc'])
+size_MP;
+disp(['MP hydraulic unit is ' num2str(D_MP*1e6),' cc'])
 
 [max_batt_elec,max_batt_elec_ind] = max(abs(battery));
 [max_batt_mech,max_batt_mech_ind] = max(abs(T1_Act(d_ind).*w1(d_ind)));
@@ -174,7 +202,21 @@ end
 disp(['Size of MP generator: ' num2str(-(TotalMPWork + TotalSwitchingLoss)/(t(end)-t_start)/1000/.9) ' kW'])
 disp(['Overall Efficiency: ' num2str(Efficiency) ''])
 
-figure, plot(t,cumsum(F1.*V1)*t(2),t,[zeros(1,round(t_start/t(2))+1), (-(TotalMPWork + TotalSwitchingLoss)/(t(end)-t_start))*t(2)*(0:1:length(t)-(round(t_start/t(2))+2))]-cumsum(battery)*t(2))
+Work_in_over_time = cumsum(F1.*V1)*t(2);
+Work_out_over_time = [zeros(1,round(t_start/t(2))+1), (-(TotalMPWork + TotalSwitchingLoss)/(t(end)-t_start))*t(2)*(0:1:length(t)-(round(t_start/t(2))+2))]-cumsum(battery)*t(2);
+figure, plot(t,Work_in_over_time/1e6,t,Work_out_over_time/1e6), ylabel('Work [MJ]'), xlabel('Time [s]')
+
+figure, plot(t,F1.*V1/1e6,t,-battery/1e6,t([1 round(t_start/t(2)) round(t_start/t(2))+1 end]), [0 0 -(TotalMPWork + TotalSwitchingLoss)/(t(end)-t_start) -(TotalMPWork + TotalSwitchingLoss)/(t(end)-t_start)]/1e6)
+legend('Power in','HECM power out','MP power out'), ylabel('Power [MW]'), xlabel('Time [s]'), xlim([100 125])
+
+% Find Capture Wdith Ratio
+B = 18; % m (This is the width of the oswec)
+ave_power_in = (Work_in_over_time(end) - Work_in_over_time(round(t_start/t(2))+1))/(t(end)-t_start); % Ave power for last 150 s
+CW_in = ave_power_in/waves.Pw;
+disp(['CWR in: ' num2str(CW_in/B) ])
+ave_power_out = (Work_out_over_time(end) - Work_out_over_time(round(t_start/t(2))+1))/(t(end)-t_start); % Ave power for last 150 s
+CW_out = ave_power_out/waves.Pw;
+disp(['CWR out: ' num2str(CW_out/B) ])
 
 end
 

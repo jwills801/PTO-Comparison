@@ -61,7 +61,7 @@ T = controller.time(end);
 T = T - simu.rampTime; % How much time does the main pump have to pump?
 Net_Flow = sum(controller.flow)*controller.time(2); % integrate flow to get volume (m^3)
 Ave_Flow = Net_Flow/T; % Motor can remove net flow (m^3/s)
-w = 3000*2*pi/60; % Angular Velocity of e generator [rad/s]
+w = 2000*2*pi/60; % Angular Velocity of e generator [rad/s]
 D = Ave_Flow/w*2*pi*1e6;  % Size of motor (cc)
 disp(['Pump size is ', num2str(D,4),' cc'])
 

@@ -3,31 +3,50 @@ clear, close all
 
 %% Input Data
 % Electric motor generator sizes
-HHEA_main_reg_gen = 970; %kW HHEA main generator size for regular waves
-HHEA_HECM_reg_gen = 0; %kW HHEA HECM generator size for regular waves
-EHA_noco_reg_gen = 3548; %kW EHA generator size for regular waves with no codesign
-EHA_co_reg_gen = 2387; %kW EHA generator size for regular waves with codesign
+HHEA_main_reg_gen = 1220; %kW HHEA main generator size for regular waves
+HHEA_HECM_reg_gen = 1454; %kW HHEA HECM generator size for regular waves
+EHA_noco_reg_gen = 4098; %kW EHA generator size for regular waves with no codesign
+EHA_co_reg_gen = 2886; %kW EHA generator size for regular waves with codesign
+
 Check_reg_gen = 509; %kW Check valve generator size for regular waves
 
-HHEA_main_irreg_gen = 331; %kW HHEA main generator size for irregular waves
-HHEA_HECM_irreg_gen = 0; %kW HHEA HECM generator size for irregular waves
-EHA_noco_irreg_gen = 4371; %kW EHA generator size for irregular waves with no codesign
+
+HHEA_main_irreg_gen = 329; %kW HHEA main generator size for irregular waves
+HHEA_HECM_irreg_gen = 1367; %kW HHEA HECM generator size for irregular waves
+EHA_noco_irreg_gen = 3739; %kW EHA generator size for irregular waves with no codesign
+
 EHA_co_irreg_gen = 3080; %kW EHA generator size for irregular waves with codesign
 Check_irreg_gen = 231; %kW Check valve generator size for irregular waves
 
 
 %Hydraulic pump motor sizes
-HHEA_main_reg_pump = 1286; %cc HHEA main pump size for regular waves
-HHEA_HECM_reg_pump = 0; %cc HHEA HECM pump size for regular waves
-EHA_noco_reg_pump = 5029 ; %cc EHA pump size for regular waves with no codesign
-EHA_co_reg_pump = 3745; %cc EHA pump size for regular waves with codesign
-Check_reg_pump = 1554; %cc Check valve pump size for regular waves
+HHEA_main_reg_pump = 3438; %cc HHEA main pump size for regular waves
+HHEA_HECM_reg_pump = 7461; %cc HHEA HECM pump size for regular waves
+EHA_noco_reg_pump = 7461; %cc EHA pump size for regular waves with no codesign
+EHA_co_reg_pump = 5885; %cc EHA pump size for regular waves with codesign
 
-HHEA_main_irreg_pump = 446; %cc HHEA main pump size for irregular waves
-HHEA_HECM_irreg_pump = 0; %cc HHEA HECM pump size for irregular waves
-EHA_noco_irreg_pump = 5885; %cc EHA pump size for irregular waves with no codesign
+Check_reg_pump = 2331; %cc Check valve pump size for regular waves
+
+
+HHEA_main_irreg_pump = 968; %cc HHEA main pump size for irregular waves
+HHEA_HECM_irreg_pump = 6842; %cc HHEA HECM pump size for irregular waves
+EHA_noco_irreg_pump = 6842; %cc EHA pump size for irregular waves with no codesign
+
 EHA_co_irreg_pump = 4815; %cc EHA pump size for irregular waves with codesign
-Check_irreg_pump = 731; %cc Check valve pump size for irregular waves
+Check_irreg_pump = 1097; %cc Check valve pump size for irregular waves
+
+
+% CWR out
+HHEA_reg_CWR = 0.99764;
+EHA_noco_reg_CWR = 0.68467;
+EHA_co_reg_CWR = 0.82974;
+Check_reg_CWR = ; 
+
+
+HHEA_irreg_CWR = 0.93257; 
+EHA_noco_irreg_CWR = 0.47242;
+EHA_co_irreg_CWR = ; 
+Check_irreg_CWR = ; 
 
 %% Bar graphs for generators
 % Regular

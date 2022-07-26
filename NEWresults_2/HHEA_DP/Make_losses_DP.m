@@ -10,7 +10,7 @@ D_HECM1 = max(abs(V1))*ARod1/(maxRPM/60); % m^3/rev
 
 ScaleHECM1 = D_HECM1/(Disp*2*pi);
 
-figure(111), plot(t, -F1,'k'); ylabel('Force (N)'); xlabel('Time (s)'); grid, hold on
+figure(111), plot(t, -F1/1e6,'k'); ylabel('Force [MN]'); xlabel('Time [s]'); grid, hold on
 colors = {'b','g',[0.9290 0.6940 0.1250],'r'};
 nR = length(PR);
 Frange = NaN(nR,nR);
@@ -18,12 +18,12 @@ legend_str1 = [];
 legend_str2 = [];
 for i = 1:nR
     Frange(:,i) = (ones(nR,1).*PR'*ACap1-PR(i)*ARod1);
-    p{i} = plot(t([1 end]),repmat(Frange(:,i),1,2),'color',colors{i});
+    p{i} = plot(t([1 end]),repmat(Frange(:,i)/1e6,1,2),'color',colors{i});
     legend_str1 = [legend_str1, ', p{' num2str(i) ,'}(1)'];
     legend_str2 = [legend_str2, ', "Prod = ' num2str(round(PR(i)/1e6)) ' MPa"'];
 end
 hold off
-eval(['legend([' legend_str1(3:end), '],{', legend_str2(3:end),'},"AutoUpdate", 0)'])
+%eval(['legend([' legend_str1(3:end), '],{', legend_str2(3:end),'},"AutoUpdate", 0)'])
 
 
 %figure, plot(t, -F1, t([1,end]),ones(2,1)*Frange1'); ylabel('Force (N)'); xlabel('Time (s)'); grid
@@ -50,7 +50,7 @@ T1_Act = ScaleHECM1*interp2(P1_Mapping,w1rad_Mapping,T1_Act_Mapping,DeltaP_HECM1
 PLoss_Hydraulic_HECM = T1_Act.*w1-DeltaP_HECM1.*(Q_HECM_1*ones_opt);
 
 % Torque limit
-[MaxT1_Act] = min_torque_limit(T1_Act,P1_Cyl,t_c,spacing);
+[MaxT1_Act] = 1.1*min_torque_limit(T1_Act,P1_Cyl,t_c,spacing);
 
 
 
@@ -101,8 +101,8 @@ for k=1:length(PR)
 end
 
 %% Constraints
-%PLoss_Electric_HECM(abs(T1_Act) >= MaxT1_Act) = inf; % Contrain torque of HECM
-PLoss_Electric_HECM(abs(battery_power) >= Max_batt_pow) = inf; % constrain power of HECM
+PLoss_Electric_HECM(abs(T1_Act) >= MaxT1_Act) = inf; % Contrain torque of HECM
+%PLoss_Electric_HECM(abs(battery_power) >= Max_batt_pow) = inf; % constrain power of HECM
 % Cavitation limit
 PLoss_Hydraulic_HECM(P1_Cyl < -1e5) = inf;
 HECMLosses = PLoss_Hydraulic_HECM+PLoss_Electric_HECM;

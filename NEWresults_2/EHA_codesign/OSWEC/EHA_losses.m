@@ -25,12 +25,16 @@ B = 1.7e9;
 rho = 870;
 
 %% Define Pump Constants
+% Angular Velocity
+Wrpm = 2000; %revolutions per minute
+w = Wrpm.*(2*pi/60); % radians per second
 
 %% I am scaling the pump to be X times larger than the 107 cc b/c That will make -1<fracDisp<1
-%Scale = 47;  % Regular wave case, no codesign
-%Scale = 35;  % Regular wave case, yes codesign
-Scale = 69.7309; % for irregular wave case, no codesign
-%Scale = 45; % for irregular wave case, yes codesign
+Scale = max(abs(Q_Act))/w*2*pi*1e6/107;
+%Scale = 69.7309;  % Regular wave case, no codesign
+%Scale = 55;  % Regular wave case, yes codesign
+%Scale = 63.9467; % for irregular wave case, no codesign
+%Scale = 130; % for irregular wave case, yes codesign
 %% Manufacturer 107cc/rev
 % Variable Displacement Axial Piston, 107 cc/rev (Pourmovahed et al. 1992b)
     D = 107; % cc/rev
@@ -42,13 +46,6 @@ Scale = 69.7309; % for irregular wave case, no codesign
 % Flow Loss Constants
     Cs = 4.26e-9;
     Cst = 0*1e-5;
-
-%% Define Pump Parameters to Study
-% (fractional displacement/angular velocity/pressure differential)
-
-% Angular Velocity
-Wrpm = 2000; %revolutions per minute
-w = Wrpm.*(2*pi/60); % radians per second
 
 %% Find fraction of total displacement
 fracDisp = NaN(n,1);
@@ -141,13 +138,13 @@ return
 %%
 figure
 hold on
-scatter(fracDisp,deltaP,'r','x')
+scatter(fracDisp,deltaP/1e6,'r','x')
 EfficiencyMap
 hold off
 %%
 Work_in = -cumsum(P_in)*dt;
 Work_out = -cumsum(P_out)*dt;
-dt = mean(diff(t));
+
 figure()
 plot(t,-[cumsum(P_in)*dt,cumsum(P_out)*dt]);
 legend('Work in', 'Work out');
@@ -162,60 +159,52 @@ max_power_in = max(-P_in);
 
 figure
 plot(t,fracDisp)
-xlabel('Time (s)')
+xlabel('Time [s]')
 ylabel('Fractional Displacement')
-grid on
+grid on, xlim([100 125])
 
 
-figure
-subplot(2,1,1);
-plot(t,-F)
-ylabel('Force (N)')
-xlabel('Time (s)')
-grid on
-subplot(2,1,2); 
-plot(t,v)
-ylabel('Velocity (m/s)')
-xlabel('Time (s)')
-grid on
+%% Plot drive cycle force and velocity
+figure, yyaxis left, plot(t,F/1e6), ylabel('Force [MN]'), xlabel('Time [s]'), ylim([-10 10])
+yyaxis right, plot(t,v), ylabel('Velocity [m/s]'), xlim([100 125])
 
 
-figure
-yyaxis left
-plot(t,-P_in/1000,t,-P_out/1000)
-xlabel('Time (s)')
-ylabel('Power (kW)')
-%ylim([-2e5 12e5])
-yyaxis right
-plot(t,v)
-legend('Power In','Power Out','Velocity','location','northwest')
-xlim([150 200])
-ylim([-2 12])
-ylabel('Velocity (m/s)')
-grid on
+% figure
+% yyaxis left
+% plot(t,-P_in/1000,t,-P_out/1000)
+% xlabel('Time (s)')
+% ylabel('Power (kW)')
+% %ylim([-2e5 12e5])
+% yyaxis right
+% plot(t,v)
+% legend('Power In','Power Out','Velocity','location','northwest')
+% xlim([150 200])
+% ylim([-2 12])
+% ylabel('Velocity (m/s)')
+% grid on
 
 figure
 plot(t,-P_in/1000,t,-P_out/1000)
-xlabel('Time (s)')
-ylabel('Power (kW)')
+xlabel('Time [s]')
+ylabel('Power [kW]')
 legend('Power In','Power Out','location','northwest')
 xlim([100 125])
 
-figure()
-plot(t,T_Act,t,T_Ideal)
-ylabel('Torque (Nm)'), xlabel('Time (s)')
-legend('Actual Torque','Ideal Torque')
-
-figure()
-plot(t,Q_Act,t,Q_Ideal)
-ylabel('(m^3/s)'), xlabel('Time (s)')
-legend('Actual flow','Ideal flow')
+% figure()
+% plot(t,T_Act,t,T_Ideal)
+% ylabel('Torque (Nm)'), xlabel('Time (s)')
+% legend('Actual Torque','Ideal Torque')
+% 
+% figure()
+% plot(t,Q_Act,t,Q_Ideal)
+% ylabel('(m^3/s)'), xlabel('Time (s)')
+% legend('Actual flow','Ideal flow')
 
 %figure(), plot(t,T_Act,t,deltaP*d*Scale.*fracDisp + sign(w).*TLoss), legend('True','sum'), ylabel('Torque'), title('Torque')
 
 %figure(), plot(t,Q_Act,t,w*d*Scale.*fracDisp - sign(deltaP).*QLoss), legend('true','sum'), ylabel('Flow'), title('Flow')
 
-figure, plot(t,cumsum(-P_in)*dt)
+%figure, plot(t,cumsum(-P_in)*dt)
 
 %% Instantaneous efficiency
 Hydraulic_in = (-P_in>=0).*(-P_in);

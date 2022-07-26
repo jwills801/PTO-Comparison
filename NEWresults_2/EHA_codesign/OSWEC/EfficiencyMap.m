@@ -144,8 +144,8 @@ Total_Efficiency = (Q_Efficiency.*T_Efficiency);
 % Overall
 levels = .1:.05:1.05;
 levels = .25:.25:1;
-contour(fracDisp,(deltaP),Total_Efficiency,levels,'ShowText','on')
+contour(fracDisp,deltaP/1e6,Total_Efficiency,levels,'ShowText','on')
 grid on
 ylabel('$\Delta$ P [MPa]','interpreter','latex')
-xlabel('Fractional Displacement [rad/s]','interpreter','latex')
+xlabel('Fractional Displacement','interpreter','latex')
 % set(gcf, 'Position', get(0, 'Screensize'));

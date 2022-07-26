@@ -20,7 +20,7 @@ simu.CITime = 30;                       % Specify CI Time [s]
 % waves.T = 8;                            % Wave Period [s]
 
 % Irregular Waves using PM Spectrum with Directionality 
-waves = waveClass('regular');         % Initialize Wave Class and Specify Type
+waves = waveClass('irregular');         % Initialize Wave Class and Specify Type
 waves.H = 2.5;                          % Significant Wave Height [m]
 waves.T = 8;                            % Peak Period [s]
 waves.spectrumType = 'PM';              % Specify Spectrum Type
@@ -70,12 +70,9 @@ pto(1) = ptoClass('PTO1');                      % Initialize ptoClass for PTO1
 %pto(1).c = ki;                               % PTO Damping Coeff [Nsm/rad]
 pto(1).loc = [0 0 -8.9];                        % PTO Location [m]
 
-%pto(1).c = kp;                                   % PTO Damping Coeff [Nsm/rad]
-%pto(1).k = ki;                                   % PTO Stiffness Coeff [Nm/rad]
-
 % grid seach - work in - regular waves
-pto(1).c = 1.9e07;                            % PTO Damping Coeff [Nsm/rad]
-pto(1).k = 3.3e7;                                   % PTO Stiffness Coeff [Nm/rad]
+%pto(1).c = 1.9e07;                            % PTO Damping Coeff [Nsm/rad]
+%pto(1).k = 3.3e7;                                   % PTO Stiffness Coeff [Nm/rad]
 
 % grid seach - work in irregular waves
 %pto(1).c = 3.1e07;                             % PTO Damping Coeff [Nsm/rad]
@@ -83,12 +80,14 @@ pto(1).k = 3.3e7;                                   % PTO Stiffness Coeff [Nm/ra
 
 
 % grid seach - EHA work out
-%pto(1).c = 3.1e07;                             % PTO Damping Coeff [Nsm/rad]
-%pto(1).k = 2.9e7;                                   % PTO Stiffness Coeff [Nm/rad]
+%pto(1).c = 2.875e07;     % pto(1).c = 3.1e07;                             % PTO Damping Coeff [Nsm/rad]
+%pto(1).k = 2.875e7;       %  pto(1).k = 2.9e7;                                   % PTO Stiffness Coeff [Nm/rad]
 
 % grid seach - EHA work out - irregular waves
-%pto(1).c = 4.1e07;                             % PTO Damping Coeff [Nsm/rad]
-%pto(1).k = 2.1e7;                                   % PTO Stiffness Coeff [Nm/rad]
+%pto(1).c = 1.6875e7; % Scale = 130 
+pto(1).c = 2.0833e7;       %  pto(1).c = 4.1e07;                             % PTO Damping Coeff [Nsm/rad]
+%pto(1).k = 3.2708e7; % Scale = 130 
+pto(1).k = 3.6667e7;          %pto(1).k = 2.1e7;                                   % PTO Stiffness Coeff [Nm/rad]
 
 
 %Perry's - from maximum power of linear system
