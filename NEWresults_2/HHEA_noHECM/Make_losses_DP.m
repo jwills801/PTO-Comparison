@@ -44,13 +44,18 @@ DeltaP_HECM1 = P1_Cyl-ones_t*PRB1';
 
 Q_HECM_1 = -V1*ARod1;
 
-w1 = interp2(P_Map,ScaleHECM1*Q_Map,W_Map,DeltaP_HECM1,Q_HECM_1*ones_opt);
-T1_Act = ScaleHECM1*interp2(P1_Mapping,w1rad_Mapping,T1_Act_Mapping,DeltaP_HECM1,w1);
+% With a pump map
+% w1 = interp2(P_Map,ScaleHECM1*Q_Map,W_Map,DeltaP_HECM1,Q_HECM_1*ones_opt);
+% T1_Act = ScaleHECM1*interp2(P1_Mapping,w1rad_Mapping,T1_Act_Mapping,DeltaP_HECM1,w1);
+
+% Ideal
+w1 = Q_HECM_1*ones_opt/D_HECM1*2*pi; % rad/s
+T1_Act = DeltaP_HECM1*D_HECM1/2/pi; % Nm
 
 PLoss_Hydraulic_HECM = T1_Act.*w1-DeltaP_HECM1.*(Q_HECM_1*ones_opt);
 
 % Torque limit
-[MaxT1_Act] = 1.1*min_torque_limit(T1_Act,P1_Cyl,t_c,spacing);
+[MaxT1_Act] = 1.1*min_torque_limit(T1_Act,P1_Cyl,t_c,spacing) + 1;
 
 
 
@@ -79,7 +84,7 @@ end
 
 battery_power = (T1_Act.*w1) + PLoss_Electric_HECM;
 % battey power limit
-[Max_batt_pow] = min_power_limit(battery_power,P1_Cyl,t_c,spacing);
+[Max_batt_pow] = min_power_limit(battery_power,P1_Cyl,t_c,spacing) +1;
                
 %% Find Main Pump Flows and Losses (Rail Losses)
 wMP = 2000*2*pi/60; % Angular Velocity [rad/s]
@@ -101,11 +106,12 @@ for k=1:length(PR)
 end
 
 %% Constraints
-PLoss_Electric_HECM(abs(T1_Act) >= MaxT1_Act) = inf; % Contrain torque of HECM
+PLoss_Electric_HECM(abs(T1_Act) > MaxT1_Act) = inf; % Contrain torque of HECM
 %PLoss_Electric_HECM(abs(battery_power) >= Max_batt_pow) = inf; % constrain power of HECM
 % Cavitation limit
-PLoss_Hydraulic_HECM(P1_Cyl < -1e5) = inf;
+%PLoss_Hydraulic_HECM(P1_Cyl < -1e5) = inf;
 HECMLosses = PLoss_Hydraulic_HECM+PLoss_Electric_HECM;
+HECMLosses = 0*HECMLosses;
 
 %%
 disp(['Making Elec and Hydr losses took ' num2str(toc) ' seconds'])

@@ -108,9 +108,9 @@ end
 EHA_Generator = max([ max(abs(P_out)) ,  max(abs(T_Act*w))])/1e3; % kW
 EHA_Pump_size = D*Scale;
 
-Work_in = sum(P_in)*dt;
+Work_In = sum(P_in)*dt;
 Work_Out = sum(P_out)*dt;
-e = Work_Out/Work_in;
+e = Work_Out/Work_In;
 
 
 B = 18; % m (This is the width of the oswec)
@@ -146,7 +146,7 @@ Work_in = -cumsum(P_in)*dt;
 Work_out = -cumsum(P_out)*dt;
 
 figure()
-plot(t,-[cumsum(P_in)*dt,cumsum(P_out)*dt]);
+plot(t,Work_in, t,Work_out);
 legend('Work in', 'Work out');
 xlabel('Time(s)');
 ylabel('Work (J)');
@@ -165,8 +165,8 @@ grid on, xlim([100 125])
 
 
 %% Plot drive cycle force and velocity
-figure, yyaxis left, plot(t,F/1e6), ylabel('Force [MN]'), xlabel('Time [s]'), ylim([-10 10])
-yyaxis right, plot(t,v), ylabel('Velocity [m/s]'), xlim([100 125])
+figure, yyaxis left, plot(t,F/1e6), ylabel('Force [MN]'), xlabel('Time [s]'), ylim([-ceil(max(abs(F/1e6))) ceil(max(abs(F/1e6)))]), grid on
+yyaxis right, plot(t,v), ylabel('Velocity [m/s]'), xlim([100 125]), ylim([-ceil(max(abs(v))) ceil(max(abs(v)))]), grid on
 
 
 % figure
@@ -189,6 +189,7 @@ xlabel('Time [s]')
 ylabel('Power [kW]')
 legend('Power In','Power Out','location','northwest')
 xlim([100 125])
+grid on
 
 % figure()
 % plot(t,T_Act,t,T_Ideal)

@@ -65,7 +65,7 @@ w = 2000*2*pi/60; % Angular Velocity of e generator [rad/s]
 D = Ave_Flow/w*2*pi*1e6;  % Size of motor (cc)
 disp(['Pump size is ', num2str(D,4),' cc'])
 
-Constant_eff = .78; % From Pmouvahead at 35 MPa and 3000 RMP and full displacement
+Constant_eff = .78; % From Pmouvahead at 35 MPa and 2000 RMP and full displacement
 
 %% Plots
 %Plot waves

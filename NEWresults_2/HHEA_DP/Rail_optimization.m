@@ -1,14 +1,20 @@
 % Rail optimization brute force for combined torques for both actuators
 % Torque is minimized. 4 rails assumed (2 middle ones to be optimized)
 
-nrails = 4;
+nrails = 3;
+
+cavit = 0;
 
 % regu;ar waves
 %Force limits normalized to Pmax*A
-F_limits = [-0.9236, .7036]; %defined at 35MPa
-%F_limits = [-1 2; 0 2]; % no limit
+F_limits = [-1 .7]; %defined at 35MPa
+F_limits = [-8e6 6e6]/35e6/.2382;
+F_limits = [-10e6 6e6]/35e6/.2382;
 
-Aratio = 1; % area ratio
+Aratio_vals = 1:.05:5;
+Aratio_vals = 1;
+for i = 1:length(Aratio_vals) % area ratio
+    Aratio = Aratio_vals(i);
 
 p = 0:0.01:1;
 dF = ones(1,length(p));
@@ -20,7 +26,7 @@ switch nrails
         for k1=2:N-1
             ind = k1;
             rails = [0,p(ind),1]';
-            maxDF1 = gap_to_go_limit(Aratio(1), rails, F_limits(1,:),1);
+            maxDF1 = gap_to_go_limit(Aratio(1), rails, F_limits(1,:),cavit);
             if maxDF1<least
                least = maxDF1; 
                least_ind = ind; 
@@ -31,7 +37,7 @@ switch nrails
             for k2=k1+1:N-1
                 ind = [k1,k2];
                 rails = [0,p(ind),1]';
-                maxDF1 = gap_to_go_limit(Aratio(1), rails, F_limits(1,:),1);
+                maxDF1 = gap_to_go_limit(Aratio(1), rails, F_limits(1,:),cavit);
                 if maxDF1<least
                    least = maxDF1; 
                    least_ind = ind;
@@ -45,11 +51,15 @@ end
 
 rails = [0,p(least_ind),1]';
 disp('Optimal rails: '); disp(rails')
-least = gap_to_go_limit(Aratio(1), rails, F_limits(1,:),1);
+least = gap_to_go_limit(Aratio(1), rails, F_limits(1,:),cavit);
 rails = linspace(0,1,nrails)';
-uniform = gap_to_go_limit(Aratio(1), rails, F_limits(1,:),1);
-disp('Optimal and uniform')
+uniform = gap_to_go_limit(Aratio(1), rails, F_limits(1,:),cavit);
+disp('Optimal and uniform gaps')
 disp([least,uniform])
+
+dist(i) = least;
+end
+figure, plot(Aratio_vals,dist)
 
 
 

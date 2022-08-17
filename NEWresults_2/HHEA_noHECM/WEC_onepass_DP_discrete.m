@@ -3,19 +3,21 @@ clear, close all
 % Rerun wec sim with finer sampling time
 %%
 disp('____________________________________________________________________________')
-cycle='regular';
-%cycle='irregular';
+%cycle='regular';
+cycle='irregular';
 
-eval(['load ../PI_',cycle,'.mat'])
+rail_no = 3;
+%rail_no = 4;
 
-%Emap = 'Mani'; % Note that this only applies to HECM - the MP is contantEff no matter what
+eval(['load ../PI_',cycle,'_',num2str(rail_no),'Rail','.mat'])
+
 Emap = 'constantEff';
 
-V1 = myoutput.signals.values(:,11);
-F1 = -myoutput.signals.values(:,17);
+V1 = myoutput.signals.values(11,:)';
+F1 = -myoutput.signals.values(17,:)';
 t = myoutput.time;
 
-DPdt = .2; % Seconds between switches
+DPdt = t(2); % Seconds between switches
 t_c = 0:DPdt:t(end);
 spacing = round(DPdt/t(2)); % re-sampling rate - we can make decisions every "spacing" milliseconds
 
@@ -25,14 +27,18 @@ end
 maxRPM = 2000; %RPM
 
 % Define an array of pressures
-Pmax = 35e6; % I've been using the same Pmax for reg and irreg
-%PR = [0, 1/6, 2/3, 1]*Pmax; % uniform
-PR = [0, .36, .81, 1]*Pmax; % optimal
-%PR = [0, 0.62, 1]*Pmax; % optimal and uniform
+Pmax = 25e6; % I've been using the same Pmax for reg and irreg
+if rail_no == 3
+    PR = [0 2/3 1]*Pmax;
+elseif rail_no == 4
+    PR = [0, 1/6, 2/3, 1]*Pmax;
+end
 
 Make_losses_DP;
 
 GetSwitchingLossMatrix_v3;
+%Eloss_A1 = 0*Eloss_A1;
+%Eloss_B1 = 0*Eloss_B1;
 
 Sum_to_constrain_switches_v1;
 
@@ -40,9 +46,8 @@ NetWorkout = -sum(F1.*V1)*t(2);
 OutputPowerSum = sum(abs(F1.*V1))*t(2);
 
 all_options = gen_options(length(PR), ['0','M','P']);
-%all_options = {'C0M'};
-all_options = {'CPM0'}; % Best for REGULAR, if POWER is constrained and torque if constraint is relaxed by 1.5
-%all_options = {'C0MM'}; % Best for IRREGULAR, if TORQUE contraint is relaxed by 1.1
+all_options = {'CMM'}; % Best for REGULAR, 3 rails
+%all_options = {''}; % Best for IRREGULAR
 
 for case_no = 1:length(all_options)
     option = all_options{case_no}
@@ -55,7 +60,7 @@ for case_no = 1:length(all_options)
     params.t_c = t_c; params.f = f; params.PR = PR; params.PRA1 = PRA1; params.PRB1 = PRB1;
     
     %options = optimset('PlotFcns',@optimplotfval,'MaxIter',100);
-    options = optimset('MaxIter',150);
+    options = optimset('MaxIter',100);
     tic
     [lam,cost1,exitflag] = fminsearch(@(lam) -fun(lam,params),lam,options);
     Convergence = exitflag==1;
@@ -76,12 +81,21 @@ for case_no = 1:length(all_options)
     HECM_total_loss = sum(HECMLosses(d_ind))*t(2);
     MP_total_loss = sum(ActualMPLoss);
 
-    switching_loss = NaN(size(t_c)); switching_loss(end) = 0;
+    switching_loss = zeros(size(t_c));
     d_vector_c = [starting_ind, Decision_vector_c]; 
-    for t_ind_c = 2:length(t_c)
-        ind_A1_old = find(PRA1(d_vector_c(t_ind_c-1)) == PR); ind_B1_old = find(PRB1(d_vector_c(t_ind_c-1)) == PR);
-        ind_A1_new = find(PRA1(d_vector_c(t_ind_c)) == PR); ind_B1_new = find(PRB1(d_vector_c(t_ind_c)) == PR);
-        switching_loss(t_ind_c-1) = Eloss_A1(ind_A1_old, ind_A1_new, t_ind_c ) + Eloss_B1(ind_B1_old, ind_B1_new, t_ind_c );
+    if Tf > t_c(2)
+        switch_spacing = Tf/t_c(2);
+    else
+        switch_spacing = 1;
+    end
+    t_ind_c_prev = 2;
+    for t_ind_c = 2:switch_spacing:length(t_c)
+        if 1%d_vector_c(t_ind_c_prev) ~= d_vector_c(t_ind_c)
+            ind_A1_old = find(PRA1(d_vector_c(t_ind_c_prev)) == PR); ind_B1_old = find(PRB1(d_vector_c(t_ind_c_prev)) == PR);
+            ind_A1_new = find(PRA1(d_vector_c(t_ind_c)) == PR); ind_B1_new = find(PRB1(d_vector_c(t_ind_c)) == PR);
+            switching_loss(t_ind_c-1) = Eloss_A1(ind_A1_old, ind_A1_new, t_ind_c ) + Eloss_B1(ind_B1_old, ind_B1_new, t_ind_c );
+        end
+        t_ind_c_prev = t_ind_c;
     end
     TotalSwitchingLoss = sum(switching_loss); % No dt because each entry is already a energy unit, not a power
     Netbattery = sum(battery)*t(2);
@@ -137,6 +151,9 @@ yyaxis right, plot(t,V1), ylabel('Velocity [m/s]'), xlim([100 125])
 figure(111), hold on, plot(t_c, CPR_F1(d_vector_c)/1e6,'x','MarkerSize',12,'linewidth',2), hold off
 xlim([100, 125])
 
+%% Switching losses
+figure, plot(t,switching_loss*1e-3), ylabel('Switching Loss [kJ]'), xlabel('Time [s]'), grid on, xlim([100 125])
+
 %% Check flow/speed
 %figure,plot(t, V1, '-', t, -Q_HECM_1/ARod1,'-.'); ylabel('Speed1 m/s'); xlabel('Time - s');grid
 
@@ -180,11 +197,6 @@ text(xtips1,ytips1,labels1,'HorizontalAlignment','center',...
 %ylim([0 13])
 
 %%
-figure, plot(w1(d_ind), DeltaP_HECM1(d_ind),'.');grid; xlabel('Speed [rad/s]'); ylabel('Pressure [Pa]');
-hold on; [c1,h1]=contour(w1rad_Mapping,P1_Mapping,Eff,(-0.1:0.1:1)); clabel(c1,h1)
-axis(1.05*[min(w1(d_ind)),max(w1(d_ind)),min(DeltaP_HECM1(d_ind)),max(DeltaP_HECM1(d_ind))])
-
-%%
 t_start = 50;
 disp('Losses:'), disp(['   HECM:      ',num2str(HECM_total_loss,3)]), disp(['   Main Pump: ',num2str(MP_total_loss,3)]), disp(['   Switching: ',num2str(TotalSwitchingLoss,3)])
 disp(['Waves: ' cycle])
@@ -207,8 +219,8 @@ Work_in_over_time = cumsum(F1.*V1)*t(2);
 Work_out_over_time = [zeros(1,round(t_start/t(2))+1), (-(TotalMPWork + TotalSwitchingLoss)/(t(end)-t_start))*t(2)*(0:1:length(t)-(round(t_start/t(2))+2))]-cumsum(battery)*t(2);
 figure, plot(t,Work_in_over_time/1e6,t,Work_out_over_time/1e6), ylabel('Work [MJ]'), xlabel('Time [s]')
 
-figure, plot(t,F1.*V1/1e6,t,-battery/1e6,t([1 round(t_start/t(2)) round(t_start/t(2))+1 end]), [0 0 -(TotalMPWork + TotalSwitchingLoss)/(t(end)-t_start) -(TotalMPWork + TotalSwitchingLoss)/(t(end)-t_start)]/1e6)
-legend('Power in','HECM power out','MP power out'), ylabel('Power [MW]'), xlabel('Time [s]'), xlim([100 125])
+figure, plot(t,F1.*V1/1e6,t([1 round(t_start/t(2)) round(t_start/t(2))+1 end]), [0 0 -(TotalMPWork + TotalSwitchingLoss)/(t(end)-t_start) -(TotalMPWork + TotalSwitchingLoss)/(t(end)-t_start)]/1e6)
+legend('Power in','Power out'), ylabel('Power [MW]'), xlabel('Time [s]'), xlim([100 125])
 
 % Find Capture Wdith Ratio
 B = 18; % m (This is the width of the oswec)

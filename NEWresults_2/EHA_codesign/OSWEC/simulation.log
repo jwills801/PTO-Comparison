@@ -1,0 +1,55 @@
+
+WEC-Sim Input From Standard wecSimInputFile.m Of Case Directory... 
+WEC-Sim: An open-source code for simulating wave energy converters
+Version: 4.4
+
+Initializing the Simulation Class...
+	Case Dir: /home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/EHA_codesign/OSWEC 
+Elapsed time is 1.435036 seconds.
+
+WEC-Sim Pre-processing ...   
+Elapsed time is 0.823609 seconds.
+
+WEC-Sim Simulation Settings:
+	Start Time                     (sec) = 0
+	End Time                       (sec) = 200
+	Time Step Size                 (sec) = 0.01
+	Ramp Function Time             (sec) = 50
+	Convolution Integral Interval  (sec) = 30
+	 Number of Time Steps     = 20000 
+
+Wave Environment: 
+	Wave Type                            = Irregular Waves (Predefined Random Phase)
+	Spectrum Type                        = Pierson-Moskowitz  
+	Significant Wave Height, Hs      (m) = 2.5
+	Peak Wave Period, Tp           (sec) = 8
+
+List of Body: Number of Bodies = 2 
+
+	***** Body Number 1, Name: flap *****
+	Body CG                          (m) = [0,0,-3.9]
+	Body Mass                       (kg) = 127000 
+	Body Diagonal MOI              (kgm2)= [1.85E+06,1.85E+06,1.85E+06]
+
+	***** Body Number 2, Name: base *****
+	Body CG                          (m) = [0,0,-10.9]
+	Body Mass                       (kg) = 999 
+	Body Diagonal MOI              (kgm2)= [999,999,999]
+
+List of PTO(s): Number of PTOs = 1 
+
+	***** PTO Name: PTO1 *****
+	PTO Stiffness           (N/m;Nm/rad) = 2.5E+07
+	PTO Damping           (Ns/m;Nsm/rad) = 5E+07
+
+List of Constraint(s): Number of Constraints = 1 
+
+	***** Constraint Name: Constraint1 *****
+
+
+Simulating the WEC device defined in the SimMechanics model /home/jackson/Documents/LiResearch/Projects/PTO_comparison/NEWresults_2/EHA_codesign/OSWEC/OSWEC.slx...   
+Elapsed time is 0.213513 seconds.
+Elapsed time is 33.392155 seconds.
+
+Post-processing and saving...   
+Elapsed time is 0.357016 seconds.

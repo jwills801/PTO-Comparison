@@ -1,13 +1,13 @@
 %% Simulation Data
 simu = simulationClass();               % Initialize Simulation Class
-simu.simMechanicsFile = 'OSWEC.slx';    % Specify Simulink Model File
+simu.simMechanicsFile = 'Discrete_OSWEC.slx';    % Specify Simulink Model File
 simu.mode = 'normal';                   % Specify Simulation Mode ('normal','accelerator','rapid-accelerator')
 simu.explorer='off';                     % Turn SimMechanics Explorer (on/off)
 simu.startTime = 0;                     % Simulation Start Time [s]
 simu.rampTime = 50;                     % Wave Ramp Time [s]
 simu.endTime=200;                       % Simulation End Time [s]        
 simu.solver = 'ode4';                   % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
-simu.dt = 0.01;                          % Simulation Time-Step [s]
+simu.dt = .01;                          % Simulation Time-Step [s]
 simu.CITime = 30;                       % Specify CI Time [s]
 
 %% Wave Information
@@ -20,7 +20,7 @@ simu.CITime = 30;                       % Specify CI Time [s]
 % waves.T = 8;                            % Wave Period [s]
 
 % Irregular Waves using PM Spectrum with Directionality 
-waves = waveClass('regular');         % Initialize Wave Class and Specify Type
+waves = waveClass('irregular');         % Initialize Wave Class and Specify Type
 waves.H = 2.5;                          % Significant Wave Height [m]
 waves.T = 8;                            % Peak Period [s]
 waves.spectrumType = 'PM';              % Specify Spectrum Type
@@ -66,38 +66,28 @@ constraint(1).loc = [0 0 -10];                  % Constraint Location [m]
 
 % Rotational PTO
 pto(1) = ptoClass('PTO1');                      % Initialize ptoClass for PTO1
-%pto(1).k = kp;                                 % PTO Stiffness Coeff [Nm/rad]
-%pto(1).c = ki;                               % PTO Damping Coeff [Nsm/rad]
+%pto(1).c = kp;                               % PTO Damping Coeff [Nsm/rad]
+%pto(1).k = ki;                                 % PTO Stiffness Coeff [Nm/rad]
 pto(1).loc = [0 0 -8.9];                        % PTO Location [m]
 
-%pto(1).c = kp;                                   % PTO Damping Coeff [Nsm/rad]
-%pto(1).k = ki;                                   % PTO Stiffness Coeff [Nm/rad]
-
-% grid seach - work in
-pto(1).c = 1.9e07;                             % PTO Damping Coeff [Nsm/rad]
-pto(1).k = 3.3e7;                                   % PTO Stiffness Coeff [Nm/rad]
+% grid seach - work in - regular waves
+%pto(1).c = 2e7;                            % PTO Damping Coeff [Nsm/rad]
+%pto(1).k = 3.5e7;                                   % PTO Stiffness Coeff [Nm/rad]
 
 % grid seach - work in irregular waves
-%pto(1).c = 3.1e07;                             % PTO Damping Coeff [Nsm/rad]
-%pto(1).k = 3.1e7;                                   % PTO Stiffness Coeff [Nm/rad]
+pto(1).c = 3e7;                             % PTO Damping Coeff [Nsm/rad]
+pto(1).k = 3e7;                                   % PTO Stiffness Coeff [Nm/rad]
 
 
 % grid seach - EHA work out
-%pto(1).c = 3.1e07;                             % PTO Damping Coeff [Nsm/rad]
-%pto(1).k = 2.9e7;                                   % PTO Stiffness Coeff [Nm/rad]
+%pto(1).c = 3.5e7;                             % PTO Damping Coeff [Nsm/rad]
+%pto(1).k = 3e7;                                   % PTO Stiffness Coeff [Nm/rad]
 
 % grid seach - EHA work out - irregular waves
-%pto(1).c = 4.1e07;                             % PTO Damping Coeff [Nsm/rad]
-%pto(1).k = 2.1e7;                                   % PTO Stiffness Coeff [Nm/rad]
+%pto(1).c = 5e7;                             % PTO Damping Coeff [Nsm/rad]
+%pto(1).k = 2.5e7;              % PTO Stiffness Coeff [Nm/rad]
 
 
 %Perry's - from maximum power of linear system
-% pto(1).c = 2.0188e7;                             % PTO Damping Coeff [Nsm/rad]
-% pto(1).k = 3.8278e7;                                 % PTO Stiffness Coeff [Nm/rad]
-
-
-
-%% Rotary to Linear Adjustable Rod
-%ptosim.motionMechanism.crank = 3;
-%ptosim.motionMechanism.offset = 1.3;
-%ptosim.motionMechanism.rodInit = 5;
+%pto(1).c = 2.0188e7;                             % PTO Damping Coeff [Nsm/rad]
+%pto(1).k = 3.8278e7;                                 % PTO Stiffness Coeff [Nm/rad]
