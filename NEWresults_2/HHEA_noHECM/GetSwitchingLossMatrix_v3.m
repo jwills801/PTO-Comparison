@@ -3,9 +3,9 @@
 tic
 Vol_inHoses = 2e-3; % m^3
 displacement = cumsum(V1(1:spacing:length(t)))*t_c(2); displacement = displacement - min(displacement) + .2;
-Vol_A1 = displacement*ACap1 + Vol_inHoses; Vol_B1 = Vol_inHoses;
+Vol_A1 = displacement*ACap1 + Vol_inHoses; Vol_B1 = (max(displacement) - displacement + .2)*ARod1 + Vol_inHoses;
 
-k_ = 2*max(abs(V1))*ACap1/sqrt(2e6); % Q/sqrt(delP) Q --> max rated Q for the valve
+k_ = 3*max(abs(V1))*ACap1/sqrt(2e6); % Q/sqrt(delP) Q --> max rated Q for the valve
 zeta = 0.7; %damping coefficient
 wn = 50*2*pi; % 50 Hz, 50*2*pi rad/s - takes about 10 ms to open
 beta = 1.8e9; %bulk modulus %pure oil - 1.8, typical oil mixture - approx 1.5
@@ -79,12 +79,12 @@ end
 
 %% Now map this to the drive cycle
 Eloss_A1 = NaN(length(PR),length(PR),length(t_c)); Eloss_B1 = NaN(length(PR),length(PR),length(t_c));
-[~,vol_ind_B1] = min(abs(vol_vals-Vol_B1));
 for i = 1:length(t_c)
     [~,vol_ind_A1] = min(abs(vol_vals-Vol_A1(i)));
     [~,velA_ind_A1] = min(abs(velA_vals-V1(i)*ACap1));
     Eloss_A1(:,:,i) = Eloss(:,:,sub2ind(size(velA_matrix),velA_ind_A1,vol_ind_A1));
 
+    [~,vol_ind_B1] = min(abs(vol_vals-Vol_B1(i)));
     [~,velA_ind_B1] = min(abs(velA_vals+V1(i)*ARod1));
     Eloss_B1(:,:,i) = Eloss(:,:,sub2ind(size(velA_matrix),velA_ind_B1,vol_ind_B1));
 

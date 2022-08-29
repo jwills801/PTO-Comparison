@@ -5,7 +5,7 @@ Vol_inHoses = 2e-3; % m^3
 displacement = cumsum(V1(1:spacing:length(t)))*t_c(2); displacement = displacement - min(displacement);
 Vol_A1 = displacement*ACap1 + Vol_inHoses; Vol_B1 = Vol_inHoses;
 
-k_ = max(abs(V1))*ACap1/sqrt(2e6); % Q/sqrt(delP) Q --> max rated Q for the valve
+k_ = max(abs(V1))*ACap1/sqrt(1e6); % Q/sqrt(delP) Q --> max rated Q for the valve
 zeta = 0.7; %damping coefficient
 wn = 50*2*pi; % 50 Hz, 50*2*pi rad/s - takes about 10 ms to open
 beta = 1.8e9; %bulk modulus %pure oil - 1.8, typical oil mixture - approx 1.5

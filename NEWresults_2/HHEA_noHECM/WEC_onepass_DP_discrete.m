@@ -27,7 +27,7 @@ end
 maxRPM = 2000; %RPM
 
 % Define an array of pressures
-Pmax = 25e6; % I've been using the same Pmax for reg and irreg
+Pmax = 20e6; % I've been using the same Pmax for reg and irreg
 if rail_no == 3
     PR = [0 2/3 1]*Pmax;
 elseif rail_no == 4

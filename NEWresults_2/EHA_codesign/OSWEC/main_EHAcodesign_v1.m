@@ -1,21 +1,4 @@
-clear, close all
-kp_0 = 2.9897e7;
-ki_0 = 3.2542e7;
-x0 = [kp_0;ki_0];
-
-return
-tStart = tic;
-
-options = optimset('PlotFcns',@optimplotfval);
-%[x,fval] = fminsearch(@fun,x0,options)
-
-% nvars = 2; options = optimoptions('ga','PlotFcn', @gaplotbestf);
-% [x,fval] = ga(@fun,nvars,[],[],[],[],zeros(nvars,1),[],[],options);
-
-TimeElapsed = toc(tStart)  
-
-%%
-Np = 10; kp_vals = linspace(2.5e7,7e7,Np);
+Np = 10; kp_vals = linspace(.5e7,5e7,Np);
 Ni = 10; ki_vals = linspace(.5e7,5e7,Ni);
 
 KP = NaN(Np,Ni); KI = KP; J = KP;
@@ -41,11 +24,13 @@ disp(['     and Ki = ' num2str(KI_(b)/1e7) 'e7'])
 %figure, plot(KP_,KI_,'*')
 
 
-
+return
 %%
+tic
 kp = 1.9e07;                             % PTO Damping Coeff [Nsm/rad]
 ki = 3.3e7; 
 fun([kp ki])
+toc
 
 function J = fun(x)
 kp = x(1);
@@ -53,6 +38,6 @@ ki = x(2);
 %A = x(3);
 [~]=evalc('wecSim');
 EHA_losses;
-J = Work_Out;
-%J = Work_In;
+%J = Work_Out;
+J = Work_In;
 end

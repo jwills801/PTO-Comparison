@@ -86,13 +86,14 @@ ylabel('Velocity (m/s)')
 xlabel('Time (s)')
 grid on
 
+t= controller.time;
 dt = controller.time(2);
 inst_power_mech = -controller.velocity.*controller.force;
 Work_mech = cumsum(inst_power_mech)*dt;
 inst_power_elec = [zeros(simu.rampTime/dt+1,1);ones(T/dt,1)]*Constant_eff*Ave_Flow * deltaP; %eta * flow * pressure
 Work_elec = cumsum(inst_power_elec)*dt;
 figure
-plot(controller.time,Work_mech/1e6,controller.time,Work_elec/1e6)
+plot(t,Work_mech/1e6,t,Work_elec/1e6)
 xlabel('Time (s)');
 ylabel('Work (MJ)');
 legend('Work in','Work out')
@@ -111,11 +112,22 @@ B = 18; % m (This is the width of the oswec)
 t_start = 50;
 t= controller.time;
 dt = t(2);
-Energy_in_first_chunk = -sum(inst_power_mech(1:find(t==t_start)))*dt;
-Energy_out_first_chunk = -sum(inst_power_elec(1:find(t==t_start)))*dt;
+Energy_in_first_chunk = sum(inst_power_mech(1:find(t==t_start)))*dt;
+Energy_out_first_chunk = sum(inst_power_elec(1:find(t==t_start)))*dt;
 Total_energy_in = sum(inst_power_mech)*dt;
 Total_energy_out = sum(inst_power_elec)*dt;
-ave_power_in = (Total_energy_in - Energy_in_first_chunk)/150;
-ave_power_out = (Total_energy_out - Energy_out_first_chunk)/150;
+ave_power_in = (Total_energy_in - Energy_in_first_chunk)/(t(end)-t_start);
+ave_power_out = (Total_energy_out - Energy_out_first_chunk)/(t(end)-t_start);
 CWR_in = ave_power_in/waves.Pw/B
 CWR_out = ave_power_out/waves.Pw/B
+
+
+%% Plot excitation force
+a =5; b = 3.9;
+x = NaN(length(t),2);
+x(:,1) = output.bodies(1).position(:,5); % Initial position in pitch
+x(:,2) = output.bodies(1).velocity(:,5); % Initial velocity in pitch
+moment_arm = [a*cos(x(:,1)) zeros(size(x(:,1))) -a*sin(x(:,1)) zeros(size(x(:,1))) ones(size(x(:,1))) zeros(size(x(:,1)))]; % Converts forces in 6 DOF to the only DOF we care about: Pitch
+excitation = sum(moment_arm.*output.bodies(1).forceExcitation(:,:),2);
+
+figure, plot(t,excitation/1e6), ylabel('Excitation Torque [MNm]'), xlabel('Time [s]'), xlim([100 300]), grid on

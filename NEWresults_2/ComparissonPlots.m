@@ -8,15 +8,15 @@ HHEA_HECM_reg_gen = 1338; %kW HHEA HECM generator size for regular waves
 EHA_noco_reg_gen = 4106; %kW EHA generator size for regular waves with no codesign
 EHA_co_reg_gen = 2642; %kW EHA generator size for regular waves with codesign
 Check_reg_gen = 509; %kW Check valve generator size for regular waves
-Disc_HHEA_reg_gen = 1139; %kW Discrete HHEA generator size for regular waves
+Disc_HHEA_reg_gen = 1253; %kW Discrete HHEA generator size for regular waves
 
 
-HHEA_main_irreg_gen = 322; %kW HHEA main generator size for irregular waves
-HHEA_HECM_irreg_gen = 1301; %kW HHEA HECM generator size for irregular waves
-EHA_noco_irreg_gen = 3744; %kW EHA generator size for irregular waves with no codesign
-EHA_co_irreg_gen = 2685; %kW EHA generator size for irregular waves with codesign
-Check_irreg_gen = 231; %kW Check valve generator size for irregular waves
-Disc_HHEA_irreg_gen = 374; %kW Discrete HHEA generator size for irregular waves
+HHEA_main_irreg_gen = 209; %kW HHEA main generator size for irregular waves
+HHEA_HECM_irreg_gen = 1153; %kW HHEA HECM generator size for irregular waves
+EHA_noco_irreg_gen = 5078; %kW EHA generator size for irregular waves with no codesign
+EHA_co_irreg_gen = 3936; %kW EHA generator size for irregular waves with codesign
+Check_irreg_gen = 158; %kW Check valve generator size for irregular waves
+Disc_HHEA_irreg_gen = 322; %kW Discrete HHEA generator size for irregular waves
 
 
 
@@ -26,15 +26,15 @@ HHEA_HECM_reg_pump = 7267; %cc HHEA HECM pump size for regular waves
 EHA_noco_reg_pump = 7267; %cc EHA pump size for regular waves with no codesign
 EHA_co_reg_pump = 5298; %cc EHA pump size for regular waves with codesign
 Check_reg_pump = 2331; %cc Check valve pump size for regular waves
-Disc_HHEA_reg_pump = 1958; %kW Discrete HHEA pump size for regular waves
+Disc_HHEA_reg_pump = 1958; %cc Discrete HHEA pump size for regular waves
 
 
-HHEA_main_irreg_pump = 902; %cc HHEA main pump size for irregular waves
-HHEA_HECM_irreg_pump = 6972; %cc HHEA HECM pump size for irregular waves
-EHA_noco_irreg_pump = 6972; %cc EHA pump size for irregular waves with no codesign
-EHA_co_irreg_pump = 4916; %cc EHA pump size for irregular waves with codesign
-Check_irreg_pump = 1097; %cc Check valve pump size for irregular waves
-Disc_HHEA_irreg_pump = 1487; %kW Discrete HHEA pump size for irregular waves
+HHEA_main_irreg_pump = 10465; %cc HHEA main pump size for irregular waves
+HHEA_HECM_irreg_pump = 7728; %cc HHEA HECM pump size for irregular waves
+EHA_noco_irreg_pump = 7728; %cc EHA pump size for irregular waves with no codesign
+EHA_co_irreg_pump = 5715; %cc EHA pump size for irregular waves with codesign
+Check_irreg_pump = 749; %cc Check valve pump size for irregular waves
+Disc_HHEA_irreg_pump = 7755; %cc Discrete HHEA pump size for irregular waves
 
 
 
@@ -46,11 +46,11 @@ Check_reg_CWR_in = 0.5919;
 Disc_HHEA_reg_CWR_in = 1.3809;
 
 
-HHEA_irreg_CWR_in = 0.97741; 
-EHA_noco_irreg_CWR_in = 0.97741;
-EHA_co_irreg_CWR_in = 0.9266;
-Check_irreg_CWR_in = .5408; 
-Disc_HHEA_irreg_CWR_in = .9899;
+HHEA_irreg_CWR_in = .92647; 
+EHA_noco_irreg_CWR_in = 0.92647;
+EHA_co_irreg_CWR_in = 0.86295;
+Check_irreg_CWR_in = 0.4663; 
+Disc_HHEA_irreg_CWR_in = 0.92618;
 
 
 % CWR out
@@ -58,14 +58,14 @@ HHEA_reg_CWR_out = 1.0255;
 EHA_noco_reg_CWR_out = 0.68138;
 EHA_co_reg_CWR_out = 0.83352;
 Check_reg_CWR_out = 0.5070; 
-Disc_HHEA_reg_CWR_out = 1.0207;
+Disc_HHEA_reg_CWR_out = 1.1227;
 
 
-HHEA_irreg_CWR_out = 0.94194; 
-EHA_noco_irreg_CWR_out = 0.46689;
-EHA_co_irreg_CWR_out = 0.56671; 
-Check_irreg_CWR_out = 0.4219; 
-Disc_HHEA_irreg_CWR_out = .79978;
+HHEA_irreg_CWR_out = 0.62926; 
+EHA_noco_irreg_CWR_out = 0.39193;
+EHA_co_irreg_CWR_out = 0.48745; 
+Check_irreg_CWR_out = 0.3746; 
+Disc_HHEA_irreg_CWR_out = 0.72186;
 %% Bar graphs for generators
 % Regular
 figure
@@ -83,7 +83,7 @@ ytips1 = sum(Gen_Sizes,2);
 labels1 = string(Gen_Sizes(:,1)) + ' kW' + [[' + '] + string(Gen_Sizes(1,2)) + [' kW'];'';'';'';''];
 text(xtips1,ytips1,labels1,'HorizontalAlignment','center',...
     'VerticalAlignment','bottom')
-legend('Main', 'HECM')
+legend('Main', 'HECM'), grid
 ylim([0 1.1*max(sum(Gen_Sizes,2))])
 
 % Irregular
@@ -102,7 +102,7 @@ ytips1 = sum(Gen_Sizes,2);
 labels1 = string(Gen_Sizes(:,1)) + ' kW' + [[' + '] + string(Gen_Sizes(1,2)) + [' kW'];'';'';'';''];
 text(xtips1,ytips1,labels1,'HorizontalAlignment','center',...
     'VerticalAlignment','bottom')
-legend('Main', 'HECM')
+legend('Main', 'HECM'), grid
 ylim([0 1.1*max(sum(Gen_Sizes,2))])
 
 %% Bar graphs for pumps
@@ -122,7 +122,7 @@ ytips1 = sum(Pump_Sizes,2);
 labels1 = string(Pump_Sizes(:,1)) + [' cc'] + [[' + '] + string(Pump_Sizes(1,2)) + [' cc'];'';'';'';''];
 text(xtips1,ytips1,labels1,'HorizontalAlignment','center',...
     'VerticalAlignment','bottom')
-legend('Main', 'HECM')
+legend('Main', 'HECM'), grid
 ylim([0 1.1*max(sum(Pump_Sizes,2))])
 
 % Irregular
@@ -141,7 +141,7 @@ ytips1 = sum(Pump_Sizes,2);
 labels1 = string(Pump_Sizes(:,1)) + [' cc'] + [[' + '] + string(Pump_Sizes(1,2)) + [' cc'];'';'';'';''];
 text(xtips1,ytips1,labels1,'HorizontalAlignment','center',...
     'VerticalAlignment','bottom')
-legend('Main', 'HECM')
+legend('Main', 'HECM'), grid
 ylim([0 1.1*max(sum(Pump_Sizes,2))])
 
 %% Bar graphs for CWR in
@@ -202,12 +202,12 @@ plot(t,Work_in_over_time/1e6,'--')
 plot(t,Work_out_over_time/1e6,'b--')
 
 
-hold off, legend('Work in - no codesign', 'Work out HHEA', 'Work out EHA - no codesign', 'Work in - codesign', 'Work out EHA - codesign', 'Work in check valve', 'Work out check valve','Work in discrete HHEA','Work out discrete HHEA','Location','Northwest')
+hold off, legend('Work in - no codesign', 'Work out HHEA', 'Work out EHA - no codesign', 'Work in - codesign', 'Work out EHA - codesign', 'Work in check valve', 'Work out check valve','Work in discrete HHEA','Work out discrete HHEA','Location','Northwest'), grid
 
 
 %% Irregular Waves
 clear
-figure, hold on, ylabel('Energy [MJ]'), xlabel('Time [s]')
+figure, hold on, ylabel('Energy [MJ]'), xlabel('Time [s]'), grid
 
 % HHEA
 load('HHEA_DP/Irreg_HHEA_workOverTime.mat')

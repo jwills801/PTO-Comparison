@@ -3,8 +3,8 @@ clear, close all
 % Rerun wec sim with finer sampling time
 %%
 disp('____________________________________________________________________________')
-cycle='regular';
-%cycle='irregular';
+%cycle='regular';
+cycle='irregular';
 
 eval(['load ../PI_',cycle,'.mat'])
 
@@ -25,7 +25,7 @@ end
 maxRPM = 2000; %RPM
 
 % Define an array of pressures
-Pmax = 35e6; % I've been using the same Pmax for reg and irreg
+Pmax = 30e6; % I've been using the same Pmax for reg and irreg
 %PR = [0, 1/6, 2/3, 1]*Pmax; % uniform
 PR = [0, .36, .81, 1]*Pmax; % optimal
 %PR = [0, 0.62, 1]*Pmax; % optimal and uniform
@@ -41,8 +41,9 @@ OutputPowerSum = sum(abs(F1.*V1))*t(2);
 
 all_options = gen_options(length(PR), ['0','M','P']);
 %all_options = {'C0M'};
-all_options = {'CPM0'}; % Best for REGULAR, if POWER is constrained and torque if constraint is relaxed by 1.5
-%all_options = {'C0MM'}; % Best for IRREGULAR, if TORQUE contraint is relaxed by 1.1
+%all_options = {'CPM0'}; % Best for REGULAR, if POWER is constrained and torque if constraint is relaxed by 1.5
+all_options = {'C00M'}; % Best for IRREGULAR, if TORQUE contraint is relaxed by 1.1
+
 
 for case_no = 1:length(all_options)
     option = all_options{case_no}
