@@ -1,10 +1,14 @@
 # READ ME
 
-This code compares 3 PTOS. 1) The HHEA
+This code compares 4 PTOS. 
+
+1) The HHEA
 
 2) The EHA
 
 3) The Check valve PTO
+
+4) The discrete HHEA
 
 All of these are tested using a flap type wec. Regular and irrgular waves are tested. The EHA is codesigned with the controller so that energy out is maximized.
 
