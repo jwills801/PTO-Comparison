@@ -127,11 +127,11 @@ ave_power_out = (Total_energy_out-Energy_first_chunk)/(t(end)-t_start); % Ave po
 CW = ave_power_out/waves.Pw;
 CWR_out = CW/B;
 
-disp(['CWR in: ' num2str(CWR_in)])
-disp(['CWR out: ' num2str(CWR_out)])
-disp(['Efficiency: ' num2str(e)])
-disp(['EHA pump size: ' num2str(round(EHA_Pump_size)) ' cc'])
-disp(['EHA generator size: ' num2str(round(EHA_Generator)) ' kW'])
+%disp(['CWR in: ' num2str(CWR_in)])
+%disp(['CWR out: ' num2str(CWR_out)])
+%disp(['Efficiency: ' num2str(e)])
+%disp(['EHA pump size: ' num2str(round(EHA_Pump_size)) ' cc'])
+%disp(['EHA generator size: ' num2str(round(EHA_Generator)) ' kW'])
 
 
 return

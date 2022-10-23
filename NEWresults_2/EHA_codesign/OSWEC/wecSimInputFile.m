@@ -5,7 +5,7 @@ simu.mode = 'normal';                   % Specify Simulation Mode ('normal','acc
 simu.explorer='off';                     % Turn SimMechanics Explorer (on/off)
 simu.startTime = 0;                     % Simulation Start Time [s]
 simu.rampTime = 50;                     % Wave Ramp Time [s]
-simu.endTime=2000;                       % Simulation End Time [s]        
+simu.endTime=200;                       % Simulation End Time [s]        
 simu.solver = 'ode45';                   % simu.solver = 'ode4' for fixed step & simu.solver = 'ode45' for variable step 
 simu.dt = 0.01;                          % Simulation Time-Step [s]
 simu.CITime = 30;                       % Specify CI Time [s]
@@ -14,9 +14,9 @@ simu.CITime = 30;                       % Specify CI Time [s]
 
 
 % Irregular Waves using PM Spectrum with Directionality 
-waves = waveClass('irregular');         % Initialize Wave Class and Specify Type
-waves.H = 2.5;                          % Significant Wave Height [m]
-waves.T = 8;                            % Peak Period [s]
+waves = waveClass('regular');         % Initialize Wave Class and Specify Type
+waves.H = H;%2.5                          % Significant Wave Height [m]
+waves.T = T;%8                            % Peak Period [s]
 waves.spectrumType = 'PM';              % Specify Spectrum Type
 waves.phaseSeed = 8;
 %waves.waveDir = [0,30,90];              % Wave Directionality [deg]
@@ -51,8 +51,8 @@ constraint(1).loc = [0 0 -10];                  % Constraint Location [m]
 
 % Rotational PTO
 pto(1) = ptoClass('PTO1');                      % Initialize ptoClass for PTO1
-%pto(1).c = kp;                               % PTO Damping Coeff [Nsm/rad]
-%pto(1).k = ki;                                 % PTO Stiffness Coeff [Nm/rad]
+pto(1).c = kp;                               % PTO Damping Coeff [Nsm/rad]
+pto(1).k = ki;                                 % PTO Stiffness Coeff [Nm/rad]
 pto(1).loc = [0 0 -8.9];                        % PTO Location [m]
 
 % grid seach - work in - regular waves
@@ -69,8 +69,8 @@ pto(1).loc = [0 0 -8.9];                        % PTO Location [m]
 %pto(1).k = 3e7;                                   % PTO Stiffness Coeff [Nm/rad]
 
 % grid seach - EHA work out - irregular waves
-pto(1).c = 5e7;                             % PTO Damping Coeff [Nsm/rad]
-pto(1).k = 2.5e7;              % PTO Stiffness Coeff [Nm/rad]
+%pto(1).c = 5e7;                             % PTO Damping Coeff [Nsm/rad]
+%pto(1).k = 2.5e7;              % PTO Stiffness Coeff [Nm/rad]
 
 
 %Perry's - from maximum power of linear system
